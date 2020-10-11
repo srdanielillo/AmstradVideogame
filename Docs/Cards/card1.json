@@ -1,0 +1,17 @@
+{
+	"title" 	: "The Lens of Emotion",
+	"questions" : {
+		"question1" : {
+			"question" 	: "What emotions would I like my player to experience? Why?",
+			"answer"	: "Me gustaría que experimentasen calma al contar la historia y frenetismo controlado a la hora de jugar, con el fin de que cuando acabe una pantalla hayan dejado la mente en blanco prácticamente todo el tiempo de esa pantalla, es decir durante la calma se organiza y se prepara y durante la acción no se piensa"
+		},
+		"question2" : {
+			"question" 	: "What emotions are players (including me) having when they play now? Why?",
+			"answer"	: "Ahora mismo no hay juego"
+		},
+		"question3" : {
+			"question" 	: "How can I bridge the gap between the emotions players are having and the emotions I'd like them to have?",
+			"answer"	: "Ahora mismo no hay juego"
+		}
+	}   
+}
