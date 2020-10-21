@@ -91,18 +91,18 @@ _main::
 	call	_cpct_setPALColour
 ;src/main.c:42: man_entitiy_init();
 	call	_man_entitiy_init
-;src/main.c:43: for(u8 i = 0; i < 5; ++i){
-	ld	c, #0x00
+;src/main.c:43: for(u8 i = 5; i > 0 ; --i){
+	ld	c, #0x05
 00106$:
 	ld	a, c
-	sub	a, #0x05
-	jr	NC,00101$
+	or	a, a
+	jr	Z,00101$
 ;src/main.c:44: createEntity();
 	push	bc
 	call	_createEntity
 	pop	bc
-;src/main.c:43: for(u8 i = 0; i < 5; ++i){
-	inc	c
+;src/main.c:43: for(u8 i = 5; i > 0 ; --i){
+	dec	c
 	jr	00106$
 00101$:
 ;src/main.c:46: sys_phyisics_update();

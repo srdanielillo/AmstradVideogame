@@ -91,27 +91,27 @@
    0028 CDr00r00      [17]   91 	call	_cpct_setPALColour
                              92 ;src/main.c:42: man_entitiy_init();
    002B CDr00r00      [17]   93 	call	_man_entitiy_init
-                             94 ;src/main.c:43: for(u8 i = 0; i < 5; ++i){
-   002E 0E 00         [ 7]   95 	ld	c, #0x00
+                             94 ;src/main.c:43: for(u8 i = 5; i > 0 ; --i){
+   002E 0E 05         [ 7]   95 	ld	c, #0x05
    0030                      96 00106$:
    0030 79            [ 4]   97 	ld	a, c
-   0031 D6 05         [ 7]   98 	sub	a, #0x05
-   0033 30 08         [12]   99 	jr	NC,00101$
+   0031 B7            [ 4]   98 	or	a, a
+   0032 28 08         [12]   99 	jr	Z,00101$
                             100 ;src/main.c:44: createEntity();
-   0035 C5            [11]  101 	push	bc
-   0036 CDr00r00      [17]  102 	call	_createEntity
-   0039 C1            [10]  103 	pop	bc
-                            104 ;src/main.c:43: for(u8 i = 0; i < 5; ++i){
-   003A 0C            [ 4]  105 	inc	c
-   003B 18 F3         [12]  106 	jr	00106$
-   003D                     107 00101$:
+   0034 C5            [11]  101 	push	bc
+   0035 CDr00r00      [17]  102 	call	_createEntity
+   0038 C1            [10]  103 	pop	bc
+                            104 ;src/main.c:43: for(u8 i = 5; i > 0 ; --i){
+   0039 0D            [ 4]  105 	dec	c
+   003A 18 F4         [12]  106 	jr	00106$
+   003C                     107 00101$:
                             108 ;src/main.c:46: sys_phyisics_update();
-   003D CDr00r00      [17]  109 	call	_sys_phyisics_update
+   003C CDr00r00      [17]  109 	call	_sys_phyisics_update
                             110 ;src/main.c:47: sys_render_update();
-   0040 CDr00r00      [17]  111 	call	_sys_render_update
+   003F CDr00r00      [17]  111 	call	_sys_render_update
                             112 ;src/main.c:49: while(1);
-   0043                     113 00103$:
-   0043 18 FE         [12]  114 	jr	00103$
+   0042                     113 00103$:
+   0042 18 FE         [12]  114 	jr	00103$
                             115 	.area _CODE
                             116 	.area _INITIALIZER
                             117 	.area _CABS (ABS)

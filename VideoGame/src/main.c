@@ -40,7 +40,7 @@ void main(void) {
    cpct_setPALColour(0, HW_BLACK);
    
    man_entitiy_init();
-   for(u8 i = 0; i < 5; ++i){
+   for(u8 i = 5; i > 0 ; --i){
       createEntity();
    }
    sys_phyisics_update();

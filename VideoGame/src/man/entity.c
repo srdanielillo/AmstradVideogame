@@ -1,12 +1,14 @@
 #include "entity.h"
 
-Entity_t  m_entities[5];
+Entity_t  m_entities[10];
 Entity_t* m_next_free_entity;
 u8 m_reserved_entities;
 
 void man_entitiy_init(){
+   //TODO 
+   //Hacer que esl siguiente byte de las entidades reservadas sea 0 para que corte bucle man_entity_for_all
    cpct_memset(m_entities, 0, sizeof(m_entities));
-   m_next_free_entity = &m_entities[0];
+   m_next_free_entity = m_entities;
 }
 
 Entity_t* man_entitiy_create() {
@@ -25,5 +27,5 @@ void man_entity_forall( void (*ptrfunc)(Entity_t*) ) {
 }
 
 void man_entity_destroy(Entity_t* dead_e){
-   
+   dead_e -> type = e_type_invalid;
 }

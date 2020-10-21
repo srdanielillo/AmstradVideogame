@@ -24,11 +24,11 @@
                              24 ;--------------------------------------------------------
                              25 	.area _DATA
    0000                      26 _m_entities::
-   0000                      27 	.ds 25
-   0019                      28 _m_next_free_entity::
-   0019                      29 	.ds 2
-   001B                      30 _m_reserved_entities::
-   001B                      31 	.ds 1
+   0000                      27 	.ds 50
+   0032                      28 _m_next_free_entity::
+   0032                      29 	.ds 2
+   0034                      30 _m_reserved_entities::
+   0034                      31 	.ds 1
                              32 ;--------------------------------------------------------
                              33 ; ram data
                              34 ;--------------------------------------------------------
@@ -58,8 +58,8 @@
                              58 ; Function man_entitiy_init
                              59 ; ---------------------------------
    0000                      60 _man_entitiy_init::
-                             61 ;src/man/entity.c:8: cpct_memset(m_entities, 0, sizeof(m_entities));
-   0000 21 19 00      [10]   62 	ld	hl, #0x0019
+                             61 ;src/man/entity.c:10: cpct_memset(m_entities, 0, sizeof(m_entities));
+   0000 21 32 00      [10]   62 	ld	hl, #0x0032
    0003 E5            [11]   63 	push	hl
    0004 AF            [ 4]   64 	xor	a, a
    0005 F5            [11]   65 	push	af
@@ -67,41 +67,41 @@
    0007 21r00r00      [10]   67 	ld	hl, #_m_entities
    000A E5            [11]   68 	push	hl
    000B CDr00r00      [17]   69 	call	_cpct_memset
-                             70 ;src/man/entity.c:9: m_next_free_entity = &m_entities[0];
+                             70 ;src/man/entity.c:11: m_next_free_entity = m_entities;
    000E 21r00r00      [10]   71 	ld	hl, #_m_entities
-   0011 22r19r00      [16]   72 	ld	(_m_next_free_entity), hl
+   0011 22r32r00      [16]   72 	ld	(_m_next_free_entity), hl
    0014 C9            [10]   73 	ret
-                             74 ;src/man/entity.c:12: Entity_t* man_entitiy_create() {
+                             74 ;src/man/entity.c:14: Entity_t* man_entitiy_create() {
                              75 ;	---------------------------------
                              76 ; Function man_entitiy_create
                              77 ; ---------------------------------
    0015                      78 _man_entitiy_create::
-                             79 ;src/man/entity.c:13: Entity_t* e = m_next_free_entity;
-   0015 ED 4Br19r00   [20]   80 	ld	bc, (_m_next_free_entity)
-                             81 ;src/man/entity.c:14: m_next_free_entity = e +1;
+                             79 ;src/man/entity.c:15: Entity_t* e = m_next_free_entity;
+   0015 ED 4Br32r00   [20]   80 	ld	bc, (_m_next_free_entity)
+                             81 ;src/man/entity.c:16: m_next_free_entity = e +1;
    0019 21 05 00      [10]   82 	ld	hl, #0x0005
    001C 09            [11]   83 	add	hl,bc
-   001D 22r19r00      [16]   84 	ld	(_m_next_free_entity), hl
-                             85 ;src/man/entity.c:15: e -> type = e_type_default;
+   001D 22r32r00      [16]   84 	ld	(_m_next_free_entity), hl
+                             85 ;src/man/entity.c:17: e -> type = e_type_default;
    0020 3E 7F         [ 7]   86 	ld	a, #0x7f
    0022 02            [ 7]   87 	ld	(bc), a
-                             88 ;src/man/entity.c:16: return e;
+                             88 ;src/man/entity.c:18: return e;
    0023 69            [ 4]   89 	ld	l, c
    0024 60            [ 4]   90 	ld	h, b
    0025 C9            [10]   91 	ret
-                             92 ;src/man/entity.c:19: void man_entity_forall( void (*ptrfunc)(Entity_t*) ) {
+                             92 ;src/man/entity.c:21: void man_entity_forall( void (*ptrfunc)(Entity_t*) ) {
                              93 ;	---------------------------------
                              94 ; Function man_entity_forall
                              95 ; ---------------------------------
    0026                      96 _man_entity_forall::
-                             97 ;src/man/entity.c:20: Entity_t* e = m_entities;
+                             97 ;src/man/entity.c:22: Entity_t* e = m_entities;
    0026 01r00r00      [10]   98 	ld	bc, #_m_entities+0
-                             99 ;src/man/entity.c:21: while(e -> type != e_type_invalid){
+                             99 ;src/man/entity.c:23: while(e -> type != e_type_invalid){
    0029                     100 00101$:
    0029 0A            [ 7]  101 	ld	a, (bc)
    002A B7            [ 4]  102 	or	a, a
    002B C8            [11]  103 	ret	Z
-                            104 ;src/man/entity.c:22: ptrfunc(e);
+                            104 ;src/man/entity.c:24: ptrfunc(e);
    002C C5            [11]  105 	push	bc
    002D C5            [11]  106 	push	bc
    002E 21 06 00      [10]  107 	ld	hl, #6
@@ -113,20 +113,26 @@
    0036 CDr00r00      [17]  113 	call	___sdcc_call_hl
    0039 F1            [10]  114 	pop	af
    003A C1            [10]  115 	pop	bc
-                            116 ;src/man/entity.c:23: ++e;
+                            116 ;src/man/entity.c:25: ++e;
    003B 03            [ 6]  117 	inc	bc
    003C 03            [ 6]  118 	inc	bc
    003D 03            [ 6]  119 	inc	bc
    003E 03            [ 6]  120 	inc	bc
    003F 03            [ 6]  121 	inc	bc
    0040 18 E7         [12]  122 	jr	00101$
-                            123 ;src/man/entity.c:27: void man_entity_destroy(Entity_t* dead_e){
+                            123 ;src/man/entity.c:29: void man_entity_destroy(Entity_t* dead_e){
                             124 ;	---------------------------------
                             125 ; Function man_entity_destroy
                             126 ; ---------------------------------
    0042                     127 _man_entity_destroy::
-                            128 ;src/man/entity.c:29: }
-   0042 C9            [10]  129 	ret
-                            130 	.area _CODE
-                            131 	.area _INITIALIZER
-                            132 	.area _CABS (ABS)
+                            128 ;src/man/entity.c:30: dead_e -> type = e_type_invalid;
+   0042 D1            [10]  129 	pop	de
+   0043 C1            [10]  130 	pop	bc
+   0044 C5            [11]  131 	push	bc
+   0045 D5            [11]  132 	push	de
+   0046 AF            [ 4]  133 	xor	a, a
+   0047 02            [ 7]  134 	ld	(bc), a
+   0048 C9            [10]  135 	ret
+                            136 	.area _CODE
+                            137 	.area _INITIALIZER
+                            138 	.area _CABS (ABS)

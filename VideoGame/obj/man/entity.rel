@@ -5,15 +5,15 @@ O -mz80
 S .__.ABS. Def0000
 S ___sdcc_call_hl Ref0000
 S _cpct_memset Ref0000
-A _CODE size 43 flags 0 addr 0
+A _CODE size 49 flags 0 addr 0
 S _man_entity_destroy Def0042
 S _man_entitiy_create Def0015
 S _man_entitiy_init Def0000
 S _man_entity_forall Def0026
-A _DATA size 1C flags 0 addr 0
-S _m_reserved_entities Def001B
+A _DATA size 35 flags 0 addr 0
+S _m_reserved_entities Def0034
 S _m_entities Def0000
-S _m_next_free_entity Def0019
+S _m_next_free_entity Def0032
 A _INITIALIZED size 0 flags 0 addr 0
 A _DABS size 0 flags 8 addr 0
 A _HOME size 0 flags 0 addr 0
@@ -25,23 +25,23 @@ T 00 00
 R 00 00 01 00
 T 00 00
 R 00 00 01 00
-T 19 00
+T 32 00
 R 00 00 01 00
-T 19 00
+T 32 00
 R 00 00 01 00
-T 1B 00
+T 34 00
 R 00 00 01 00
-T 1B 00
+T 34 00
 R 00 00 01 00
 T 00 00
 R 00 00 00 00
-T 00 00 21 19 00 E5 AF F5 33 21 00 00 E5 CD 00 00
+T 00 00 21 32 00 E5 AF F5 33 21 00 00 E5 CD 00 00
 R 00 00 00 00 00 0A 01 00 02 0E 02 00
-T 0E 00 21 00 00 22 19 00 C9
+T 0E 00 21 00 00 22 32 00 C9
 R 00 00 00 00 00 03 01 00 00 06 01 00
 T 15 00
 R 00 00 00 00
-T 15 00 ED 4B 19 00 21 05 00 09 22 19 00 3E 7F 02
+T 15 00 ED 4B 32 00 21 05 00 09 22 32 00 3E 7F 02
 R 00 00 00 00 00 04 01 00 00 0B 01 00
 T 23 00 69 60 C9
 R 00 00 00 00
@@ -57,5 +57,5 @@ T 37 00 00 00 F1 C1 03 03 03 03 03 18 E7
 R 00 00 00 00 02 02 01 00
 T 42 00
 R 00 00 00 00
-T 42 00 C9
+T 42 00 D1 C1 C5 D5 AF 02 C9
 R 00 00 00 00

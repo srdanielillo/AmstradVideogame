@@ -10,8 +10,8 @@ Symbol Table
     ___sdcc_call_hl                                                **** GX
     _cpct_memset                                                   **** GX
   1 _m_entities                                                    0000 GR
-  1 _m_next_free_entity                                            0019 GR
-  1 _m_reserved_entities                                           001B GR
+  1 _m_next_free_entity                                            0032 GR
+  1 _m_reserved_entities                                           0034 GR
   0 _man_entitiy_create                                            0015 GR
   0 _man_entitiy_init                                              0000 GR
   0 _man_entity_destroy                                            0042 GR
@@ -23,8 +23,8 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size   43   flags    0
-   1 _DATA                                      size   1C   flags    0
+   0 _CODE                                      size   49   flags    0
+   1 _DATA                                      size   35   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0

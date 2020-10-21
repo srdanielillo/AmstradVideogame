@@ -17,60 +17,60 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     0000001C  l__DATA                         
-     00000165  l__CODE                         
+     00000035  l__DATA                         
+     0000016A  l__CODE                         
      00004000  s__CODE                         
-     00004165  s__DATA                         
-     00004181  s__GSFINAL                      
-     00004181  s__GSINIT                       
-     00004181  s__HOME                         
-     00004181  s__INITIALIZED                  
-     00004181  s__INITIALIZER                  
+     0000416A  s__DATA                         
+     0000419F  s__GSFINAL                      
+     0000419F  s__GSINIT                       
+     0000419F  s__HOME                         
+     0000419F  s__INITIALIZED                  
+     0000419F  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00000165 =         357. bytes (REL,CON)
+_CODE                               00004000    0000016A =         362. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00004000  _createEntity                      main
      00004010  _init_e                            main
      00004015  _main                              main
-     00004045  _sys_physics_update_one_entity     physics
-     00004080  _sys_phyisics_update               physics
-     00004089  _sys_render_one_entity             render
-     000040B7  _sys_render_update                 render
-     000040C0  _man_entitiy_init                  entity
-     000040D5  _man_entitiy_create                entity
-     000040E6  _man_entity_forall                 entity
-     00004102  _man_entity_destroy                entity
-     00004103  _cpct_setPALColour                 cpct_video
-     0000410F  ___sdcc_call_hl                    
-     00004110  _cpct_setVideoMode                 cpct_video
-     0000411E  _cpct_memset                       cpct_memutils
-     0000412C  _cpct_memcpy                       cpct_memutils
-     00004134  _cpct_disableFirmware              cpct_firmware
-     00004134  _cpct_removeInterruptHandler       cpct_firmware
-     00004134  cpct_disableFirmware_asm           cpct_firmware
-     00004134  cpct_removeInterruptHandler_asm    cpct_firmware
-     00004144  _cpct_mode_rom_status              cpct_firmware
-     00004145  _cpct_getScreenPtr                 cpct_video
+     00004044  _sys_physics_update_one_entity     physics
+     0000407F  _sys_phyisics_update               physics
+     00004088  _sys_render_one_entity             render
+     000040B6  _sys_render_update                 render
+     000040BF  _man_entitiy_init                  entity
+     000040D4  _man_entitiy_create                entity
+     000040E5  _man_entity_forall                 entity
+     00004101  _man_entity_destroy                entity
+     00004108  _cpct_setPALColour                 cpct_video
+     00004114  ___sdcc_call_hl                    
+     00004115  _cpct_setVideoMode                 cpct_video
+     00004123  _cpct_memset                       cpct_memutils
+     00004131  _cpct_memcpy                       cpct_memutils
+     00004139  _cpct_disableFirmware              cpct_firmware
+     00004139  _cpct_removeInterruptHandler       cpct_firmware
+     00004139  cpct_disableFirmware_asm           cpct_firmware
+     00004139  cpct_removeInterruptHandler_asm    cpct_firmware
+     00004149  _cpct_mode_rom_status              cpct_firmware
+     0000414A  _cpct_getScreenPtr                 cpct_video
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00004165    0000001C =          28. bytes (REL,CON)
+_DATA                               0000416A    00000035 =          53. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004165  _m_entities                        entity
-     0000417E  _m_next_free_entity                entity
-     00004180  _m_reserved_entities               entity
+     0000416A  _m_entities                        entity
+     0000419C  _m_next_free_entity                entity
+     0000419E  _m_reserved_entities               entity
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 
 Files Linked                              [ module(s) ]

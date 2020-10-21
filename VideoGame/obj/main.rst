@@ -56,14 +56,14 @@
                              56 ; ---------------------------------
    4000                      57 _createEntity::
                              58 ;src/main.c:32: Entity_t* e = man_entitiy_create();
-   4000 CD D5 40      [17]   59 	call	_man_entitiy_create
+   4000 CD D4 40      [17]   59 	call	_man_entitiy_create
                              60 ;src/main.c:33: cpct_memcpy (e, &init_e, sizeof(Entity_t));
    4003 01 10 40      [10]   61 	ld	bc, #_init_e+0
    4006 11 05 00      [10]   62 	ld	de, #0x0005
    4009 D5            [11]   63 	push	de
    400A C5            [11]   64 	push	bc
    400B E5            [11]   65 	push	hl
-   400C CD 2C 41      [17]   66 	call	_cpct_memcpy
+   400C CD 31 41      [17]   66 	call	_cpct_memcpy
    400F C9            [10]   67 	ret
    4010                      68 _init_e:
    4010 01                   69 	.db #0x01	; 1
@@ -77,41 +77,41 @@
                              77 ; ---------------------------------
    4015                      78 _main::
                              79 ;src/main.c:37: cpct_disableFirmware();
-   4015 CD 34 41      [17]   80 	call	_cpct_disableFirmware
+   4015 CD 39 41      [17]   80 	call	_cpct_disableFirmware
                              81 ;src/main.c:38: cpct_setVideoMode(0);
    4018 2E 00         [ 7]   82 	ld	l, #0x00
-   401A CD 10 41      [17]   83 	call	_cpct_setVideoMode
+   401A CD 15 41      [17]   83 	call	_cpct_setVideoMode
                              84 ;src/main.c:39: cpct_setBorder(HW_BLACK);
    401D 21 10 14      [10]   85 	ld	hl, #0x1410
    4020 E5            [11]   86 	push	hl
-   4021 CD 03 41      [17]   87 	call	_cpct_setPALColour
+   4021 CD 08 41      [17]   87 	call	_cpct_setPALColour
                              88 ;src/main.c:40: cpct_setPALColour(0, HW_BLACK);
    4024 21 00 14      [10]   89 	ld	hl, #0x1400
    4027 E5            [11]   90 	push	hl
-   4028 CD 03 41      [17]   91 	call	_cpct_setPALColour
+   4028 CD 08 41      [17]   91 	call	_cpct_setPALColour
                              92 ;src/main.c:42: man_entitiy_init();
-   402B CD C0 40      [17]   93 	call	_man_entitiy_init
-                             94 ;src/main.c:43: for(u8 i = 0; i < 5; ++i){
-   402E 0E 00         [ 7]   95 	ld	c, #0x00
+   402B CD BF 40      [17]   93 	call	_man_entitiy_init
+                             94 ;src/main.c:43: for(u8 i = 5; i > 0 ; --i){
+   402E 0E 05         [ 7]   95 	ld	c, #0x05
    4030                      96 00106$:
    4030 79            [ 4]   97 	ld	a, c
-   4031 D6 05         [ 7]   98 	sub	a, #0x05
-   4033 30 08         [12]   99 	jr	NC,00101$
+   4031 B7            [ 4]   98 	or	a, a
+   4032 28 08         [12]   99 	jr	Z,00101$
                             100 ;src/main.c:44: createEntity();
-   4035 C5            [11]  101 	push	bc
-   4036 CD 00 40      [17]  102 	call	_createEntity
-   4039 C1            [10]  103 	pop	bc
-                            104 ;src/main.c:43: for(u8 i = 0; i < 5; ++i){
-   403A 0C            [ 4]  105 	inc	c
-   403B 18 F3         [12]  106 	jr	00106$
-   403D                     107 00101$:
+   4034 C5            [11]  101 	push	bc
+   4035 CD 00 40      [17]  102 	call	_createEntity
+   4038 C1            [10]  103 	pop	bc
+                            104 ;src/main.c:43: for(u8 i = 5; i > 0 ; --i){
+   4039 0D            [ 4]  105 	dec	c
+   403A 18 F4         [12]  106 	jr	00106$
+   403C                     107 00101$:
                             108 ;src/main.c:46: sys_phyisics_update();
-   403D CD 80 40      [17]  109 	call	_sys_phyisics_update
+   403C CD 7F 40      [17]  109 	call	_sys_phyisics_update
                             110 ;src/main.c:47: sys_render_update();
-   4040 CD B7 40      [17]  111 	call	_sys_render_update
+   403F CD B6 40      [17]  111 	call	_sys_render_update
                             112 ;src/main.c:49: while(1);
-   4043                     113 00103$:
-   4043 18 FE         [12]  114 	jr	00103$
+   4042                     113 00103$:
+   4042 18 FE         [12]  114 	jr	00103$
                             115 	.area _CODE
                             116 	.area _INITIALIZER
                             117 	.area _CABS (ABS)
