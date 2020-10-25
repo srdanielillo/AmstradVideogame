@@ -18,12 +18,14 @@
 
 #include <cpctelera.h>
 #include "man/entity.h"
+#include "sys/physics.h"
+#include "sys/render.h"
 
 const Entity_t init_e = {
-   1,       // type
-   79, 1,   // x, y
-   -1,      // vx
-   0xFF     // color
+   e_type_star,   // type
+   79, 1,         // x, y
+   -1,            // vx
+   0xFF           // color
 };
 
 void createEntity(){
@@ -32,9 +34,17 @@ void createEntity(){
 }
 
 void main(void) {
+   cpct_disableFirmware();
+   cpct_setVideoMode(0);
+   cpct_setBorder(HW_BLACK);
+   cpct_setPALColour(0, HW_BLACK);
+   
    man_entitiy_init();
-   for(u8 i; i < 10; ++i){
+   for(u8 i = 5; i > 0 ; --i){
       createEntity();
    }
+   sys_phyisics_update();
+   sys_render_update();
+  
    while(1);
 }
