@@ -20,31 +20,28 @@
 #include "man/entity.h"
 #include "sys/physics.h"
 #include "sys/render.h"
+#include "sys/generator.h"
 
-const Entity_t init_e = {
-   e_type_star,   // type
-   79, 1,         // x, y
-   -1,            // vx
-   0xFF           // color
-};
 
-void createEntity(){
-   Entity_t* e = man_entitiy_create();
-   cpct_memcpy (e, &init_e, sizeof(Entity_t));
+
+void wait(u8 n){
+   do{
+      cpct_waitHalts(2);
+      cpct_waitVSYNC();
+   } while(--n);
 }
 
 void main(void) {
    cpct_disableFirmware();
-   cpct_setVideoMode(0);
-   cpct_setBorder(HW_BLACK);
-   cpct_setPALColour(0, HW_BLACK);
-   
-   man_entitiy_init();
-   for(u8 i = 5; i > 0 ; --i){
-      createEntity();
-   }
-   sys_phyisics_update();
-   sys_render_update();
   
-   while(1);
+   man_entitiy_init();
+   sys_render_init();
+   while(1){
+      sys_phyisics_update();
+      sys_generator_update();
+      sys_render_update();
+   
+      man_entity_update();
+      cpct_waitVSYNC();
+   }
 }
