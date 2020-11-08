@@ -2,12 +2,12 @@
 #include "man/entity.h"
 
 void sys_physics_update_one_entity(Entity_t *e){
-    u8 newx = e->x + e->vx;
-    //TODO marcar para destruir
-    if(newx > e -> x){
+    i8 newx = e->x + e->vx;
+    e->x = newx;
+    if(newx > 80 || newx < 0){
         man_entity_set4destruction(e);
     }
-    e->x = newx;
+    //e->x = newx;
 }
 
 void sys_phyisics_update(){

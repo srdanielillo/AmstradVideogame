@@ -22,7 +22,7 @@ void sys_generator_update(){
     u8 free = man_entity_freeSpace();
     if(free > 2) free = 2;
     while(free){
-        generateNewStar();
+        //generateNewStar();
         --free;
     }
 }

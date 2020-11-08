@@ -30,9 +30,9 @@ void main(void) {
    man_entity_create_player();
    sys_render_init();
    while(1){
+      sys_input_update();
       sys_phyisics_update();
       sys_generator_update();
-      sys_input_update();
       sys_render_update();
       man_entity_update();
       cpct_waitVSYNC();

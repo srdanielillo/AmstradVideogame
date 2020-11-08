@@ -12,7 +12,7 @@
 
 typedef struct te {
    u8    type;
-   u8    x, y;
+   i8    x, y;
    i8    vx;
    u8    color;
    u8*   prevptr;
