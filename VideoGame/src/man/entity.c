@@ -5,13 +5,28 @@ u8 m_zero_type_at_the_end;
 Entity_t* m_next_free_entity;
 u8 m_num_entities;
 
+const Entity_t init_player = {
+   e_type_player, // type
+   50, 50,        // x, y
+   0,             // vx
+   0xFF,          // color
+   0              // prevm
+};
+
 void man_entitiy_init(){
-   //TODO 
-   //Hacer que esl siguiente byte de las entidades reservadas sea 0 para que corte bucle man_entity_for_all
    cpct_memset(m_entities, 0, sizeof(m_entities));
    m_next_free_entity = m_entities;
    m_num_entities = 0;
    m_zero_type_at_the_end = e_type_invalid;
+}
+
+void man_entity_create_player(){
+   Entity_t* e = man_entitiy_create();
+   cpct_memcpy (e, &init_player, sizeof(Entity_t));    
+}
+
+Entity_t* man_entity_get_player(){
+   return m_entities;
 }
 
 Entity_t* man_entitiy_create() {

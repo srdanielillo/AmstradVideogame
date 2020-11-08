@@ -21,26 +21,19 @@
 #include "sys/physics.h"
 #include "sys/render.h"
 #include "sys/generator.h"
-
-
-
-void wait(u8 n){
-   do{
-      cpct_waitHalts(2);
-      cpct_waitVSYNC();
-   } while(--n);
-}
+#include "sys/input.h"
 
 void main(void) {
    cpct_disableFirmware();
   
    man_entitiy_init();
+   man_entity_create_player();
    sys_render_init();
    while(1){
       sys_phyisics_update();
       sys_generator_update();
+      sys_input_update();
       sys_render_update();
-   
       man_entity_update();
       cpct_waitVSYNC();
    }

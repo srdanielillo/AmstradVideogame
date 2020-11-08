@@ -1,0 +1,18 @@
+   ____  ____  __________  ___  ______________  _   __    ___    __    _______  __ ___    _   ______  ____  ___ 
+  / __ \/ __ \/ ____/ __ \/   |/_  __/  _/ __ \/ | / /   /   |  / /   / ____/ |/ //   |  / | / / __ \/ __ \/   |
+ / / / / /_/ / __/ / /_/ / /| | / /  / // / / /  |/ /   / /| | / /   / __/  |   // /| | /  |/ / / / / /_/ / /| |
+/ /_/ / ____/ /___/ _, _/ ___ |/ / _/ // /_/ / /|  /   / ___ |/ /___/ /___ /   |/ ___ |/ /|  / /_/ / _, _/ ___ |
+\____/_/   /_____/_/ |_/_/  |_/_/ /___/\____/_/ |_/   /_/  |_/_____/_____//_/|_/_/  |_/_/ |_/_____/_/ |_/_/  |_|
+
+OPERATION ALEXANDRA
+A 64KB videogame for Amstrad CPC
+
+
+
+Gesture to Chicago's 30 / Topo Soft (1988)
+------------------------------------------
+
+In Operation Alexandra we have included a gesture to the famous Spanish video game Chicago's 30, by Topo Soft (1988).
+In an advanced point of the game, our hero will have to take a new weapon that allows him to go further with his shots. This weapon is the same as the one carried by the protagonist of Chicago's 30, a Thompson submachine gun, commonly known as "Tommy Gun".
+
+See image included with this document.

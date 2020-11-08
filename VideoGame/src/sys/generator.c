@@ -5,7 +5,7 @@ const Entity_t init_e = {
    e_type_star,   // type
    79, 1,         // x, y
    -1,            // vx
-   0xFF,          // color
+   0x80,          // color
    0              // prevm
 };
 
@@ -20,7 +20,9 @@ void generateNewStar(){
 
 void sys_generator_update(){
     u8 free = man_entity_freeSpace();
-    if(free){
+    if(free > 2) free = 2;
+    while(free){
         generateNewStar();
+        --free;
     }
 }

@@ -6,7 +6,9 @@
 #define e_type_dead     0x80
 #define e_type_default  0x7F
 
-#define MAX_ENTITIES 40
+#define e_type_player   0x02
+
+#define MAX_ENTITIES 50
 
 typedef struct te {
    u8    type;
@@ -18,7 +20,9 @@ typedef struct te {
 
 
 void man_entitiy_init();
+void man_entity_create_player();
 Entity_t* man_entitiy_create();
+Entity_t* man_entity_get_player();
 void man_entity_destroy(Entity_t* dead_e);
 void man_entity_forall( void (*ptrfunc)(Entity_t*) );
 void man_entity_set4destruction(Entity_t* dead_e);
