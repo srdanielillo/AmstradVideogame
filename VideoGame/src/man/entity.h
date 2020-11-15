@@ -1,5 +1,6 @@
 #pragma once
 #include "cpctelera.h"
+#include "sprites/agent.h"
 
 #define e_type_invalid  0x00
 #define e_type_star     0x01
@@ -14,7 +15,8 @@ typedef struct te {
    u8    type;
    i8    x, y;
    i8    vx;
-   u8    color;
+   u8*   sprite;
+   u8    sprite_W, sprite_H;
    u8*   prevptr;
 } Entity_t;
 

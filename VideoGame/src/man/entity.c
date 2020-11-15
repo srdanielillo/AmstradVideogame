@@ -9,7 +9,8 @@ const Entity_t init_player = {
    e_type_player, // type
    50, 50,        // x, y
    0,             // vx
-   0xFF,          // color
+   agent_sp_0,    // sprite
+   AGENT_SP_0_W, AGENT_SP_0_H,
    0              // prevm
 };
 

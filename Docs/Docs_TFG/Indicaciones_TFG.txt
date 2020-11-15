@@ -1,0 +1,17 @@
+Memoria TFG
+------------
+https://eps.ua.es/es/ingenieria-informatica/trabajos-fin-de-grado.html
+	Parte de abajo -> esta portada y libro de estilos
+		Justificación y objetivos para el final
+		Empezar memoria desde el principio 
+			Índice de contenidos -> obligatorio
+			Resto de índices -> opcional
+
+		Hacer estado del arte al principio 
+		Metodología -> Trello/metodologías ágiles/ECS/FrameWork
+
+
+Curso realización TFG multimedia
+------------------------------------
+https://moodle2019-20.ua.es/pensemonline/enrol/index.php?id=85
+
