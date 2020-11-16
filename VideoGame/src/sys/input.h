@@ -1,4 +1,4 @@
 #pragma once
-#include "cpctelera.h"
+#include <cpctelera.h>
 
 void sys_input_update();
