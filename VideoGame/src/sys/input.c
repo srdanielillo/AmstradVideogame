@@ -18,10 +18,7 @@ void sys_input_update_player(Entity_t *e){
    //TO-DO Distinguir cuando esta quieto y cuando esta en movimiento
    //TO_DO Revisar rendimiento (Almacenar teclas pulsadas)
    u8 jump_table_index = e -> jump_table_index;
-   if(jump_table_index){
-       jump_table_index++;
-   }
-   else{
+   if(!jump_table_index){
        u8 newx = e -> x;
        u8 newy = e -> y;
        u8 sprite_W = e -> sprite_W;

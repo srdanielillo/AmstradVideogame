@@ -15,7 +15,8 @@
 */
 void sys_phyisics_update_player(Entity_t *e){
     //TO-DO Hacer game over si nos salimos del juego hacía abajo
-    //TO-DO Pensar si va a haber cosas que nos mueban hacia los laterales
+    //TO-DO Pensar si va a haber cosas que nos muevan hacia los laterales
+    //TO-DO Comprobar si se encuentra saltando y si lo esta actualizar posición e índice de la tabla de salto
 
 }
 
@@ -27,6 +28,7 @@ void sys_phyisics_update_player(Entity_t *e){
 */
 void sys_physics_update_one_entity(Entity_t *e){
     //TO-DO Realizar calculo sobre tamanyo del sprite en caso de salir por la derecha 
+    //TO-DO Comprobar si se encuentra saltando y si lo esta actualizar posición e índice de la tabla de salto
     u8 newx = e->x + e->vx;
     e->x = newx;
     if(newx > 80 || newx < 0){

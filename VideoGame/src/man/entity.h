@@ -1,6 +1,7 @@
 //TO-DO diferenciar entidad jugador del resto de entidades
 #pragma once
 #include "cpctelera.h"
+#include "sys/physics.h"
 #include "sprites/agent.h"
 
 #define e_type_invalid  0x00
@@ -10,20 +11,6 @@
 #define e_type_default  0x7F
 
 #define MAX_ENTITIES_NON_PLAYER 2
-
-#define STEPS_PER_JUMP_TABLE  4
-#define e_state_not_jumping   0x00
-
-/*JUMP_TABLES*/
-#define e_jump_step_up           0x01
-#define e_jump_step_down         0x08
-#define e_jump_step_up_right     0x11
-#define e_jump_step_down_right   0x18
-#define e_jump_step_up_left      0x81
-#define e_jump_step_down_left    0x88
-
-//TO_DO MOVER A SISTEMA DE FISICAS
-u8 jump_table_in_site[STEPS_PER_JUMP_TABLE] = {e_jump_step_down, e_jump_step_down, e_jump_step_down, e_jump_step_down};
 
 #define SCR_W  80
 #define SCR_H  200

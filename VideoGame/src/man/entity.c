@@ -42,7 +42,7 @@ const Entity_t init_player = {
    AGENT_SP_0_W, AGENT_SP_0_H,   // sprite_size
    0,                            // prevm
    0,                            // jumping_index
-   0                             // ptr to jump_table
+   jump_table_in_site            // ptr to jump_table
 };
 
 /*
