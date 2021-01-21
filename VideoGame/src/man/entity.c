@@ -41,8 +41,7 @@ const Entity_t init_player = {
    agent_sp_0,                   // sprite
    AGENT_SP_0_W, AGENT_SP_0_H,   // sprite_size
    0,                            // prevm
-   0,                            // jumping_index
-   jump_table_in_site            // ptr to jump_table
+   0                             // jumping
 };
 
 /*

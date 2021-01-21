@@ -17,8 +17,9 @@ void sys_input_update_player(Entity_t *e){
    //TO-DO Cambiar cuando este listo el scroll horizontal
    //TO-DO Distinguir cuando esta quieto y cuando esta en movimiento
    //TO_DO Revisar rendimiento (Almacenar teclas pulsadas)
-   u8 jump_table_index = e -> jump_table_index;
-   if(!jump_table_index){
+   u8 jumping = e -> jumping;
+   if(!jumping){
+       //TO-DO Comprobar si se ha pulsado la tecla de saltar y asignar correctamente el índice
        u8 newx = e -> x;
        u8 newy = e -> y;
        u8 sprite_W = e -> sprite_W;

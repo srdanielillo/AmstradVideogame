@@ -1,7 +1,7 @@
 //TO-DO diferenciar entidad jugador del resto de entidades
 #pragma once
 #include "cpctelera.h"
-#include "sys/physics.h"
+//TO-DO Inicializar sprite en el render system init para evitar dependencia
 #include "sprites/agent.h"
 
 #define e_type_invalid  0x00
@@ -22,8 +22,7 @@ typedef struct te {
    u8*   sprite;
    u8    sprite_W, sprite_H;
    u8*   prevptr;
-   u8    jump_table_index;
-   u8*   jump_table;
+   u8    jumping;
 } Entity_t;
 
 void man_entitiy_init();
