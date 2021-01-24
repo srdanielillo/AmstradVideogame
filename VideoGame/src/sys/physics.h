@@ -6,20 +6,21 @@
 #define JUMP_TABLES           3
 #define e_state_not_jumping   0x00
 
-/*JUMP_TABLE VALUES                xy   */
-#define e_jump_step_up           0x08
-#define e_jump_step_down         0x01
-#define e_jump_step_up_right     0x18
-#define e_jump_step_down_right   0x11
-#define e_jump_step_up_left      0x88
-#define e_jump_step_down_left    0x81
-#define e_no_jump                0x00
+/*JUMP_TABLE VALUES*/
+#define js_x_right         0x08
+#define js_x_left          -0x08
+#define js_y_up            -0x08
+#define js_y_down            0x08
+#define js_no_movement     0x00
 
-#define left_four_bits           0xF0
-#define right_four_bits          0x0F
+typedef struct js {
+    i8 x_step;
+    i8 y_step;
+} JumpStep_t;
 
 typedef struct jt {
-    u8 steps[STEPS_PER_JUMP_TABLE];
+    //TO-DO si la jumptable cambia entre niveles quitarle el const
+    const JumpStep_t steps[STEPS_PER_JUMP_TABLE];
     u8 index;    
 } JumpTable_t;
 

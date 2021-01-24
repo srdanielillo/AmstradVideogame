@@ -11,17 +11,17 @@
 JumpTable_t s_jumpTables[JUMP_TABLES];
 
 const JumpTable_t jumpTableInSite = {
-    {e_jump_step_up, e_jump_step_up, e_jump_step_down, e_jump_step_down, e_no_jump},
+    { {js_no_movement, js_y_up}, {js_no_movement, js_y_up}, {js_no_movement, js_y_down}, {js_no_movement, js_y_down}, {js_no_movement, js_no_movement}},
     0x00
 };
 
 const JumpTable_t jumpTableRight = {
-    {e_jump_step_up_right, e_jump_step_up_right, e_jump_step_down_right, e_jump_step_down_right, e_no_jump},
+    {{js_x_right, js_y_up}, {js_x_right, js_y_up}, {js_x_right, js_y_down}, {js_x_right, js_y_down}, {js_no_movement, js_no_movement}},
     0x00
 };
 
 const JumpTable_t jumpTableLeft = {
-    {e_jump_step_up_left, e_jump_step_up_left, e_jump_step_down_left, e_jump_step_down_left, e_no_jump},
+    {{js_x_left, js_y_up}, {js_x_left, js_y_up}, {js_x_left, js_y_down}, {js_x_left, js_y_down}, {js_no_movement, js_no_movement}},
     0x00
 };
 
@@ -35,28 +35,26 @@ void sys_phyisics_update_player(Entity_t *e){
     //TO-DO Hacer game over si nos salimos del juego hacía abajo
     //TO-DO Pensar si va a haber cosas que nos muevan hacia los laterales
     //TO-DO Comprobar si se encuentra saltando y si lo esta actualizar posición e índice de la tabla de salto
-    u8 jumping = e -> jumping;
-    //En jumping vendra el indice para obtener la JumpTable correcta
-    //TO-DO Que los pasos del salto vayan en bloques de dos (Cambiar a i8)
-    if(jumping){
-        u8 jumping_aux = jumping - 1;
-        u8 index = s_jumpTables[jumping_aux].index;
-        u8 step = s_jumpTables[jumping_aux].steps[index];
-        if(step){
-            u8 x_movement = (step & left_four_bits) >> 4;
-            u8 y_movement = step & right_four_bits;
-            i8 newx = e -> x;
-            i8 newy = e -> y;
-            newx = newx + x_movement;
-            newy = newy + y_movement;
+    //TO_DO !!!!!!RENDIMIENTO!!!!!!
+    u8 jumping_original = e -> jumping;
+    u8 jumping = jumping_original - 1;
+    
+    if(jumping_original){
+        u8 index = s_jumpTables[jumping].index;
+        JumpStep_t step = {s_jumpTables[jumping].steps[index].x_step, s_jumpTables[jumping].steps[index].y_step};
+        if(((step.x_step | step.y_step) | 0x00)){
+            u8 newx = e -> x;
+            u8 newy = e -> y;
+            newx = newx + step.x_step;
+            newy = newy + step.y_step;
             e -> x = newx;
             e -> y = newy;
             ++index;
-            s_jumpTables[jumping_aux].index = index;
+            s_jumpTables[jumping].index = index;
         }
         else{
-            e -> jumping = e_no_jump;
-            s_jumpTables[jumping_aux].index = e_no_jump;
+            e -> jumping = js_no_movement;
+            s_jumpTables[jumping].index = js_no_movement;
         }
     }
 }
