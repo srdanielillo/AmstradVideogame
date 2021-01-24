@@ -11,17 +11,17 @@
 JumpTable_t s_jumpTables[JUMP_TABLES];
 
 const JumpTable_t jumpTableInSite = {
-    {e_jump_step_up, e_jump_step_up, e_jump_step_down, e_jump_step_down},
+    {e_jump_step_up, e_jump_step_up, e_jump_step_down, e_jump_step_down, e_no_jump},
     0x00
 };
 
 const JumpTable_t jumpTableRight = {
-    {e_jump_step_up_right, e_jump_step_up_right, e_jump_step_down_right, e_jump_step_down_right},
+    {e_jump_step_up_right, e_jump_step_up_right, e_jump_step_down_right, e_jump_step_down_right, e_no_jump},
     0x00
 };
 
 const JumpTable_t jumpTableLeft = {
-    {e_jump_step_up_left, e_jump_step_up_left, e_jump_step_down_left, e_jump_step_down_left},
+    {e_jump_step_up_left, e_jump_step_up_left, e_jump_step_down_left, e_jump_step_down_left, e_no_jump},
     0x00
 };
 
@@ -37,8 +37,27 @@ void sys_phyisics_update_player(Entity_t *e){
     //TO-DO Comprobar si se encuentra saltando y si lo esta actualizar posición e índice de la tabla de salto
     u8 jumping = e -> jumping;
     //En jumping vendra el indice para obtener la JumpTable correcta
+    //TO-DO Que los pasos del salto vayan en bloques de dos (Cambiar a i8)
     if(jumping){
-
+        u8 jumping_aux = jumping - 1;
+        u8 index = s_jumpTables[jumping_aux].index;
+        u8 step = s_jumpTables[jumping_aux].steps[index];
+        if(step){
+            u8 x_movement = (step & left_four_bits) >> 4;
+            u8 y_movement = step & right_four_bits;
+            i8 newx = e -> x;
+            i8 newy = e -> y;
+            newx = newx + x_movement;
+            newy = newy + y_movement;
+            e -> x = newx;
+            e -> y = newy;
+            ++index;
+            s_jumpTables[jumping_aux].index = index;
+        }
+        else{
+            e -> jumping = e_no_jump;
+            s_jumpTables[jumping_aux].index = e_no_jump;
+        }
     }
 }
 
@@ -65,6 +84,18 @@ void sys_physics_update_one_entity(Entity_t *e){
 * PUBLIC SECTION
 *******************************************************
 */
+/*
+    TO-DO Actualizar documentacion
+   [INFO]            Calls sys_phyisics_update_player and sys_physics_update_one_entity
+   
+   [PREREQUISITES]   The entity manager must be initialized before calling this function
+*/
+void sys_phyisics_init(){
+    cpct_memset(s_jumpTables, 0, sizeof(s_jumpTables));
+    cpct_memcpy (s_jumpTables, &jumpTableInSite, sizeof(JumpTable_t));
+    cpct_memcpy (s_jumpTables+1, &jumpTableRight, sizeof(JumpTable_t));
+    cpct_memcpy (s_jumpTables+2, &jumpTableLeft, sizeof(JumpTable_t));
+}
 
 /*
    [INFO]            Calls sys_phyisics_update_player and sys_physics_update_one_entity

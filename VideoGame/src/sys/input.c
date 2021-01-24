@@ -25,15 +25,18 @@ void sys_input_update_player(Entity_t *e){
        u8 sprite_W = e -> sprite_W;
        cpct_scanKeyboard_f();
        if(cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorRight)){
-           e -> y = --newy;
-           e -> x = ++newx;
+            // e -> y = --newy;
+            // e -> x = ++newx;
+           e -> jumping = jump_table_right; 
        }
        else if(cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorLeft)){
-           e -> y = --newy;
-           e -> x = --newx;
+            //    e -> y = --newy;
+            //    e -> x = --newx;
+           e -> jumping = jump_table_left;  
        }
        else if(cpct_isKeyPressed(Key_CursorUp)){
-           e -> y = --newy;
+            //    e -> y = --newy;
+           e -> jumping = jump_table_in_site; 
        }
        else if( cpct_isKeyPressed(Key_CursorRight) && newx < (SCR_W - sprite_W) ){
            e -> x = ++newx;

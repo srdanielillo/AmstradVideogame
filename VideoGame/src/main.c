@@ -29,6 +29,7 @@ void main(void) {
    man_entitiy_init();
    man_entity_create_player();
    sys_render_init();
+   sys_phyisics_init();
    while(1){
       sys_input_update();
       sys_phyisics_update();

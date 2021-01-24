@@ -9,7 +9,7 @@
 /*
    [INFO] Entity that represents the player
 */
-Entity_t*  m_player;
+Entity_t  m_player;
 
 /*
    [INFO] Array of entities that are non-player
@@ -82,7 +82,7 @@ void man_entity_destroy(Entity_t* dead_e){
 */
 void man_entitiy_init(){
    //TO-DO Comprobar si es mas eficiente con 2 memset o 1 calculando los parametros
-   cpct_memset(m_player, 0, sizeof(Entity_t));
+   cpct_memset(&m_player, 0, sizeof(Entity_t));
    cpct_memset(m_entities, 0, sizeof(m_entities));
    m_next_free_entity = m_entities;
    m_num_entities_non_player = 0;
@@ -95,7 +95,7 @@ void man_entitiy_init(){
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
 void man_entity_create_player(){
-   Entity_t* e = m_player;
+   Entity_t* e = &m_player;
    cpct_memcpy (e, &init_player, sizeof(Entity_t));
    //TO-DO Cargar tabla de saltos al comienzo de cada nivel   
 }
@@ -146,7 +146,7 @@ void man_entity_forall( void (*ptrfunc)(Entity_t*) ) {
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
 void man_entity_forplayer( void (*ptrfunc)(Entity_t*) ) {
-   Entity_t* e = m_player;
+   Entity_t* e = &m_player;
    ptrfunc(e);
 }
 
