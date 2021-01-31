@@ -11,17 +11,17 @@
 JumpTable_t s_jumpTables[JUMP_TABLES];
 
 const JumpTable_t jumpTableInSite = {
-    { {js_no_movement, js_y_up}, {js_no_movement, js_y_up}, {js_no_movement, js_y_down}, {js_no_movement, js_y_down}, {js_no_movement, js_no_movement}},
+    {js_up, js_up, js_down, js_down},
     0x00
 };
 
 const JumpTable_t jumpTableRight = {
-    {{js_x_right, js_y_up}, {js_x_right, js_y_up}, {js_x_right, js_y_down}, {js_x_right, js_y_down}, {js_no_movement, js_no_movement}},
+    {js_up_right, js_up_right, js_down_right, js_down_right},
     0x00
 };
 
 const JumpTable_t jumpTableLeft = {
-    {{js_x_left, js_y_up}, {js_x_left, js_y_up}, {js_x_left, js_y_down}, {js_x_left, js_y_down}, {js_no_movement, js_no_movement}},
+    {js_up_left, js_up_left, js_down_left,js_down_left},
     0x00
 };
 
@@ -36,25 +36,48 @@ void sys_phyisics_update_player(Entity_t *e){
     //TO-DO Pensar si va a haber cosas que nos muevan hacia los laterales
     //TO-DO Comprobar si se encuentra saltando y si lo esta actualizar posición e índice de la tabla de salto
     //TO_DO !!!!!!RENDIMIENTO!!!!!!
-    u8 jumping_original = e -> jumping;
-    u8 jumping = jumping_original - 1;
-    
-    if(jumping_original){
-        u8 index = s_jumpTables[jumping].index;
-        JumpStep_t step = {s_jumpTables[jumping].steps[index].x_step, s_jumpTables[jumping].steps[index].y_step};
-        if(((step.x_step | step.y_step) | 0x00)){
-            u8 newx = e -> x;
-            u8 newy = e -> y;
-            newx = newx + step.x_step;
-            newy = newy + step.y_step;
-            e -> x = newx;
-            e -> y = newy;
-            ++index;
-            s_jumpTables[jumping].index = index;
+    u8 jumping = e -> jumping;
+    if(jumping){
+        u8 jump_table_number = jumping - 1;
+        u8 jump_table_index = s_jumpTables[jump_table_number].index;
+        if(jump_table_index == STEPS_PER_JUMP_TABLE){
+            s_jumpTables[jump_table_number].index = 0x00;
+            e -> jumping = js_no_movement;
         }
         else{
-            e -> jumping = js_no_movement;
-            s_jumpTables[jumping].index = js_no_movement;
+            u8 jump_table_step = s_jumpTables[jump_table_number].steps[jump_table_index];
+            
+            u8 newx = e -> x;
+            u8 newy = e -> y;
+
+            u8 x_movement = 0x00;
+            u8 y_movement = 0x00;
+            
+            //Determine if x is positive or negative
+            //Negative
+            if(jump_table_step & 0x80){
+                x_movement = (((jump_table_step & 0x70) >> 4) ^ 0xFF) + 1;
+            }
+            //Positive
+            else{
+                x_movement = (jump_table_step & 0x70) >> 4;
+            }
+
+            //Determine if y is positive or negative
+            //Negative
+            if(jump_table_step & 0x08){
+                y_movement = ((jump_table_step & 0x07) ^ 0xFF) + 1;
+            }
+            //Positive
+            else{
+                y_movement = jump_table_step & 0x07;
+            }
+
+            s_jumpTables[jump_table_number].index = ++jump_table_index;
+            newx = newx + x_movement;
+            newy = newy + y_movement;
+            e -> x = newx;
+            e -> y = newy;
         }
     }
 }
