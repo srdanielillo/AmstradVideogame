@@ -18,7 +18,7 @@
 typedef struct te {
    u8    type;
    u8    x, y;
-   i8    vx;
+   i8    vx, vy;
    u8*   sprite;
    u8    sprite_W, sprite_H;
    u8*   prevptr;

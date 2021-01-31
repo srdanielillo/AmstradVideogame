@@ -37,7 +37,7 @@ u8 m_num_entities_non_player;
 const Entity_t init_player = {
    e_type_player,                // type
    50, 50,                       // x, y
-   0,                            // vx
+   0, 0,                         // vx, vy
    agent_sp_0,                   // sprite
    AGENT_SP_0_W, AGENT_SP_0_H,   // sprite_size
    0,                            // prevm

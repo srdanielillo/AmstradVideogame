@@ -1,24 +1,5 @@
 #pragma once
 #include <cpctelera.h>
-//TO-DO Crear una función init que asigne la tabla de salto, así toda la responsabilidad de la tabla de salto queda en el sistema de físicas
-
-#define STEPS_PER_JUMP_TABLE  4
-#define JUMP_TABLES           3
-
-/*JUMP_TABLE VALUES          xy   */   
-#define js_no_movement     0x00
-#define js_up              0x0B 
-#define js_down            0x03
-#define js_up_right        0x3B
-#define js_up_left         0xBB 
-#define js_down_right      0x33
-#define js_down_left       0xB3
-
-
-typedef struct jt {
-    u8 steps[STEPS_PER_JUMP_TABLE];
-    u8 index;    
-} JumpTable_t;
 
 void sys_phyisics_init();
 void sys_phyisics_update();

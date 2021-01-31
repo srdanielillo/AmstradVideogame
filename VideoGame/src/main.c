@@ -22,6 +22,7 @@
 #include "sys/render.h"
 #include "sys/generator.h"
 #include "sys/input.h"
+#include "sys/jump.h"
 
 void main(void) {
    cpct_disableFirmware();
@@ -30,8 +31,10 @@ void main(void) {
    man_entity_create_player();
    sys_render_init();
    sys_phyisics_init();
+   sys_jump_init();
    while(1){
       sys_input_update();
+      sys_jump_update();
       sys_phyisics_update();
       sys_generator_update();
       sys_render_update();
