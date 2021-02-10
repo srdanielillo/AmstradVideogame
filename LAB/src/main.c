@@ -17,28 +17,33 @@
 //------------------------------------------------------------------------------
 
 #include <cpctelera.h>
-#include "man/entity.h"
-#include "sys/physics.h"
-#include "sys/render.h"
-#include "sys/generator.h"
-#include "sys/input.h"
-#include "sys/jump.h"
+
+
+u8 jump_step;
+
 
 void main(void) {
-   cpct_disableFirmware();
-  
-   man_entitiy_init();
-   man_entity_create_player();
-   sys_render_init();
-   sys_phyisics_init();
-   sys_jump_init();
-   while(1){
-      sys_input_update();
-      sys_jump_update();
-      sys_phyisics_update();
-      sys_generator_update();
-      sys_render_update();
-      man_entity_update();
-      cpct_waitVSYNC();
+               
+   jump_step = 0x10; // 0001 0000
+   i8 y_step = 0x00;
+   i8 x_step = 0x00;
+
+   // //Obtener y Negativo
+   if(jump_step & 0x80){
+      
+      y_step = (((jump_step & 0x70) >> 4) ^0xFF)+1;
+      
    }
+   else{
+      y_step = (jump_step & 0xF0) >> 4;
+   }
+    
+                     
+      
+   
+
+   
+
+   
+   while (1);
 }
