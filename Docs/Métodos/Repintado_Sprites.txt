@@ -1,0 +1,36 @@
+34 34 34 34
+34 34 34 34
+34 34 34 34
+34 34 34 34
+34 34 34 34
+
+
+56
+56
+
+56 XOR 34 = 62
+62 XOR 56 = 34
+
+1 - Pintar monigote con XOR
+34 34 34 34
+34 62 34 34
+34 62 34 34
+34 34 34 34
+34 34 34 34
+
+(Cuando se mueva monigote)
+2 - Repintar con XOR en la posición actual
+34             34 34 34
+34 62 XOR 56 = 34 34 34
+34 62 XOR 56 = 34 34 34
+34             34 34 34
+34             34 34 34
+
+
+3 - Pintar con XOR el monigote en la posición futura
+34 34             34 34
+34 34 34 XOR 56 = 62 34
+34 34 34 XOR 56 = 62 34
+34 34             34 34
+34 34             34 34
+
