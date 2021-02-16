@@ -16,7 +16,7 @@
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_render_player(Entity_t* e) {
-    //TO-DO Realizar el borrado de pantalla conforme se muevan las entidades
+    //TO-DO Rendimiento
     u8* prevpvmem = e -> prevptr;
     if(prevpvmem){
         cpct_drawSpriteBlended(prevpvmem, e->sprite_H, e->sprite_W, e->sprite);
