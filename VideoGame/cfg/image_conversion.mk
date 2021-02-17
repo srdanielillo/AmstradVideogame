@@ -41,9 +41,11 @@
 #$(eval $(call IMG2SP, CONVERT_PALETTE , $(PALETTE), g_palette ))
 #$(eval $(call IMG2SP, CONVERT         , img.png , w, h, array, palette, tileset))
 
-PALETTE= 13 0 1 2 3 6 9 11 12 15 16 18 20 24 25 26
+PALETTE= 26 0 18 18 6 6 15 15 24 24 9 9 2 2 4 4
+$(eval $(call IMG2SP, SET_PALETTE_FW  , $(PALETTE)         ))
 $(eval $(call IMG2SP, SET_FOLDER      , src/sprites               ))
 $(eval $(call IMG2SP, CONVERT         , img/agent.png , 16, 16, agent_sp, agent_pal))
+
 
 ##
 ## OLD MACROS (For compatibility)
