@@ -67,6 +67,7 @@ void sys_render_one_entity(Entity_t* e) {
 void sys_render_init(){
    cpct_setVideoMode(0);
    cpct_setBorder(HW_BLACK);
+   //TO-DO Cargar paleta de un fichero externo para poder modificarla entre niveles
    cpct_setPalette(agent_pal, 16);
 }
 

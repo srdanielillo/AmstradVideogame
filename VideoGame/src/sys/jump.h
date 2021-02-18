@@ -13,7 +13,7 @@
 #define js_down_right      0x33
 #define js_down_left       0xB3
 
-
+//TO-DO Cambiar para que no se almacene el index
 typedef struct jt {
     u8 steps[STEPS_PER_JUMP_TABLE];
     u8 index;    
