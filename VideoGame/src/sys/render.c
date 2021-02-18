@@ -65,8 +65,6 @@ void sys_render_one_entity(Entity_t* e) {
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_render_init(){
-   //TO-DO desacoplar tamanyo de la paleta y la paleta
-   //TO-DO definir paleta en este fichero 
    cpct_setVideoMode(0);
    cpct_setBorder(HW_BLACK);
    cpct_setPalette(agent_pal, 16);
