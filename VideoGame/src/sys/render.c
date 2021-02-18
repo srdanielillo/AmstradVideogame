@@ -16,11 +16,20 @@
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_render_player(Entity_t* e) {
-    //TO-DO Realizar el borrado de pantalla conforme se muevan las entidades
-    if(e->prevptr != 0) *(e->prevptr) = 0;
+    //TO-DO Rendimiento
+    u8* prevpvmem = e -> prevptr;
+    if(prevpvmem){
+        cpct_drawSpriteBlended(prevpvmem, e->sprite_H, e->sprite_W, e->sprite);
+    }
+    else{
+        prevpvmem = cpct_getScreenPtr (CPCT_VMEM_START, e->x, e->y);
+        e -> prevptr = prevpvmem;
+    }
     if(!(e->type & e_type_dead)){
-        u8* pvmem = cpct_getScreenPtr (CPCT_VMEM_START, e-> x, e->y);
-        cpct_drawSprite(e->sprite, pvmem, e->sprite_W, e->sprite_H);
+        u8* pvmem = cpct_getScreenPtr (CPCT_VMEM_START, e->x, e->y);
+        cpct_drawSpriteBlended(pvmem, e->sprite_H, e->sprite_W, e->sprite);
+        e -> prevptr = pvmem;
+        //cpct_drawSprite(e->sprite, pvmem, e->sprite_W, e->sprite_H);
     }
 }
 
@@ -56,8 +65,6 @@ void sys_render_one_entity(Entity_t* e) {
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_render_init(){
-   //TO-DO desacoplar tamanyo de la paleta y la paleta
-   //TO-DO definir paleta en este fichero 
    cpct_setVideoMode(0);
    cpct_setBorder(HW_BLACK);
    cpct_setPalette(agent_pal, 16);
