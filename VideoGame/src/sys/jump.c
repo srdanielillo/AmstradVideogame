@@ -6,7 +6,8 @@
 * PRIVATE SECTION
 *******************************************************
 */
-
+//TO-DO Almacenar el indice de salto en la entidad para poder reutilizar tablas de salto
+//TO-DO Aumentar rendimiento
 JumpTable_t s_jumpTables[JUMP_TABLES];
 
 const JumpTable_t jumpTableInSite = {
@@ -78,7 +79,7 @@ void sys_jump_update_player(Entity_t *e){
 * PUBLIC SECTION
 *******************************************************
 */
-
+//TO-DO Cargar tablas de salto desde un fichero a parte cuando existe el manager de niveles
 void sys_jump_init(){
     cpct_memset(s_jumpTables, 0, sizeof(s_jumpTables));
     cpct_memcpy (s_jumpTables, &jumpTableInSite, sizeof(JumpTable_t));
