@@ -18,6 +18,7 @@
 
 #include <cpctelera.h>
 #include "man/entity.h"
+#include "man/level.h"
 #include "sys/physics.h"
 #include "sys/render.h"
 #include "sys/input.h"
@@ -26,18 +27,19 @@
 void main(void) {
    cpct_disableFirmware();
   
-   man_entitiy_init();
-   man_entity_create_player();
-   sys_render_init();
-   sys_phyisics_init();
-   sys_jump_init();
+   //man_entitiy_init();
+   //man_entity_create_player();
+   //sys_render_init();
+   //sys_phyisics_init();
+   //sys_jump_init();
    
-   while(1){
-      sys_input_update();
-      sys_jump_update();
-      sys_phyisics_update();
-      sys_render_update();
-      man_entity_update();
-      cpct_waitVSYNC();
-   }
+   // while(1){
+   //    sys_input_update();
+   //    sys_jump_update();
+   //    sys_phyisics_update();
+   //    sys_render_update();
+   //    man_entity_update();
+   //    cpct_waitVSYNC();
+   // }
+   man_level_level1();
 }
