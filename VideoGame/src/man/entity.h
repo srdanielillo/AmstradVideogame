@@ -12,9 +12,6 @@
 
 #define MAX_ENTITIES_NON_PLAYER 2
 
-#define SCR_W  80
-#define SCR_H  200
-
 typedef struct te {
    u8    type;
    u8    x, y;
@@ -26,7 +23,7 @@ typedef struct te {
 } Entity_t;
 
 void man_entitiy_init();
-void man_entity_create_player();
+void man_entity_create_player(Entity_t* init_player_ptr);
 
 Entity_t* man_entitiy_create();
 void man_entity_set4destruction(Entity_t* dead_e);

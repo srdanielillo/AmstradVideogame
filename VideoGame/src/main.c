@@ -17,29 +17,12 @@
 //------------------------------------------------------------------------------
 
 #include <cpctelera.h>
-#include "man/entity.h"
 #include "man/level.h"
-#include "sys/physics.h"
-#include "sys/render.h"
-#include "sys/input.h"
-#include "sys/jump.h"
 
 void main(void) {
    cpct_disableFirmware();
+   cpct_setVideoMode(0);
+   cpct_setBorder(HW_BLACK);
   
-   //man_entitiy_init();
-   //man_entity_create_player();
-   //sys_render_init();
-   //sys_phyisics_init();
-   //sys_jump_init();
-   
-   // while(1){
-   //    sys_input_update();
-   //    sys_jump_update();
-   //    sys_phyisics_update();
-   //    sys_render_update();
-   //    man_entity_update();
-   //    cpct_waitVSYNC();
-   // }
    man_level_level1();
 }

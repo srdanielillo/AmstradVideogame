@@ -1,6 +1,5 @@
 #include "render.h"
 #include "man/entity.h"
-#include "sprites/agent.h"
 
 /*
 *******************************************************
@@ -29,7 +28,6 @@ void sys_render_player(Entity_t* e) {
         u8* pvmem = cpct_getScreenPtr (CPCT_VMEM_START, e->x, e->y);
         cpct_drawSpriteBlended(pvmem, e->sprite_H, e->sprite_W, e->sprite);
         e -> prevptr = pvmem;
-        //cpct_drawSprite(e->sprite, pvmem, e->sprite_W, e->sprite_H);
     }
 }
 
@@ -57,18 +55,13 @@ void sys_render_one_entity(Entity_t* e) {
 */
 
 /*
-   [INFO]            Initialize the render system
-                     -  Set's video mode to 0
-                     -  Set border to HW_BLACK
-                     -  Set the palette to the agent sprites palette  
+   [INFO]            Initialize the palette 
+                     -  Set the palette to the one passed through the pointer  
    
-   [PREREQUISITES]   The entity manager must be initialized before calling this function
+   [PREREQUISITES]   
 */
-void sys_render_init(){
-   cpct_setVideoMode(0);
-   cpct_setBorder(HW_BLACK);
-   //TO-DO Cargar paleta de un fichero externo para poder modificarla entre niveles
-   cpct_setPalette(agent_pal, 16);
+void sys_render_init_palette(u8* palette_pointer){
+   cpct_setPalette(palette_pointer, 16);
 }
 
 

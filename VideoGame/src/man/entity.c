@@ -31,18 +31,6 @@ Entity_t* m_next_free_entity;
 */
 u8 m_num_entities_non_player;
 
-/*
-   [INFO] Struct that represents the default values of the player
-*/
-const Entity_t init_player = {
-   e_type_player,                // type
-   50, 50,                       // x, y
-   0, 0,                         // vx, vy
-   agent_sp_1,                   // sprite
-   AGENT_SP_0_W, AGENT_SP_0_H,   // sprite_size
-   0,                            // prevm
-   0                             // jumping
-};
 
 /*
    [INFO]            Deletes an entity
@@ -94,10 +82,9 @@ void man_entitiy_init(){
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-void man_entity_create_player(){
+void man_entity_create_player(Entity_t* init_player_ptr){
    Entity_t* e = &m_player;
-   cpct_memcpy (e, &init_player, sizeof(Entity_t));
-   //TO-DO Cargar tabla de saltos al comienzo de cada nivel   
+   cpct_memcpy (e, init_player_ptr, sizeof(Entity_t));
 }
 
 /*
