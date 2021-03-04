@@ -9,7 +9,8 @@ const Entity_t init_player = {
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
    0,                            // prevm
-   0                             // jumping
+   0,                            // jump_table
+   0                             // jump_index
 };
 
 void man_level_gameLoop(){

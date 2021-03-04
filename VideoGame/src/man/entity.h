@@ -19,7 +19,8 @@ typedef struct te {
    u8*   sprite;
    u8    sprite_W, sprite_H;
    u8*   prevptr;
-   u8    jumping;
+   u8    jump_table;
+   u8    jump_index;
 } Entity_t;
 
 void man_entitiy_init();
