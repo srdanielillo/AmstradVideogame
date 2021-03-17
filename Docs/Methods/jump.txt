@@ -1,0 +1,14 @@
+- Cada entidad tendrá un puntero hacía un vector de punteros
+- Cada puntero final apuntará a una JumpTable
+- Los vectores de punteros estarán almacenados en el sistema de saltos y se inicializaran en el sys_jump_init
+
+JumpTable1 = {u8 u8 u8 u8}   C000
+JumpTable2 = {u8 u8 u8 u8}   C004
+JumpTable3 = {u8 u8 u8 u8}   C008
+
+typedef JumpTable* jump_table_ptr[JUMP_TABLES_NUMBER]
+
+Entidad {
+    JumpTable* jump_table_ptr
+}
+

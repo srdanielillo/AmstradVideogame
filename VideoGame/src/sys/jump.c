@@ -6,14 +6,9 @@
 * PRIVATE SECTION
 *******************************************************
 */
-//TO-DO Aumentar rendimiento
-//TO-DO Moverlo a level 
-JumpTable s_jump_tables[JUMP_TABLES];
 
-const JumpTable jump_table_in_site = {js_up, js_up, js_down, js_down};
-const JumpTable jump_table_right = {js_up_right, js_up_right, js_down_right, js_down_right};
-const JumpTable jump_table_left = {js_up_left, js_up_left, js_down_left,js_down_left};
-
+u8* sys_jump_player_jtable_ptrs[JUMP_TABLES_NUMBER];
+ 
 void sys_jump_update_player(Entity_t *e){
     u8 jump_table = e -> jump_table;
     
@@ -28,8 +23,9 @@ void sys_jump_update_player(Entity_t *e){
             e -> jump_table = 0;
         }
         else{
-            u8 jump_table_step = s_jump_tables[jump_table_aux][jump_index];
-            
+            u8* jump_table_ptr = *(sys_jump_player_jtable_ptrs+(jump_table_aux * sizeof(u8*)));
+            u8 jump_table_step = *(jump_table_ptr+jump_index);
+
             u8 x_movement = 0x00;
             u8 y_movement = 0x00;
             
@@ -67,12 +63,10 @@ void sys_jump_update_player(Entity_t *e){
 * PUBLIC SECTION
 *******************************************************
 */
-//TO-DO Cargar tablas de salto desde un fichero a parte cuando existe el manager de niveles
-void sys_jump_init(){
-    cpct_memset(s_jump_tables, 0, sizeof(s_jump_tables));
-    cpct_memcpy (s_jump_tables, &jump_table_in_site, sizeof(JumpTable));
-    cpct_memcpy (s_jump_tables+1, &jump_table_right, sizeof(JumpTable));
-    cpct_memcpy (s_jump_tables+2, &jump_table_left, sizeof(JumpTable));
+
+void sys_jump_init_player(u8 **ptr){
+    cpct_memset(sys_jump_player_jtable_ptrs, 0, sizeof(sys_jump_player_jtable_ptrs));
+    cpct_memcpy(sys_jump_player_jtable_ptrs, ptr, sizeof(sys_jump_player_jtable_ptrs));
 }
 
 void sys_jump_update(){
