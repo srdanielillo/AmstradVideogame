@@ -1,0 +1,17 @@
+GESTOR DE NIVELES
+----------------------
+Jugador
+    Posición
+    Sprite inicial
+    Tabla de saltos
+    
+Fondo
+
+Enemigos
+    Posición
+    Sprite inicial
+    Tabla de saltos
+    IA
+
+    
+1 - Cargar paleta en cada nivel
