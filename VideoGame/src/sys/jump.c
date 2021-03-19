@@ -23,8 +23,8 @@ void sys_jump_update_player(Entity_t *e){
             e -> jump_table = 0;
         }
         else{
-            u8* jump_table_ptr = *(sys_jump_player_jtable_ptrs+(jump_table_aux * sizeof(u8*)));
-            u8 jump_table_step = *(jump_table_ptr+jump_index);
+            u8* jump_table_ptr = sys_jump_player_jtable_ptrs[jump_table_aux];
+            u8 jump_table_step = jump_table_ptr[jump_index];
 
             u8 x_movement = 0x00;
             u8 y_movement = 0x00;

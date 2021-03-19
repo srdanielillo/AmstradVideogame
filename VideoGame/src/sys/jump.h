@@ -13,8 +13,5 @@
 #define js_down_right      0x33
 #define js_down_left       0xB3
 
-typedef u8 JumpTable[STEPS_PER_JUMP_TABLE];
-typedef JumpTable* JumpTablePtrs[JUMP_TABLES_NUMBER];
-
 void sys_jump_init_player(u8 **ptr);
 void sys_jump_update();
