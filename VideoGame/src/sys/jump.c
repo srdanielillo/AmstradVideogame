@@ -64,9 +64,14 @@ void sys_jump_update_player(Entity_t *e){
 *******************************************************
 */
 
-void sys_jump_init_player(u8 **ptr){
+void sys_jump_init_player(u8 *ptr){
+    u8* ptr_aux = ptr;
     cpct_memset(sys_jump_player_jtable_ptrs, 0, sizeof(sys_jump_player_jtable_ptrs));
-    cpct_memcpy(sys_jump_player_jtable_ptrs, ptr, sizeof(sys_jump_player_jtable_ptrs));
+    //cpct_memcpy(sys_jump_player_jtable_ptrs, ptr, sizeof(sys_jump_player_jtable_ptrs));
+    for(u8 i = 0; i < JUMP_TABLES_NUMBER; ++i){
+        sys_jump_player_jtable_ptrs[i] = ptr_aux;
+        ptr_aux = ptr_aux + STEPS_PER_JUMP_TABLE;
+    }
 }
 
 void sys_jump_update(){
