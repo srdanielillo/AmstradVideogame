@@ -7,8 +7,26 @@
 *******************************************************
 */
 
+/*
+   [INFO] Array of pointers that point to the corresponding jump_table
+*/
 u8* sys_jump_player_jtable_ptrs[JUMP_TABLES_NUMBER];
- 
+
+
+/*
+   [INFO]            Updates the velocity attributes of the player depending on the values stored in the jump tables
+                     - Extracts the number of actual jump table from the entity.
+                     - Decreases it because is an index.
+                     - Extracts the correct jump index that will point to the correct value of vx and vy
+                            Each 4 bits represent the value to increment on each direction
+                            The first 4 bits are the X increment value and the follow 4 are the Y increment value
+                            If the first bit of the group is activated (More on the left) the number is negative if not it's positive.
+                              XY
+                              --
+                            0x00
+
+   [PREREQUISITES]   The entity manager must be initialized before calling this function
+*/
 void sys_jump_update_player(Entity_t *e){
     u8 jump_table = e -> jump_table;
     
@@ -27,9 +45,6 @@ void sys_jump_update_player(Entity_t *e){
             u8* jump_table_ptr = sys_jump_player_jtable_ptrs[jump_table];
             u8 jump_table_step = jump_table_ptr[jump_index];
 
-            // u8 x_movement = 0x00;
-            // u8 y_movement = 0x00;
-            
             //Determine if x is positive or negative
             //Negative
             if(jump_table_step & 0x80){
@@ -63,15 +78,24 @@ void sys_jump_update_player(Entity_t *e){
 *******************************************************
 */
 
+/*
+   [INFO]            Initializes the sys_jump_player_jtable_ptrs
+                     
+   [PREREQUISITES]   
+*/
 void sys_jump_init_player(u8 *ptr){
-    u8* ptr_aux = ptr;
     cpct_memset(sys_jump_player_jtable_ptrs, 0, sizeof(sys_jump_player_jtable_ptrs));
     for(u8 i = 0; i < JUMP_TABLES_NUMBER; ++i){
-        sys_jump_player_jtable_ptrs[i] = ptr_aux;
-        ptr_aux = ptr_aux + STEPS_PER_JUMP_TABLE;
+        sys_jump_player_jtable_ptrs[i] = ptr;
+        ptr += STEPS_PER_JUMP_TABLE;
     }
 }
 
+/*
+   [INFO]            Calls sys_jump_update_player
+                     
+   [PREREQUISITES]   
+*/
 void sys_jump_update(){
     man_entity_forplayer( sys_jump_update_player );
 }

@@ -1,5 +1,18 @@
 #include "man/level.h"
 
+/*
+*******************************************************
+* PRIVATE SECTION
+*******************************************************
+   In this module the use of const word might not be strict
+   At each level start the values of the container maybe would change
+*/
+
+
+
+/*
+   [INFO] Container to copy the player data on each level
+*/
 const Entity_t man_level_init_player = {
    e_type_player,                // type
    PLAYER_START_X_LEVEL1,        // x 
@@ -13,10 +26,27 @@ const Entity_t man_level_init_player = {
    0                             // jump_index
 };
 
+/*
+   [INFO] Container to store the jump tables of the player
+          The jump system points to these containers
+          The sys_jump_init_player should only be called once.
+          This is beacuse the values that these system points are here and are managed by this system   
+*/
 const u8 man_level_jtable_site_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_IN_SITE_PLAYER_LEVEL1;
 const u8 man_level_jtable_right_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_RIGHT_PLAYER_LEVEL1;
 const u8 man_level_jtable_left_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_LEFT_PLAYER_LEVEL1;
 
+
+/*
+   [INFO] Method to group the call to the update methods of each system
+            //TO-DO
+            - Loop while condition victory of the level is accomplished
+            - On each iteration call the update method of each system
+            - Waits VSYNC to to start next iterations
+   
+   [PREREQUISITES]   Any function with the signature man_level_levelX should be called before this one.
+   
+*/
 void man_level_gameLoop(){
    //TO-DO Comprobar condición de cambio de nivel (Puntuación enemigos...) 
    while(1){
@@ -29,12 +59,43 @@ void man_level_gameLoop(){
    }
 }
 
+
+/*
+*******************************************************
+* PUBLIC SECTION
+*******************************************************
+*/
+
+/*
+   [INFO] Method to initialize the common data between levels
+            - -Initialize the jumptable pointers of the jump system 
+   
+   [PREREQUISITES]   
+*/
+void man_level_init(){
+   cpct_disableFirmware();
+   cpct_setVideoMode(0);
+   cpct_setBorder(HW_BLACK);
+   sys_jump_init_player(man_level_jtable_site_p_level1);
+}
+
+/*
+   [INFO] Method to initialize the data of each level
+            -Calls man_entity init to reset the entities array
+            -Initialize the palette through parameter
+            -Initialize the player with the values stored at the man_level_init_player container
+            -Initialize the jumptable pointers of the jump system
+            -Calls man_level_gameLoop to start the level.  
+   
+   [PREREQUISITES] The method man_level_init should be called before this function is called  
+*/
 void man_level_level1(){
    man_entitiy_init();
    sys_render_init_palette(PALETTE_LEVEL1);
    man_entity_create_player(&man_level_init_player);
-   sys_jump_init_player(man_level_jtable_site_p_level1);
    man_level_gameLoop();
 }
+
+
 
 

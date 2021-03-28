@@ -69,34 +69,20 @@ void man_entity_destroy(Entity_t* dead_e){
    [PREREQUISITES]   This function has no prerequisites
 */
 void man_entitiy_init(){
-   //TO-DO Comprobar si es mas eficiente con 2 memset o 1 calculando los parametros
-   cpct_memset(&m_player, 0, sizeof(Entity_t));
-   cpct_memset(m_entities, 0, sizeof(m_entities));
+   cpct_memset(&m_player, 0, sizeof(m_entities)+sizeof(Entity_t));
    m_next_free_entity = m_entities;
    m_num_entities_non_player = 0;
    m_zero_type_at_the_end = e_type_invalid;
 }
 
 /*
-   [INFO]            Initialize the player entitie with default values
+   [INFO]            Initialize the player entitie with default values passed through parameter
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
 void man_entity_create_player(Entity_t* init_player_ptr){
-   Entity_t* e = &m_player;
-   cpct_memcpy (e, init_player_ptr, sizeof(Entity_t));
+   cpct_memcpy (&m_player, init_player_ptr, sizeof(Entity_t));
 }
-
-/*
-   [INFO]            Gets the pointer to the player entity
-   
-   [PREREQUISITES]   The function man_entity_init should be called before calling this function
-
-Entity_t* man_entity_get_player(){
-   //TO-DO Comprobar si es mas eficiente con copia
-   return m_player;
-}
-*/
 
 /*
    [INFO]            Creates and entity in the non-player entitie array
@@ -131,6 +117,7 @@ void man_entity_forall( void (*ptrfunc)(Entity_t*) ) {
    [INFO]            Applies the function passed as paremeter to the player entitie
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
+                     The function man_entity_create_player should be called before calling this function
 */
 void man_entity_forplayer( void (*ptrfunc)(Entity_t*) ) {
    Entity_t* e = &m_player;

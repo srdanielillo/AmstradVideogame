@@ -20,9 +20,6 @@
 #include "man/level.h"
 
 void main(void) {
-   cpct_disableFirmware();
-   cpct_setVideoMode(0);
-   cpct_setBorder(HW_BLACK);
-  
+   man_level_init();
    man_level_level1();
 }
