@@ -1,14 +1,10 @@
-//TO-DO diferenciar entidad jugador del resto de entidades
 #pragma once
 #include "cpctelera.h"
-//TO-DO Inicializar sprite en el render system init para evitar dependencia
-#include "sprites/agent.h"
 
 #define e_type_invalid  0x00
-#define e_type_star     0x01
 #define e_type_player   0x02
-#define e_type_dead     0x80
 #define e_type_default  0x7F
+#define e_type_dead     0x80
 
 #define MAX_ENTITIES_NON_PLAYER 2
 

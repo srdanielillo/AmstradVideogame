@@ -7,4 +7,5 @@
 #include "sys/input.h"
 #include "sys/jump.h"
 
+void man_level_init();
 void man_level_level1();

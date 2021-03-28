@@ -8,8 +8,13 @@
 */
 
 /*
-   [INFO]            Updates the position of the player depending on the pressed keys
-                     -  CursorRight x++ || CursorLeft x--
+   [INFO]            Updates the velocity attributes of the player depending on the pressed keys
+                     - CursorRight x++ || CursorLeft x--
+                     
+                     Assign the number of the correct jump table depending on the keys pressed
+                     - CursorUp               jump_table = 1
+                     - CursorUp + CurosrRight jump_table = 2
+                     - CursorUp + CursorLeft  jump_table = 3
                      
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
