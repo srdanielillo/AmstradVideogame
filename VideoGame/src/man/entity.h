@@ -13,8 +13,8 @@ typedef struct te {
    u8    type;
    u8    x, y;
    i8    vx, vy;
-   u8*   sprite;
    u8    sprite_W, sprite_H;
+   u8*   sprite;
    u8*   ptr;
    u8*   prevptr;
    //TO-DO Almacenar ambos en un solo u8

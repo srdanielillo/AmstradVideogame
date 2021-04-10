@@ -18,9 +18,9 @@ const Entity_t man_level_init_player = {
    PLAYER_START_X_LEVEL1,        // x 
    PLAYER_START_Y_LEVEL1,        // y
    0, 0,                         // vx, vy
-   PLAYER_START_SPRITE_LEVEL1,   // sprite
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+   PLAYER_START_SPRITE_LEVEL1,   // sprite
    0,                            // ptr
    0,                            // prevptr
    0,                            // jump_table
@@ -36,9 +36,9 @@ const Entity_t man_level_init_enemy = {
    40,                           // x 
    32,                           // y
    0, 0,                         // vx, vy
-   PLAYER_START_SPRITE_LEVEL1,   // sprite
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+   PLAYER_START_SPRITE_LEVEL1,   // sprite
    0,                            // ptr
    0,                            // prevptr
    0,                            // jump_table
@@ -73,12 +73,12 @@ void man_level_gameLoop(){
    while(1){
       sys_input_update();
       sys_jump_update();
+      cpct_setBorder(HW_BRIGHT_BLUE);
       sys_phyisics_update();
+      cpct_setBorder(HW_BRIGHT_RED);
       man_entity_update();
       cpct_waitVSYNC();
-      cpct_setBorder(HW_BRIGHT_BLUE);
       sys_render_update();
-      cpct_setBorder(HW_BRIGHT_RED);
    }
 }
 

@@ -16,7 +16,8 @@
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_phyisics_update_player(Entity_t *e){
-   //TO-DO Comprobar si declarandolas antes y usandolas despues utiliza mas tiempo
+   //TO-DO Meter muerte por caida
+   //TO-DO Dejar entidad justo en el borde cuando salta y choca
    u8 newx, newy, newvx, newvy, message;
    u8* ptr; 
    u8* prevptr;
@@ -30,16 +31,22 @@ void sys_phyisics_update_player(Entity_t *e){
       prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
       
       newx += newvx; newy += newvy;
+      if(!(newx >= 0 && newx <= SCR_W - e -> sprite_W)){
+         newx -= newvx;
+      }
+      if(!(newy >= 0 && newy <= SCR_H - e -> sprite_H)){
+         newy -= newvy;
+      }
+      
       ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
       
       e -> x = newx; e -> y = newy;
-      e -> vx = 0; e -> vy = 0;
       e -> ptr = ptr;
       e -> prevptr = prevptr;
-
       //Activates the last bit of the message
       e -> messages_re_ph = message | sys_physics_active_movement;
-      e -> vx = 0; e -> vy = 0;   
+      //Resets speed
+      e -> vx = 0; e -> vy = 0;
    }
 }
 
@@ -66,7 +73,7 @@ void sys_phyisics_update_player(Entity_t *e){
 */
 /*
     
-   [INFO]         Initializes the prevptr and the ptr attributes of the entities             
+   [INFO]                      
    
    [PREREQUISITES]   
 */
