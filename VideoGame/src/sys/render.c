@@ -16,15 +16,27 @@
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_render_player(Entity_t* e) {
+    u8 message = e -> messages_re_ph;
     
-    if(!(e->type & e_type_dead)){
-        u8* prevpvmem = e -> prevptr;
+    if(message & render_first_time){
         u8* pvmem = cpct_getScreenPtr (CPCT_VMEM_START, e->x, e->y);
-        if(prevpvmem) cpct_drawSpriteBlended(prevpvmem, e->sprite_H, e->sprite_W, e->sprite);
         cpct_drawSpriteBlended(pvmem, e->sprite_H, e->sprite_W, e->sprite);
-        e -> prevptr = pvmem;
+        
+        //Desactivate first_time_render flag in message attribute 
+        e -> messages_re_ph = message - render_first_time;
     }
-    
+    if(message & render_has_moved){
+        if(!(e->type & e_type_dead)){
+            u8* prevpvmem = e -> prevptr;
+            u8* pvmem = cpct_getScreenPtr (CPCT_VMEM_START, e->x, e->y);
+            if(prevpvmem) cpct_drawSpriteBlended(prevpvmem, e->sprite_H, e->sprite_W, e->sprite);
+            cpct_drawSpriteBlended(pvmem, e->sprite_H, e->sprite_W, e->sprite);
+            e -> prevptr = pvmem;
+            
+            //Desactivate first_time_render flag in message attribute 
+            e -> messages_re_ph = message - render_has_moved;
+        }
+    }
 }
 
 /*

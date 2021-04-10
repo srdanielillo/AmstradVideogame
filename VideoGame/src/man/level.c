@@ -23,7 +23,8 @@ const Entity_t man_level_init_player = {
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
    0,                            // prevm
    0,                            // jump_table
-   0                             // jump_index
+   0,                            // jump_index
+   0x02                          // messages_re_ph
 };
 
 /*
@@ -39,7 +40,8 @@ const Entity_t man_level_init_enemy = {
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
    0,                            // prevm
    0,                            // jump_table
-   0                             // jump_index
+   0,                            // jump_index
+   0x02                          // messages_re_ph
 };
 
 
@@ -94,7 +96,6 @@ void man_level_gameLoop(){
 void man_level_init(){
    cpct_disableFirmware();
    cpct_setVideoMode(0);
-   //cpct_setBorder(HW_BLACK);
    sys_jump_init_player(man_level_jtable_site_p_level1);
 }
 

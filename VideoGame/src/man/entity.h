@@ -16,8 +16,14 @@ typedef struct te {
    u8*   sprite;
    u8    sprite_W, sprite_H;
    u8*   prevptr;
+   //TO-DO Almacenar ambos en un solo u8
    u8    jump_table;
    u8    jump_index;
+   /*
+         7  6  5  4  3  2  [1]            [0]
+                           First_render   Has_moved
+   */
+   u8    messages_re_ph;
 } Entity_t;
 
 void man_entitiy_init();

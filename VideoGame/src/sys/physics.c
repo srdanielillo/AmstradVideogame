@@ -16,12 +16,21 @@
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_phyisics_update_player(Entity_t *e){
-    u8 newx = e -> x; u8 newy = e -> y;
-    u8 newvx = e -> vx; u8 newvy = e -> vy;
-    
-    newx = newx + newvx; newy = newy + newvy;
-    e -> x = newx; e -> y = newy;
-    e -> vx = 0; e -> vy = 0;
+   //TO-DO Comprobar si declarandolas antes y usandolas despues utiliza mas tiempo
+   u8 newx, newy, newvx, newvy, message;
+
+   message = e -> messages_re_ph; 
+   newvx = e -> vx; newvy = e -> vy;
+   
+   if(newvx | newvy){
+      newx = e -> x; newy = e -> y;
+      newx += newvx; newy += newvy;
+      e -> x = newx; e -> y = newy;
+      e -> vx = 0; e -> vy = 0;
+      //Activates the last bit of the message
+      e -> messages_re_ph = message | sys_physics_active_movement;
+      e -> vx = 0; e -> vy = 0;   
+   }
 }
 
 /*
