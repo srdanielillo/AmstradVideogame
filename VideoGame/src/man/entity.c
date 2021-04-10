@@ -100,6 +100,12 @@ Entity_t* man_entitiy_create() {
    return e;
 }
 
+void man_entity_populate_entity_data(Entity_t* e){
+   Entity_t* to = man_entitiy_create();
+   Entity_t* from = e;
+   cpct_memcpy(to, from, sizeof(Entity_t));
+}
+
 /*
    [INFO]            Applies the function passed as paremeter to all the non-player entities if they don't have an invalid type
    

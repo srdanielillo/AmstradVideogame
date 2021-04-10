@@ -27,6 +27,23 @@ const Entity_t man_level_init_player = {
 };
 
 /*
+   [INFO] Container to copy the enemies data on each level
+*/
+const Entity_t man_level_init_enemy = {
+   e_type_enemy,                 // type
+   40,                           // x 
+   32,                           // y
+   0, 0,                         // vx, vy
+   PLAYER_START_SPRITE_LEVEL1,   // sprite
+   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
+   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+   0,                            // prevm
+   0,                            // jump_table
+   0                             // jump_index
+};
+
+
+/*
    [INFO] Container to store the jump tables of the player
           The jump system points to these containers
           The sys_jump_init_player should only be called once.
@@ -53,9 +70,11 @@ void man_level_gameLoop(){
       sys_input_update();
       sys_jump_update();
       sys_phyisics_update();
-      sys_render_update();
       man_entity_update();
       cpct_waitVSYNC();
+      cpct_setBorder(HW_BRIGHT_BLUE);
+      sys_render_update();
+      cpct_setBorder(HW_BRIGHT_RED);
    }
 }
 
@@ -75,7 +94,7 @@ void man_level_gameLoop(){
 void man_level_init(){
    cpct_disableFirmware();
    cpct_setVideoMode(0);
-   cpct_setBorder(HW_BLACK);
+   //cpct_setBorder(HW_BLACK);
    sys_jump_init_player(man_level_jtable_site_p_level1);
 }
 
@@ -90,9 +109,10 @@ void man_level_init(){
    [PREREQUISITES] The method man_level_init should be called before this function is called  
 */
 void man_level_level1(){
+   cpct_setPalette(PALETTE_LEVEL1, 16);
    man_entitiy_init();
-   sys_render_init_palette(PALETTE_LEVEL1);
    man_entity_create_player(&man_level_init_player);
+   man_entity_populate_entity_data(&man_level_init_enemy);
    man_level_gameLoop();
 }
 

@@ -16,6 +16,7 @@
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_render_player(Entity_t* e) {
+    
     if(!(e->type & e_type_dead)){
         u8* prevpvmem = e -> prevptr;
         u8* pvmem = cpct_getScreenPtr (CPCT_VMEM_START, e->x, e->y);
@@ -23,6 +24,7 @@ void sys_render_player(Entity_t* e) {
         cpct_drawSpriteBlended(pvmem, e->sprite_H, e->sprite_W, e->sprite);
         e -> prevptr = pvmem;
     }
+    
 }
 
 /*
@@ -47,16 +49,6 @@ void sys_render_player(Entity_t* e) {
 * PUBLIC SECTION
 *******************************************************
 */
-
-/*
-   [INFO]            Initialize the palette 
-                     -  Set the palette to the one passed through the pointer  
-   
-   [PREREQUISITES]   
-*/
-void sys_render_init_palette(u8* palette_pointer){
-   cpct_setPalette(palette_pointer, 16);
-}
 
 
 /*
