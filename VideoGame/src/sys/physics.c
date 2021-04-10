@@ -18,15 +18,25 @@
 void sys_phyisics_update_player(Entity_t *e){
    //TO-DO Comprobar si declarandolas antes y usandolas despues utiliza mas tiempo
    u8 newx, newy, newvx, newvy, message;
-
-   message = e -> messages_re_ph; 
+   u8* ptr; 
+   u8* prevptr;
+   
    newvx = e -> vx; newvy = e -> vy;
    
    if(newvx | newvy){
+      message = e -> messages_re_ph;
+      
       newx = e -> x; newy = e -> y;
+      prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
+      
       newx += newvx; newy += newvy;
+      ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
+      
       e -> x = newx; e -> y = newy;
       e -> vx = 0; e -> vy = 0;
+      e -> ptr = ptr;
+      e -> prevptr = prevptr;
+
       //Activates the last bit of the message
       e -> messages_re_ph = message | sys_physics_active_movement;
       e -> vx = 0; e -> vy = 0;   
@@ -56,7 +66,7 @@ void sys_phyisics_update_player(Entity_t *e){
 */
 /*
     
-   [INFO]            
+   [INFO]         Initializes the prevptr and the ptr attributes of the entities             
    
    [PREREQUISITES]   
 */
