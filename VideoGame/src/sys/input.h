@@ -1,5 +1,6 @@
 #pragma once
 #include <cpctelera.h>
+#include "man/entity.h"
 
 //TO-DO Llevarse estos índices al sistema de salto
 #define jump_table_in_site 0x01

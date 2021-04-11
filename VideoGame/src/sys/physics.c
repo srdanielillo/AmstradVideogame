@@ -15,13 +15,49 @@
    
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
+//TO-DO Cambiar nombre método
 void sys_phyisics_update_player(Entity_t *e){
-    u8 newx = e -> x; u8 newy = e -> y;
-    u8 newvx = e -> vx; u8 newvy = e -> vy;
-    
-    newx = newx + newvx; newy = newy + newvy;
-    e -> x = newx; e -> y = newy;
-    e -> vx = 0; e -> vy = 0;
+   //Hacer insitu y no coger variables temporales
+   u8 newx, newy, newvx, newvy;
+   u8* ptr; 
+   u8* prevptr;
+   
+   newvx = e -> vx; newvy = e -> vy;
+   
+   if(newvx | newvy){
+      
+      newx = e -> x; newy = e -> y;
+      prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
+      
+      newx += newvx; newy += newvy;
+
+      // Checks if newx is less than 0
+      if((newx & sys_physics_check_negative) == sys_physics_check_negative){
+         newx = 0;
+      }
+      else if(newx > SCR_W - e -> sprite_W){
+         newx = SCR_W - e -> sprite_W;
+      }
+
+      
+      if((newy & sys_physics_check_negative) == sys_physics_check_negative){
+         newy = 0;
+      }
+      else if(newy > SCR_H - e -> sprite_H){
+         //TO-DO Implementar mecanismo de muerte del jugador
+         man_entity_set4destruction(e);
+      }
+      
+      ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
+      
+      e -> x = newx; e -> y = newy;
+      e -> ptr = ptr;
+      e -> prevptr = prevptr;
+      //Activates the last bit of the message
+      e -> messages_re_ph |= sys_physics_active_movement;
+      //Resets speed
+      e -> vx = 0; e -> vy = 0;
+   }
 }
 
 /*
@@ -47,7 +83,7 @@ void sys_phyisics_update_player(Entity_t *e){
 */
 /*
     
-   [INFO]            
+   [INFO]                      
    
    [PREREQUISITES]   
 */

@@ -18,13 +18,34 @@ const Entity_t man_level_init_player = {
    PLAYER_START_X_LEVEL1,        // x 
    PLAYER_START_Y_LEVEL1,        // y
    0, 0,                         // vx, vy
-   PLAYER_START_SPRITE_LEVEL1,   // sprite
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-   0,                            // prevm
+   PLAYER_START_SPRITE_LEVEL1,   // sprite
+   0,                            // ptr
+   0,                            // prevptr
    0,                            // jump_table
-   0                             // jump_index
+   0,                            // jump_index
+   0x02                          // messages_re_ph
 };
+
+/*
+   [INFO] Container to copy the enemies data on each level
+*/
+const Entity_t man_level_init_enemy = {
+   e_type_enemy,                 // type
+   40,                           // x 
+   32,                           // y
+   0, 0,                         // vx, vy
+   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
+   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+   PLAYER_START_SPRITE_LEVEL1,   // sprite
+   0,                            // ptr
+   0,                            // prevptr
+   0,                            // jump_table
+   0,                            // jump_index
+   0x02                          // messages_re_ph
+};
+
 
 /*
    [INFO] Container to store the jump tables of the player
@@ -52,12 +73,15 @@ void man_level_gameLoop(){
    while(1){
       sys_input_update();
       sys_jump_update();
+      cpct_setBorder(HW_BRIGHT_BLUE);
       sys_phyisics_update();
-      sys_render_update();
+      cpct_setBorder(HW_BRIGHT_RED);
       man_entity_update();
       cpct_waitVSYNC();
+      sys_render_update();
    }
 }
+
 
 
 /*
@@ -75,7 +99,6 @@ void man_level_gameLoop(){
 void man_level_init(){
    cpct_disableFirmware();
    cpct_setVideoMode(0);
-   cpct_setBorder(HW_BLACK);
    sys_jump_init_player(man_level_jtable_site_p_level1);
 }
 
@@ -90,9 +113,10 @@ void man_level_init(){
    [PREREQUISITES] The method man_level_init should be called before this function is called  
 */
 void man_level_level1(){
+   cpct_setPalette(PALETTE_LEVEL1, 16);
    man_entitiy_init();
-   sys_render_init_palette(PALETTE_LEVEL1);
    man_entity_create_player(&man_level_init_player);
+   man_entity_populate_entity_data(&man_level_init_enemy);
    man_level_gameLoop();
 }
 
