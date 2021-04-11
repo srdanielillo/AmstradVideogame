@@ -15,27 +15,37 @@
    
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
+//TO-DO Cambiar nombre método
 void sys_phyisics_update_player(Entity_t *e){
-   //TO-DO Meter muerte por caida
-   //TO-DO Dejar entidad justo en el borde cuando salta y choca
-   u8 newx, newy, newvx, newvy, message;
+   //Hacer insitu y no coger variables temporales
+   u8 newx, newy, newvx, newvy;
    u8* ptr; 
    u8* prevptr;
    
    newvx = e -> vx; newvy = e -> vy;
    
    if(newvx | newvy){
-      message = e -> messages_re_ph;
       
       newx = e -> x; newy = e -> y;
       prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
       
       newx += newvx; newy += newvy;
-      if(!(newx >= 0 && newx <= SCR_W - e -> sprite_W)){
-         newx -= newvx;
+
+      // Checks if newx is less than 0
+      if((newx & sys_physics_check_negative) == sys_physics_check_negative){
+         newx = 0;
       }
-      if(!(newy >= 0 && newy <= SCR_H - e -> sprite_H)){
-         newy -= newvy;
+      else if(newx > SCR_W - e -> sprite_W){
+         newx = SCR_W - e -> sprite_W;
+      }
+
+      
+      if((newy & sys_physics_check_negative) == sys_physics_check_negative){
+         newy = 0;
+      }
+      else if(newy > SCR_H - e -> sprite_H){
+         //TO-DO Implementar mecanismo de muerte del jugador
+         man_entity_set4destruction(e);
       }
       
       ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
@@ -44,7 +54,7 @@ void sys_phyisics_update_player(Entity_t *e){
       e -> ptr = ptr;
       e -> prevptr = prevptr;
       //Activates the last bit of the message
-      e -> messages_re_ph = message | sys_physics_active_movement;
+      e -> messages_re_ph |= sys_physics_active_movement;
       //Resets speed
       e -> vx = 0; e -> vy = 0;
    }
