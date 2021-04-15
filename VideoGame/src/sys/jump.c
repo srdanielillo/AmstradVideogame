@@ -27,13 +27,12 @@ u8* sys_jump_player_jtable_ptrs[JUMP_TABLES_NUMBER];
 
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
-void sys_jump_update_player(Entity_t *e){
+void sys_jump_update_entitie(Entity_t *e){
     u8 jump_table = e -> jump_table;
     
-    u8 newvx = e -> vx;
-    u8 newvy = e -> vy;
-    
     if(jump_table){
+        u8 newvx = e -> vx;
+        u8 newvy = e -> vy;
         /*  - Line to force the compiler does the -- operator on jump_table variable */
         u8 jump_table_aux = jump_table--;
         u8 jump_index = e -> jump_index;
@@ -97,5 +96,5 @@ void sys_jump_init_player(u8 *ptr){
    [PREREQUISITES]   
 */
 void sys_jump_update(){
-    man_entity_forplayer( sys_jump_update_player );
+    man_entity_forplayer( sys_jump_update_entitie );
 }

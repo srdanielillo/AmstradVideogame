@@ -43,8 +43,53 @@ const Entity_t man_level_init_enemy = {
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
-   0x02                          // messages_re_ph
+   0x06                          // messages_re_ph
 };
+
+// const Entity_t man_level_init_enemy_2 = {
+//    e_type_enemy,                 // type
+//    60,                           // x 
+//    32,                           // y
+//    0, 0,                         // vx, vy
+//    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
+//    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+//    PLAYER_START_SPRITE_LEVEL1,   // sprite
+//    0,                            // ptr
+//    0,                            // prevptr
+//    0,                            // jump_table
+//    0,                            // jump_index
+//    0x02                          // messages_re_ph
+// };
+
+// const Entity_t man_level_init_enemy_3 = {
+//    e_type_enemy,                 // type
+//    45,                           // x 
+//    80,                           // y
+//    0, 0,                         // vx, vy
+//    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
+//    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+//    PLAYER_START_SPRITE_LEVEL1,   // sprite
+//    0,                            // ptr
+//    0,                            // prevptr
+//    0,                            // jump_table
+//    0,                            // jump_index
+//    0x02                          // messages_re_ph
+// };
+
+// const Entity_t man_level_init_enemy_4 = {
+//    e_type_enemy,                 // type
+//    22,                           // x 
+//    100,                           // y
+//    0, 0,                         // vx, vy
+//    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
+//    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+//    PLAYER_START_SPRITE_LEVEL1,   // sprite
+//    0,                            // ptr
+//    0,                            // prevptr
+//    0,                            // jump_table
+//    0,                            // jump_index
+//    0x02                          // messages_re_ph
+// };
 
 
 /*
