@@ -34,8 +34,8 @@ Entity_t* man_entitiy_create();
 void man_entity_populate_entity_data(Entity_t* e);
 void man_entity_set4destruction(Entity_t* dead_e);
 
-//TO-DO Add a function to all entities
-void man_entity_forall( void (*ptrfunc)(Entity_t*) );
+void man_entity_for_all( void (*ptrfunc)(Entity_t*) );
+void man_entity_for_entities( void (*ptrfunc)(Entity_t*) );
 void man_entity_forplayer( void (*ptrfunc)(Entity_t*) ); 
 
 u8 man_entity_freeSpace();

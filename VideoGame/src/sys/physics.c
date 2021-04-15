@@ -16,7 +16,7 @@
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 //TO-DO Cambiar nombre método
-void sys_phyisics_update_player(Entity_t *e){
+void sys_phyisics_update_entitie(Entity_t *e){
    //Hacer insitu y no coger variables temporales
    u8 newx, newy, newvx, newvy;
    u8* ptr; 
@@ -97,6 +97,5 @@ void sys_phyisics_init(){
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_phyisics_update(){
-    man_entity_forplayer( sys_phyisics_update_player );
-    man_entity_forall( sys_phyisics_update_player );
+    man_entity_for_all(sys_phyisics_update_entitie);
 }

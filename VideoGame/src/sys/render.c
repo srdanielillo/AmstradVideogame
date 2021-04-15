@@ -15,7 +15,7 @@
    
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
-void sys_render_player(Entity_t* e) {
+void sys_render_update_entitie(Entity_t* e) {
     u8 message, sprite_H, sprite_W; 
     u8* ptr = e->ptr;
     u8* prevptr = e->prevptr;
@@ -54,6 +54,5 @@ void sys_render_player(Entity_t* e) {
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_render_update() {
-    man_entity_forplayer ( sys_render_player );
-    man_entity_forall ( sys_render_player );
+    man_entity_for_all(sys_render_update_entitie);
 }

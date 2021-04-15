@@ -117,11 +117,24 @@ void man_entity_populate_entity_data(Entity_t* e){
 }
 
 /*
-   [INFO]            Applies the function passed as paremeter to all the non-player entities if they don't have an invalid type
+   [INFO]            Applies the function passed as paremeter to all entities
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-void man_entity_forall( void (*ptrfunc)(Entity_t*) ) {
+void man_entity_for_all( void (*ptrfunc)(Entity_t*) ) {
+   Entity_t* e = &m_player;
+   while(e -> type != e_type_invalid){
+      ptrfunc(e);
+      ++e;
+   }
+}
+
+/*
+   [INFO]            Applies the function passed as paremeter to all the non-player entities 
+   
+   [PREREQUISITES]   The function man_entity_init should be called before calling this function
+*/
+void man_entity_for_entities( void (*ptrfunc)(Entity_t*) ) {
    Entity_t* e = m_entities;
    while(e -> type != e_type_invalid){
       ptrfunc(e);
