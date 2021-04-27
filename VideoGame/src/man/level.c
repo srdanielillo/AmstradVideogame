@@ -25,7 +25,8 @@ const Entity_t man_level_init_player = {
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
-   0x02                          // messages_re_ph
+   0x02,                         // messages_re_ph
+   0x00                          // patrol_info
 };
 
 /*
@@ -43,7 +44,8 @@ const Entity_t man_level_init_enemy = {
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
-   0x06                          // messages_re_ph
+   0x06,                         // messages_re_ph
+   0x00                          // patrol_info
 };
 
 // const Entity_t man_level_init_enemy_2 = {
@@ -102,6 +104,13 @@ const u8 man_level_jtable_site_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_IN_SI
 const u8 man_level_jtable_right_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_RIGHT_PLAYER_LEVEL1;
 const u8 man_level_jtable_left_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_LEFT_PLAYER_LEVEL1;
 
+/*
+   [INFO] Containers to store the patrol tables
+
+*/
+//TODO Poner nombre consistente
+const Patrol_step_t man_level_patrol_table_1[STEPS_PER_PATROL_TABLE] = {{0xFF, 0xFF}, {0xFF, 0xFF}, {0xFF, 0xFF}, {0xFF, 0xFF}};
+const Patrol_step_t man_level_patrol_table_2[STEPS_PER_PATROL_TABLE] = {{0xFA, 0xFA}, {0xFA, 0xFA}, {0xFA, 0xFA}, {0xFA, 0xFA}};
 
 /*
    [INFO] Method to group the call to the update methods of each system
@@ -118,6 +127,7 @@ void man_level_gameLoop(){
    while(1){
       sys_input_update();
       sys_jump_update();
+      sys_ai_update();
       cpct_setBorder(HW_BRIGHT_BLUE);
       sys_phyisics_update();
       cpct_setBorder(HW_BRIGHT_RED);
@@ -145,6 +155,7 @@ void man_level_init(){
    cpct_disableFirmware();
    cpct_setVideoMode(0);
    sys_jump_init_player(man_level_jtable_site_p_level1);
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
 }
 
 /*

@@ -25,6 +25,7 @@ typedef struct te {
                         Should_move  First_render  Has_moved
    */
    u8    messages_re_ph;
+   u8    patrol_info;
 } Entity_t;
 
 void man_entitiy_init();
