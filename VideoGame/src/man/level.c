@@ -34,8 +34,8 @@ const Entity_t man_level_init_player = {
 */
 const Entity_t man_level_init_enemy = {
    e_type_enemy,                 // type
-   40,                           // x 
-   32,                           // y
+   0,                           // x 
+   50,                           // y
    0, 0,                         // vx, vy
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
@@ -109,7 +109,7 @@ const u8 man_level_jtable_left_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_LEFT_
 
 */
 //TODO Poner nombre consistente
-const Patrol_step_t man_level_patrol_table_1[STEPS_PER_PATROL_TABLE] = {{0xFF, 0xFF}, {0xFF, 0xFF}, {0xFF, 0xFF}, {0xFF, 0xFF}};
+const Patrol_step_t man_level_patrol_table_1[STEPS_PER_PATROL_TABLE] = {{30, 50}, {60, 50}, {30, 50}, {0, 50}};
 const Patrol_step_t man_level_patrol_table_2[STEPS_PER_PATROL_TABLE] = {{0xFA, 0xFA}, {0xFA, 0xFA}, {0xFA, 0xFA}, {0xFA, 0xFA}};
 
 /*

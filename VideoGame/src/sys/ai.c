@@ -8,7 +8,7 @@
 
 
 /*
-   [INFO] Array of pointers that point to the corresponding jump_table
+   [INFO] Array of pointers that point to the corresponding patrol table
 */
 Patrol_step_t* sys_ai_ptable_ptrs[PATROL_TABLES_NUMBER];
 
@@ -18,7 +18,44 @@ Patrol_step_t* sys_ai_ptable_ptrs[PATROL_TABLES_NUMBER];
    [PREREQUISITES]   
 */
 void sys_ai_update_patrol(Entity_t* e){
+    u8 actual_x = e -> x;
+    u8 actual_y = e -> y;
+    u8 destination_x, destination_y;
 
+    u8 patrol_info = e -> patrol_info;
+    u8 patrol_table_number = patrol_info >> 4;
+    u8 patrol_table_index = patrol_info & 0x0F;
+
+    Patrol_step_t* patrol_table = sys_ai_ptable_ptrs[patrol_table_number];
+    patrol_table += patrol_table_index;
+    
+    destination_x = patrol_table -> x;
+    destination_y = patrol_table -> y;
+
+    if(actual_x == destination_x && actual_y == destination_y){
+        if(patrol_table_index == STEPS_PER_PATROL_TABLE){
+            patrol_info &= 0xF0;
+            e->patrol_info = patrol_info;
+        }
+        else{
+            e->patrol_info += 1;
+        }
+    }
+    else{
+        if(actual_x < destination_x){
+            e -> vx += 1;
+        }
+        else if(actual_x > destination_x){
+            e -> vx -= 1;
+        }
+
+        if(actual_y < destination_y){
+            e -> vy += 1;
+        }
+        else if(actual_y > destination_y){
+            e -> vy -= 1;
+        }
+    }
 }
 
 /*
