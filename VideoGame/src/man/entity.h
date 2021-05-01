@@ -37,7 +37,7 @@ void man_entity_set4destruction(Entity_t* dead_e);
 
 void man_entity_for_all( void (*ptrfunc)(Entity_t*) );
 void man_entity_for_entities( void (*ptrfunc)(Entity_t*) );
-void man_entity_forplayer( void (*ptrfunc)(Entity_t*) ); 
+void man_entity_for_player( void (*ptrfunc)(Entity_t*) ); 
 
 u8 man_entity_freeSpace();
 

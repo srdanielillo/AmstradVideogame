@@ -15,7 +15,7 @@
    
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
-//TO-DO Cambiar nombre método
+//TODO SEPARAR LÓGICA DE JUGADOR DE LA DE LOS ENEMIGOS
 void sys_phyisics_update_entitie(Entity_t *e){
    //Hacer insitu y no coger variables temporales
    u8 newx, newy, newvx, newvy, message, type;
@@ -30,27 +30,9 @@ void sys_phyisics_update_entitie(Entity_t *e){
       
       newx = e -> x; newy = e -> y;
       // When guard is desactivated the prevptr is calculated
-      // When the entitie is the player it always moves
-      if(!(message & sys_phyisics_move_sentinel) || (type == e_type_player)){
+      if(!(message & sys_phyisics_move_sentinel)){
          prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
          newx += newvx; newy += newvy;
-
-         // Checks if newx is less than 0
-         if((newx & sys_physics_check_negative) == sys_physics_check_negative){
-            newx = 0;
-         }
-         else if(newx > SCR_W - e -> sprite_W){
-            newx = SCR_W - e -> sprite_W;
-         }
-
-         // Checks if newy is less than 0
-         if((newy & sys_physics_check_negative) == sys_physics_check_negative){
-            newy = 0;
-         }
-         else if(newy > SCR_H - e -> sprite_H){
-            //TO-DO Implementar mecanismo de muerte del jugador
-            man_entity_set4destruction(e);
-         }
 
          ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
       
@@ -65,6 +47,50 @@ void sys_phyisics_update_entitie(Entity_t *e){
       else {
          e -> messages_re_ph -= sys_phyisics_move_sentinel;
       }
+   }
+}
+
+void sys_physics_update_player(Entity_t *e){
+   //Hacer insitu y no coger variables temporales
+   u8 newx, newy, newvx, newvy;
+   u8* ptr; 
+   u8* prevptr;
+   
+   newvx = e -> vx; newvy = e -> vy;
+   
+   if(newvx | newvy){
+      
+      newx = e -> x; newy = e -> y;
+      
+      prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
+      newx += newvx; newy += newvy;
+
+      // Checks if newx is less than 0
+      if((newx & sys_physics_check_negative) == sys_physics_check_negative){
+         newx = 0;
+      }
+      else if(newx > SCR_W - e -> sprite_W){
+         newx = SCR_W - e -> sprite_W;
+      }
+
+      // Checks if newy is less than 0
+      if((newy & sys_physics_check_negative) == sys_physics_check_negative){
+         newy = 0;
+      }
+      else if(newy > SCR_H - e -> sprite_H){
+         //TO-DO Implementar mecanismo de muerte del jugador
+         man_entity_set4destruction(e);
+      }
+
+      ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
+      
+      e -> x = newx; e -> y = newy;
+      e -> ptr = ptr;
+      e -> prevptr = prevptr;
+      //Activates the active_movement flag
+      e -> messages_re_ph |= sys_physics_active_movement;
+      //Resets speed
+      e -> vx = 0; e -> vy = 0;   
    }
 }
 
@@ -105,5 +131,6 @@ void sys_phyisics_init(){
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_phyisics_update(){
-    man_entity_for_all(sys_phyisics_update_entitie);
+   man_entity_for_player(sys_physics_update_player);
+   man_entity_for_entities(sys_phyisics_update_entitie);
 }

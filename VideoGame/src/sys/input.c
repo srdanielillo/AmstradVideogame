@@ -54,5 +54,5 @@ void sys_input_update_player(Entity_t *e){
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
 void sys_input_update(){
-    man_entity_forplayer( sys_input_update_player );
+    man_entity_for_player( sys_input_update_player );
 }

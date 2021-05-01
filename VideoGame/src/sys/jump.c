@@ -96,5 +96,5 @@ void sys_jump_init_player(u8 *ptr){
    [PREREQUISITES]   
 */
 void sys_jump_update(){
-    man_entity_forplayer( sys_jump_update_entitie );
+    man_entity_for_player( sys_jump_update_entitie );
 }

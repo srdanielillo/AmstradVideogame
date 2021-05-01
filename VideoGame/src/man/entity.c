@@ -148,7 +148,7 @@ void man_entity_for_entities( void (*ptrfunc)(Entity_t*) ) {
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
                      The function man_entity_create_player should be called before calling this function
 */
-void man_entity_forplayer( void (*ptrfunc)(Entity_t*) ) {
+void man_entity_for_player( void (*ptrfunc)(Entity_t*) ) {
    Entity_t* e = &m_player;
    ptrfunc(e);
 }
