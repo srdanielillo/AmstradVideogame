@@ -33,13 +33,14 @@ void sys_ai_update_patrol(Entity_t* e){
     destination_y = patrol_table -> y;
 
     if(actual_x == destination_x && actual_y == destination_y){
-        if(patrol_table_index == STEPS_PER_PATROL_TABLE){
-            patrol_info &= 0xF0;
-            e->patrol_info = patrol_info;
+        ++patrol_info;
+        if((patrol_info & 0x0F) == STEPS_PER_PATROL_TABLE){
+            e->patrol_info &= PATROL_CLEAN_STEP;
         }
         else{
-            e->patrol_info += 1;
+            e->patrol_info = patrol_info;
         }
+        
     }
     else{
         if(actual_x < destination_x){

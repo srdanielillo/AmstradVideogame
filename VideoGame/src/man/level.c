@@ -131,9 +131,9 @@ void man_level_gameLoop(){
       sys_phyisics_update();
       man_entity_update();
       cpct_waitVSYNC();
-      cpct_setBorder(HW_BRIGHT_BLUE);
+      //cpct_setBorder(HW_BRIGHT_BLUE);
       sys_render_update();
-      cpct_setBorder(HW_BRIGHT_RED);
+      //cpct_setBorder(HW_BRIGHT_RED);
    }
 }
 
