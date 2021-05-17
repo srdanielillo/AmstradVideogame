@@ -44,8 +44,8 @@ void sys_phyisics_update_entitie(Entity_t *e){
          //Resets speed
          e -> vx = 0; e -> vy = 0;   
       }
-      else {
-         e -> messages_re_ph -= sys_phyisics_move_sentinel;
+       else {
+          e -> messages_re_ph -= sys_phyisics_move_sentinel;
       }
    }
 }

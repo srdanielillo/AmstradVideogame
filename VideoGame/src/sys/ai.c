@@ -6,7 +6,7 @@
 *******************************************************
 */
 
-
+//TODO Asignar valor para que la entidad se quede parado 
 /*
    [INFO] Array of pointers that point to the corresponding patrol table
 */
@@ -20,6 +20,8 @@ Patrol_step_t* sys_ai_ptable_ptrs[PATROL_TABLES_NUMBER];
 void sys_ai_update_patrol(Entity_t* e){
     u8 actual_x = e -> x;
     u8 actual_y = e -> y;
+    u8 actual_vx = e -> vx;
+    u8 actual_vy = e -> vy;
     u8 destination_x, destination_y;
 
     u8 patrol_info = e -> patrol_info;
@@ -32,7 +34,7 @@ void sys_ai_update_patrol(Entity_t* e){
     destination_x = patrol_table -> x;
     destination_y = patrol_table -> y;
 
-    if(actual_x == destination_x && actual_y == destination_y){
+    if((actual_x + actual_vx) == destination_x && (actual_y + actual_vy) == destination_y){
         ++patrol_info;
         if((patrol_info & 0x0F) == STEPS_PER_PATROL_TABLE){
             e->patrol_info &= PATROL_CLEAN_STEP;
@@ -43,17 +45,17 @@ void sys_ai_update_patrol(Entity_t* e){
         
     }
     else{
-        if(actual_x < destination_x){
+        if((actual_x + actual_vx) < destination_x){
             e -> vx += 1;
         }
-        else if(actual_x > destination_x){
+        else if((actual_x + actual_vx) > destination_x){
             e -> vx -= 1;
         }
 
-        if(actual_y < destination_y){
+        if((actual_y + actual_vy) < destination_y){
             e -> vy += 1;
         }
-        else if(actual_y > destination_y){
+        else if((actual_y + actual_vy) > destination_y){
             e -> vy -= 1;
         }
     }

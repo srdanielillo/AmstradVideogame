@@ -1,5 +1,6 @@
 #include "man/level.h"
 
+
 /*
 *******************************************************
 * PRIVATE SECTION
@@ -35,7 +36,39 @@ const Entity_t man_level_init_player = {
 const Entity_t man_level_init_enemy = {
    e_type_enemy,                 // type
    0,                           // x 
-   50,                           // y
+   150,                           // y
+   0, 0,                         // vx, vy
+   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
+   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+   PLAYER_NEXT_SPRITE_LEVEL1,   // sprite
+   0,                            // ptr
+   0,                            // prevptr
+   0,                            // jump_table
+   0,                            // jump_index
+   0x06,                         // messages_re_ph
+   0x00                          // patrol_info
+};
+
+const Entity_t man_level_init_enemy_2 = {
+   e_type_enemy,                 // type
+   0,                           // x 
+   180,                           // y
+   0, 0,                         // vx, vy
+   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
+   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+   PLAYER_NEXT_SPRITE_LEVEL1,    // sprite
+   0,                            // ptr
+   0,                            // prevptr
+   0,                            // jump_table
+   0,                            // jump_index
+   0x02,                         // messages_re_ph
+   0x00                          // patrol_info
+};
+
+const Entity_t man_level_init_enemy_3 = {
+   e_type_enemy,                 // type
+   0,                           // x 
+   80,                           // y
    0, 0,                         // vx, vy
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
@@ -45,53 +78,24 @@ const Entity_t man_level_init_enemy = {
    0,                            // jump_table
    0,                            // jump_index
    0x06,                         // messages_re_ph
-   0x00                          // patrol_info
+   0x20                          // patrol_info
 };
 
-// const Entity_t man_level_init_enemy_2 = {
-//    e_type_enemy,                 // type
-//    60,                           // x 
-//    32,                           // y
-//    0, 0,                         // vx, vy
-//    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
-//    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-//    PLAYER_START_SPRITE_LEVEL1,   // sprite
-//    0,                            // ptr
-//    0,                            // prevptr
-//    0,                            // jump_table
-//    0,                            // jump_index
-//    0x02                          // messages_re_ph
-// };
-
-// const Entity_t man_level_init_enemy_3 = {
-//    e_type_enemy,                 // type
-//    45,                           // x 
-//    80,                           // y
-//    0, 0,                         // vx, vy
-//    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
-//    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-//    PLAYER_START_SPRITE_LEVEL1,   // sprite
-//    0,                            // ptr
-//    0,                            // prevptr
-//    0,                            // jump_table
-//    0,                            // jump_index
-//    0x02                          // messages_re_ph
-// };
-
-// const Entity_t man_level_init_enemy_4 = {
-//    e_type_enemy,                 // type
-//    22,                           // x 
-//    100,                           // y
-//    0, 0,                         // vx, vy
-//    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
-//    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-//    PLAYER_START_SPRITE_LEVEL1,   // sprite
-//    0,                            // ptr
-//    0,                            // prevptr
-//    0,                            // jump_table
-//    0,                            // jump_index
-//    0x02                          // messages_re_ph
-// };
+const Entity_t man_level_init_enemy_4 = {
+   e_type_enemy,                 // type
+   22,                           // x 
+   100,                           // y
+   0, 0,                         // vx, vy
+   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
+   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+   PLAYER_START_SPRITE_LEVEL1,   // sprite
+   0,                            // ptr
+   0,                            // prevptr
+   0,                            // jump_table
+   0,                            // jump_index
+   0x02,                          // messages_re_ph
+   0x10
+};
 
 
 /*
@@ -109,8 +113,9 @@ const u8 man_level_jtable_left_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_LEFT_
 
 */
 //TODO Poner nombre consistente
-const Patrol_step_t man_level_patrol_table_1[STEPS_PER_PATROL_TABLE] = {{30, 50}, {60, 50}, {30, 50}, {0, 50}};
-const Patrol_step_t man_level_patrol_table_2[STEPS_PER_PATROL_TABLE] = {{0xFA, 0xFA}, {0xFA, 0xFA}, {0xFA, 0xFA}, {0xFA, 0xFA}};
+const Patrol_step_t man_level_patrol_table_1[STEPS_PER_PATROL_TABLE] = {{0, 1}, {70, 0}, {70, 184}, {0, 184}};
+const Patrol_step_t man_level_patrol_table_2[STEPS_PER_PATROL_TABLE] = {{0, 180}, {60, 180}, {30, 180}, {0, 180}};
+const Patrol_step_t man_level_patrol_table_3[STEPS_PER_PATROL_TABLE] = {{30, 80}, {60, 80}, {30, 80}, {0, 80}};
 
 /*
    [INFO] Method to group the call to the update methods of each system
@@ -131,9 +136,9 @@ void man_level_gameLoop(){
       sys_phyisics_update();
       man_entity_update();
       cpct_waitVSYNC();
-      //cpct_setBorder(HW_BRIGHT_BLUE);
+      cpct_setBorder(HW_ORANGE);
       sys_render_update();
-      //cpct_setBorder(HW_BRIGHT_RED);
+      cpct_setBorder(HW_PINK);
    }
 }
 
@@ -173,6 +178,13 @@ void man_level_level1(){
    man_entitiy_init();
    man_entity_create_player(&man_level_init_player);
    man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   
+   // Draws the whole level before doing any system update
+   cpct_waitVSYNC();
+   sys_render_update();
    man_level_gameLoop();
 }
 

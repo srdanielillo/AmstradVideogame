@@ -8,7 +8,7 @@ typedef struct tpt {
 } Patrol_step_t;
 
 #define STEPS_PER_PATROL_TABLE 4
-#define PATROL_TABLES_NUMBER 2
+#define PATROL_TABLES_NUMBER 3
 #define PATROL_CLEAN_STEP 0xF0
  
 void sys_ai_init_patrol_tables(Patrol_step_t *ptr);
