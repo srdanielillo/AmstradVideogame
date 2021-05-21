@@ -29,14 +29,18 @@ void sys_phyisics_update_entitie(Entity_t *e){
       
       newx = e -> x; newy = e -> y;
 
-      prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
+      // Only get prevptr when the entitie has been move the last game cycle
+      // TODO optimize this part
+      if(!(message & 0x01)){   
+         prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
+         e -> prevptr = prevptr;
+      }
       newx += newvx; newy += newvy;
 
       ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
       
       e -> x = newx; e -> y = newy;
       e -> ptr = ptr;
-      e -> prevptr = prevptr;
       e -> messages_re_ph |= sys_physics_moved;
 
       //Resets speed

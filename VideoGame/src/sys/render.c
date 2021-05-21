@@ -42,7 +42,7 @@ void sys_render_update_entitie(Entity_t* e) {
     sprite_H = e -> sprite_H;
     sprite_W = e -> sprite_W;
     
-    if((message & sys_render_should_render && message & sys_render_moved) || (e->type == e_type_player && message & sys_render_moved)){
+    if(((message & sys_render_should_render) && (message & sys_render_moved)) || (e->type == e_type_player && message & sys_render_moved)){
         if(!(e->type & e_type_dead)){
             cpct_drawSpriteBlended(prevptr, sprite_H, sprite_W, sprite);
             cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
