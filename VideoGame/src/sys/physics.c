@@ -17,7 +17,6 @@
 */
 //TODO SEPARAR LÓGICA DE JUGADOR DE LA DE LOS ENEMIGOS
 void sys_phyisics_update_entitie(Entity_t *e){
-   //Hacer insitu y no coger variables temporales
    u8 newx, newy, newvx, newvy, message, type;
    u8* ptr; 
    u8* prevptr;
@@ -29,24 +28,22 @@ void sys_phyisics_update_entitie(Entity_t *e){
    if(newvx | newvy){
       
       newx = e -> x; newy = e -> y;
-      // When guard is desactivated the prevptr is calculated
-      if(!(message & sys_phyisics_move_sentinel)){
-         prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
-         newx += newvx; newy += newvy;
 
-         ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
+      prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
+      newx += newvx; newy += newvy;
+
+      ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
       
-         e -> x = newx; e -> y = newy;
-         e -> ptr = ptr;
-         e -> prevptr = prevptr;
-         //Activates the active_movement flag and the move_sentinel flag
-         e -> messages_re_ph |= sys_physics_active_movement + sys_phyisics_move_sentinel;
-         //Resets speed
-         e -> vx = 0; e -> vy = 0;   
-      }
-       else {
-          e -> messages_re_ph -= sys_phyisics_move_sentinel;
-      }
+      e -> x = newx; e -> y = newy;
+      e -> ptr = ptr;
+      e -> prevptr = prevptr;
+      e -> messages_re_ph |= sys_physics_moved;
+
+      //Resets speed
+      e -> vx = 0; e -> vy = 0;   
+   }
+   else{
+      e -> messages_re_ph &= sys_physics_not_moved;
    }
 }
 
@@ -88,9 +85,12 @@ void sys_physics_update_player(Entity_t *e){
       e -> ptr = ptr;
       e -> prevptr = prevptr;
       //Activates the active_movement flag
-      e -> messages_re_ph |= sys_physics_active_movement;
+      e -> messages_re_ph |= sys_physics_moved;
       //Resets speed
       e -> vx = 0; e -> vy = 0;   
+   }
+   else{
+      e -> messages_re_ph &= sys_physics_not_moved;
    }
 }
 

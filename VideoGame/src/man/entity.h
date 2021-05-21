@@ -21,8 +21,8 @@ typedef struct te {
    u8    jump_table;
    u8    jump_index;
    /*
-         7  6  5  4  3  [2]            [1]           [0]
-                        Should_render  First_render  Has_moved
+         7  6  5  4  3    [1]        [0]
+                          Has_moved  Should_render
    */
    u8    messages_re_ph;
    u8    patrol_info;

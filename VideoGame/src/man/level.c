@@ -26,7 +26,7 @@ const Entity_t man_level_init_player = {
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
-   0x02,                         // messages_re_ph
+   0x00,                         // messages_re_ph
    0x00                          // patrol_info
 };
 
@@ -45,7 +45,7 @@ const Entity_t man_level_init_enemy = {
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
-   0x06,                         // messages_re_ph
+   0x01,                         // messages_re_ph
    0x00                          // patrol_info
 };
 
@@ -61,7 +61,7 @@ const Entity_t man_level_init_enemy_2 = {
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
-   0x02,                         // messages_re_ph
+   0x01,                         // messages_re_ph
    0x00                          // patrol_info
 };
 
@@ -77,7 +77,7 @@ const Entity_t man_level_init_enemy_3 = {
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
-   0x06,                         // messages_re_ph
+   0x00,                         // messages_re_ph
    0x20                          // patrol_info
 };
 
@@ -93,7 +93,7 @@ const Entity_t man_level_init_enemy_4 = {
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
-   0x02,                          // messages_re_ph
+   0x00,                          // messages_re_ph
    0x10
 };
 
@@ -184,7 +184,7 @@ void man_level_level1(){
    
    // Draws the whole level before doing any system update
    cpct_waitVSYNC();
-   sys_render_update();
+   sys_render_first_time();
    man_level_gameLoop();
 }
 
