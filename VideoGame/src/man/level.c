@@ -22,7 +22,6 @@ const Entity_t man_level_init_player = {
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
    PLAYER_START_SPRITE_LEVEL1,   // sprite
-   0,                            // ptr
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
@@ -41,11 +40,10 @@ const Entity_t man_level_init_enemy = {
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
    PLAYER_NEXT_SPRITE_LEVEL1,   // sprite
-   0,                            // ptr
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
-   0x01,                         // messages_re_ph
+   0x00,                         // messages_re_ph
    0x00                          // patrol_info
 };
 
@@ -57,7 +55,6 @@ const Entity_t man_level_init_enemy_2 = {
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
    PLAYER_NEXT_SPRITE_LEVEL1,    // sprite
-   0,                            // ptr
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
@@ -73,7 +70,6 @@ const Entity_t man_level_init_enemy_3 = {
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
    PLAYER_START_SPRITE_LEVEL1,   // sprite
-   0,                            // ptr
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
@@ -89,7 +85,6 @@ const Entity_t man_level_init_enemy_4 = {
    PLAYER_SPRITE_W_LEVEL1,       // sprite_W
    PLAYER_SPRITE_H_LEVEL1,       // sprite_H
    PLAYER_START_SPRITE_LEVEL1,   // sprite
-   0,                            // ptr
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index

@@ -77,14 +77,13 @@ void man_entitiy_init(){
 
 /*
    [INFO]            Initialize the player entitie with default values passed through parameter
-                     Fills the ptr attribute
+                     
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
 void man_entity_create_player(Entity_t* init_player_ptr){
    Entity_t* player = &m_player;
    cpct_memcpy (player, init_player_ptr, sizeof(Entity_t));
-   player -> ptr = cpct_getScreenPtr(CPCT_VMEM_START, player->x, player->y);
 }
 
 /*
@@ -105,7 +104,7 @@ Entity_t* man_entitiy_create() {
 
 /*
    [INFO]            Creates a new entity and copy the data from the entity pointed by the parameter
-                     Fills the ptr and prevptr attributes
+                     
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
@@ -113,7 +112,6 @@ void man_entity_populate_entity_data(Entity_t* e){
    Entity_t* to = man_entitiy_create();
    Entity_t* from = e;
    cpct_memcpy(to, from, sizeof(Entity_t));
-   to -> ptr = cpct_getScreenPtr(CPCT_VMEM_START, to->x, to->y);
 }
 
 /*

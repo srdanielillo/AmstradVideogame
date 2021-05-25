@@ -18,8 +18,6 @@
 //TODO SEPARAR LÓGICA DE JUGADOR DE LA DE LOS ENEMIGOS
 void sys_phyisics_update_entitie(Entity_t *e){
    u8 newx, newy, newvx, newvy, message, type;
-   u8* ptr; 
-   u8* prevptr;
    
    newvx = e -> vx; newvy = e -> vy;
    message = e -> messages_re_ph;
@@ -29,18 +27,10 @@ void sys_phyisics_update_entitie(Entity_t *e){
       
       newx = e -> x; newy = e -> y;
 
-      // Only get prevptr when the entitie has been move the last game cycle
-      // TODO optimize this part
-      if(!(message & 0x01)){   
-         prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
-         e -> prevptr = prevptr;
-      }
       newx += newvx; newy += newvy;
 
-      ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
-      
       e -> x = newx; e -> y = newy;
-      e -> ptr = ptr;
+      
       e -> messages_re_ph |= sys_physics_moved;
 
       //Resets speed
@@ -54,8 +44,6 @@ void sys_phyisics_update_entitie(Entity_t *e){
 void sys_physics_update_player(Entity_t *e){
    //Hacer insitu y no coger variables temporales
    u8 newx, newy, newvx, newvy;
-   u8* ptr; 
-   u8* prevptr;
    
    newvx = e -> vx; newvy = e -> vy;
    
@@ -63,7 +51,6 @@ void sys_physics_update_player(Entity_t *e){
       
       newx = e -> x; newy = e -> y;
       
-      prevptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
       newx += newvx; newy += newvy;
 
       // Checks if newx is less than 0
@@ -83,13 +70,11 @@ void sys_physics_update_player(Entity_t *e){
          man_entity_set4destruction(e);
       }
 
-      ptr = cpct_getScreenPtr(CPCT_VMEM_START, newx, newy);
-      
       e -> x = newx; e -> y = newy;
-      e -> ptr = ptr;
-      e -> prevptr = prevptr;
+      
       //Activates the active_movement flag
       e -> messages_re_ph |= sys_physics_moved;
+      
       //Resets speed
       e -> vx = 0; e -> vy = 0;   
    }

@@ -15,7 +15,6 @@ typedef struct te {
    i8    vx, vy;
    u8    sprite_W, sprite_H;
    u8*   sprite;
-   u8*   ptr;
    u8*   prevptr;
    //TO-DO Almacenar ambos en un solo u8
    u8    jump_table;
