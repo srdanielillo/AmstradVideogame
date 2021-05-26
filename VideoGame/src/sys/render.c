@@ -53,11 +53,14 @@ void sys_render_update_entitie(Entity_t* e) {
             e -> prevptr = ptr;
             
             // Desactivate the flag so the next cicle the entity wont be rendered 
-            e -> messages_re_ph &= sys_render_not_render;
+            //e -> messages_re_ph &= sys_render_not_render;
         }
     }
+    // Changes the state of the render (If rendered last cycle the next cycle must not be rendered)
+    if(e -> messages_re_ph & sys_render_should_render){
+        e -> messages_re_ph &= sys_render_not_render;
+    }
     else{
-        // Activates the flag so the next cicle the entity will be rendered
         e -> messages_re_ph |= sys_render_should_render;
     }
 }

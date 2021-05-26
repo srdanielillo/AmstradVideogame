@@ -59,7 +59,7 @@ const Entity_t man_level_init_enemy_2 = {
    0,                            // jump_table
    0,                            // jump_index
    0x01,                         // messages_re_ph
-   0x00                          // patrol_info
+   0x10                          // patrol_info
 };
 
 const Entity_t man_level_init_enemy_3 = {
@@ -88,8 +88,38 @@ const Entity_t man_level_init_enemy_4 = {
    0,                            // prevptr
    0,                            // jump_table
    0,                            // jump_index
-   0x00,                          // messages_re_ph
-   0x10
+   0x01,                          // messages_re_ph
+   0x00
+};
+
+const Entity_t man_level_init_enemy_5 = {
+   e_type_enemy,                 // type
+   0,                           // x 
+   80,                           // y
+   0, 0,                         // vx, vy
+   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
+   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+   PLAYER_START_SPRITE_LEVEL1,   // sprite
+   0,                            // prevptr
+   0,                            // jump_table
+   0,                            // jump_index
+   0x00,                         // messages_re_ph
+   0x00                          // patrol_info
+};
+
+const Entity_t man_level_init_enemy_6 = {
+   e_type_enemy,                 // type
+   22,                           // x 
+   100,                           // y
+   0, 0,                         // vx, vy
+   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
+   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
+   PLAYER_START_SPRITE_LEVEL1,   // sprite
+   0,                            // prevptr
+   0,                            // jump_table
+   0,                            // jump_index
+   0x01,                          // messages_re_ph
+   0x00
 };
 
 
@@ -174,8 +204,10 @@ void man_level_level1(){
    man_entity_create_player(&man_level_init_player);
    man_entity_populate_entity_data(&man_level_init_enemy);
    man_entity_populate_entity_data(&man_level_init_enemy_2);
-   //man_entity_populate_entity_data(&man_level_init_enemy_3);
-   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   man_entity_populate_entity_data(&man_level_init_enemy_3);
+   man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_6);
    
    // Draws the whole level before doing any system update
    cpct_waitVSYNC();
