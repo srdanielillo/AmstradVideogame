@@ -202,7 +202,7 @@ void man_level_level1()
    man_entity_populate_entity_data(&man_level_init_enemy_2);
    man_entity_populate_entity_data(&man_level_init_enemy_3);
    man_entity_populate_entity_data(&man_level_init_enemy_4);
-   man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
    //man_entity_populate_entity_data(&man_level_init_enemy_6);
 
    // Draws the whole level before doing any system update
