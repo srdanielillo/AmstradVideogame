@@ -1,6 +1,5 @@
 #include "man/level.h"
 
-
 /*
 *******************************************************
 * PRIVATE SECTION
@@ -9,119 +8,114 @@
    At each level start the values of the container maybe would change
 */
 
-
-
 /*
    [INFO] Container to copy the player data on each level
 */
 const Entity_t man_level_init_player = {
-   e_type_player,                // type
-   PLAYER_START_X_LEVEL1,        // x 
-   PLAYER_START_Y_LEVEL1,        // y
-   0, 0,                         // vx, vy
-   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
-   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-   PLAYER_START_SPRITE_LEVEL1,   // sprite
-   0,                            // prevptr
-   0,                            // jump_table
-   0,                            // jump_index
-   0x00,                         // messages_re_ph
-   0x00                          // patrol_info
+    e_type_player,              // type
+    PLAYER_START_X_LEVEL1,      // x
+    PLAYER_START_Y_LEVEL1,      // y
+    0, 0,                       // vx, vy
+    PLAYER_SPRITE_W_LEVEL1,     // sprite_W
+    PLAYER_SPRITE_H_LEVEL1,     // sprite_H
+    PLAYER_START_SPRITE_LEVEL1, // sprite
+    0,                          // prevptr
+    0,                          // jump_table
+    0,                          // jump_index
+    0x00,                       // messages_re_ph
+    0x00                        // patrol_info
 };
 
 /*
    [INFO] Container to copy the enemies data on each level
 */
 const Entity_t man_level_init_enemy = {
-   e_type_enemy,                 // type
-   0,                           // x 
-   150,                           // y
-   0, 0,                         // vx, vy
-   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
-   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-   PLAYER_NEXT_SPRITE_LEVEL1,   // sprite
-   0,                            // prevptr
-   0,                            // jump_table
-   0,                            // jump_index
-   0x00,                         // messages_re_ph
-   0x00                          // patrol_info
+    e_type_enemy,              // type
+    0,                         // x
+    150,                       // y
+    0, 0,                      // vx, vy
+    PLAYER_SPRITE_W_LEVEL1,    // sprite_W
+    PLAYER_SPRITE_H_LEVEL1,    // sprite_H
+    PLAYER_NEXT_SPRITE_LEVEL1, // sprite
+    0,                         // prevptr
+    0,                         // jump_table
+    0,                         // jump_index
+    0x00,                      // messages_re_ph
+    0x00                       // patrol_info
 };
 
 const Entity_t man_level_init_enemy_2 = {
-   e_type_enemy,                 // type
-   0,                           // x 
-   180,                           // y
-   0, 0,                         // vx, vy
-   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
-   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-   PLAYER_NEXT_SPRITE_LEVEL1,    // sprite
-   0,                            // prevptr
-   0,                            // jump_table
-   0,                            // jump_index
-   0x01,                         // messages_re_ph
-   0x10                          // patrol_info
+    e_type_enemy,              // type
+    0,                         // x
+    180,                       // y
+    0, 0,                      // vx, vy
+    PLAYER_SPRITE_W_LEVEL1,    // sprite_W
+    PLAYER_SPRITE_H_LEVEL1,    // sprite_H
+    PLAYER_NEXT_SPRITE_LEVEL1, // sprite
+    0,                         // prevptr
+    0,                         // jump_table
+    0,                         // jump_index
+    0x01,                      // messages_re_ph
+    0x10                       // patrol_info
 };
 
 const Entity_t man_level_init_enemy_3 = {
-   e_type_enemy,                 // type
-   0,                           // x 
-   80,                           // y
-   0, 0,                         // vx, vy
-   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
-   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-   PLAYER_START_SPRITE_LEVEL1,   // sprite
-   0,                            // prevptr
-   0,                            // jump_table
-   0,                            // jump_index
-   0x00,                         // messages_re_ph
-   0x20                          // patrol_info
+    e_type_enemy,               // type
+    0,                          // x
+    80,                         // y
+    0, 0,                       // vx, vy
+    PLAYER_SPRITE_W_LEVEL1,     // sprite_W
+    PLAYER_SPRITE_H_LEVEL1,     // sprite_H
+    PLAYER_START_SPRITE_LEVEL1, // sprite
+    0,                          // prevptr
+    0,                          // jump_table
+    0,                          // jump_index
+    0x00,                       // messages_re_ph
+    0x20                        // patrol_info
 };
 
 const Entity_t man_level_init_enemy_4 = {
-   e_type_enemy,                 // type
-   22,                           // x 
-   100,                           // y
-   0, 0,                         // vx, vy
-   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
-   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-   PLAYER_START_SPRITE_LEVEL1,   // sprite
-   0,                            // prevptr
-   0,                            // jump_table
-   0,                            // jump_index
-   0x01,                          // messages_re_ph
-   0x00
-};
+    e_type_enemy,               // type
+    22,                         // x
+    100,                        // y
+    0, 0,                       // vx, vy
+    PLAYER_SPRITE_W_LEVEL1,     // sprite_W
+    PLAYER_SPRITE_H_LEVEL1,     // sprite_H
+    PLAYER_START_SPRITE_LEVEL1, // sprite
+    0,                          // prevptr
+    0,                          // jump_table
+    0,                          // jump_index
+    0x01,                       // messages_re_ph
+    0x00};
 
 const Entity_t man_level_init_enemy_5 = {
-   e_type_enemy,                 // type
-   0,                           // x 
-   80,                           // y
-   0, 0,                         // vx, vy
-   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
-   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-   PLAYER_START_SPRITE_LEVEL1,   // sprite
-   0,                            // prevptr
-   0,                            // jump_table
-   0,                            // jump_index
-   0x00,                         // messages_re_ph
-   0x00                          // patrol_info
+    e_type_enemy,               // type
+    0,                          // x
+    80,                         // y
+    0, 0,                       // vx, vy
+    PLAYER_SPRITE_W_LEVEL1,     // sprite_W
+    PLAYER_SPRITE_H_LEVEL1,     // sprite_H
+    PLAYER_START_SPRITE_LEVEL1, // sprite
+    0,                          // prevptr
+    0,                          // jump_table
+    0,                          // jump_index
+    0x00,                       // messages_re_ph
+    0x00                        // patrol_info
 };
 
 const Entity_t man_level_init_enemy_6 = {
-   e_type_enemy,                 // type
-   22,                           // x 
-   100,                           // y
-   0, 0,                         // vx, vy
-   PLAYER_SPRITE_W_LEVEL1,       // sprite_W
-   PLAYER_SPRITE_H_LEVEL1,       // sprite_H
-   PLAYER_START_SPRITE_LEVEL1,   // sprite
-   0,                            // prevptr
-   0,                            // jump_table
-   0,                            // jump_index
-   0x01,                          // messages_re_ph
-   0x00
-};
-
+    e_type_enemy,               // type
+    22,                         // x
+    100,                        // y
+    0, 0,                       // vx, vy
+    PLAYER_SPRITE_W_LEVEL1,     // sprite_W
+    PLAYER_SPRITE_H_LEVEL1,     // sprite_H
+    PLAYER_START_SPRITE_LEVEL1, // sprite
+    0,                          // prevptr
+    0,                          // jump_table
+    0,                          // jump_index
+    0x01,                       // messages_re_ph
+    0x00};
 
 /*
    [INFO] Container to store the jump tables of the player
@@ -152,9 +146,11 @@ const Patrol_step_t man_level_patrol_table_3[STEPS_PER_PATROL_TABLE] = {{30, 80}
    [PREREQUISITES]   Any function with the signature man_level_levelX should be called before this one.
    
 */
-void man_level_gameLoop(){
-   //TO-DO Comprobar condición de cambio de nivel (Puntuación enemigos...) 
-   while(1){
+void man_level_gameLoop()
+{
+   //TO-DO Comprobar condición de cambio de nivel (Puntuación enemigos...)
+   while (1)
+   {
       sys_input_update();
       sys_jump_update();
       sys_ai_update();
@@ -166,8 +162,6 @@ void man_level_gameLoop(){
       cpct_setBorder(HW_PINK);
    }
 }
-
-
 
 /*
 *******************************************************
@@ -181,7 +175,8 @@ void man_level_gameLoop(){
    
    [PREREQUISITES]   
 */
-void man_level_init(){
+void man_level_init()
+{
    cpct_disableFirmware();
    cpct_setVideoMode(0);
    sys_jump_init_player(man_level_jtable_site_p_level1);
@@ -198,7 +193,8 @@ void man_level_init(){
    
    [PREREQUISITES] The method man_level_init should be called before this function is called  
 */
-void man_level_level1(){
+void man_level_level1()
+{
    cpct_setPalette(PALETTE_LEVEL1, 16);
    man_entitiy_init();
    man_entity_create_player(&man_level_init_player);
@@ -206,15 +202,11 @@ void man_level_level1(){
    man_entity_populate_entity_data(&man_level_init_enemy_2);
    man_entity_populate_entity_data(&man_level_init_enemy_3);
    man_entity_populate_entity_data(&man_level_init_enemy_4);
-   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   man_entity_populate_entity_data(&man_level_init_enemy_5);
    //man_entity_populate_entity_data(&man_level_init_enemy_6);
-   
+
    // Draws the whole level before doing any system update
    cpct_waitVSYNC();
    sys_render_first_time();
    man_level_gameLoop();
 }
-
-
-
-

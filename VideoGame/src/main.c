@@ -19,7 +19,8 @@
 #include <cpctelera.h>
 #include "man/level.h"
 
-void main(void) {
+void main(void)
+{
    man_level_init();
    man_level_level1();
 }

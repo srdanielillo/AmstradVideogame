@@ -9,28 +9,27 @@
 /*
    [INFO] Entity that represents the player
 */
-Entity_t  m_player;
+Entity_t m_player;
 
 /*
    [INFO] Array of entities that are non-player
 */
-Entity_t  m_entities[MAX_ENTITIES_NON_PLAYER];
+Entity_t m_entities[MAX_ENTITIES_NON_PLAYER];
 
 /*
    [INFO] byte in memory to break the loop of man_entity_for_all
 */
-u8 m_zero_type_at_the_end; 
+u8 m_zero_type_at_the_end;
 
 /*
    [INFO] Pointer to the next free entity in the non-player entities array
 */
-Entity_t* m_next_free_entity;
+Entity_t *m_next_free_entity;
 
 /*
    [INFO] Total number of non-player entitities
 */
 u8 m_num_entities_non_player;
-
 
 /*
    [INFO]            Deletes an entity
@@ -41,18 +40,19 @@ u8 m_num_entities_non_player;
 
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-void man_entity_destroy(Entity_t* dead_e){
-   Entity_t* de = dead_e;
-   Entity_t* last = m_next_free_entity;
+void man_entity_destroy(Entity_t *dead_e)
+{
+   Entity_t *de = dead_e;
+   Entity_t *last = m_next_free_entity;
    --last;
-   if(de != last){
+   if (de != last)
+   {
       cpct_memcpy(de, last, sizeof(Entity_t));
    }
-   last -> type = e_type_invalid;
+   last->type = e_type_invalid;
    m_next_free_entity = last;
    --m_num_entities_non_player;
 }
-
 
 /*
 *******************************************************
@@ -68,8 +68,9 @@ void man_entity_destroy(Entity_t* dead_e){
    
    [PREREQUISITES]   This function has no prerequisites
 */
-void man_entitiy_init(){
-   cpct_memset(&m_player, 0, sizeof(m_entities)+sizeof(Entity_t));
+void man_entitiy_init()
+{
+   cpct_memset(&m_player, 0, sizeof(m_entities) + sizeof(Entity_t));
    m_next_free_entity = m_entities;
    m_num_entities_non_player = 0;
    m_zero_type_at_the_end = e_type_invalid;
@@ -81,9 +82,10 @@ void man_entitiy_init(){
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-void man_entity_create_player(Entity_t* init_player_ptr){
-   Entity_t* player = &m_player;
-   cpct_memcpy (player, init_player_ptr, sizeof(Entity_t));
+void man_entity_create_player(Entity_t *init_player_ptr)
+{
+   Entity_t *player = &m_player;
+   cpct_memcpy(player, init_player_ptr, sizeof(Entity_t));
 }
 
 /*
@@ -94,10 +96,11 @@ void man_entity_create_player(Entity_t* init_player_ptr){
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-Entity_t* man_entitiy_create() {
-   Entity_t* e = m_next_free_entity;
-   m_next_free_entity = e +1;
-   e -> type = e_type_default;
+Entity_t *man_entitiy_create()
+{
+   Entity_t *e = m_next_free_entity;
+   m_next_free_entity = e + 1;
+   e->type = e_type_default;
    ++m_num_entities_non_player;
    return e;
 }
@@ -108,9 +111,10 @@ Entity_t* man_entitiy_create() {
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-void man_entity_populate_entity_data(Entity_t* e){
-   Entity_t* to = man_entitiy_create();
-   Entity_t* from = e;
+void man_entity_populate_entity_data(Entity_t *e)
+{
+   Entity_t *to = man_entitiy_create();
+   Entity_t *from = e;
    cpct_memcpy(to, from, sizeof(Entity_t));
 }
 
@@ -119,9 +123,11 @@ void man_entity_populate_entity_data(Entity_t* e){
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-void man_entity_for_all( void (*ptrfunc)(Entity_t*) ) {
-   Entity_t* e = &m_player;
-   while(e -> type != e_type_invalid){
+void man_entity_for_all(void (*ptrfunc)(Entity_t *))
+{
+   Entity_t *e = &m_player;
+   while (e->type != e_type_invalid)
+   {
       ptrfunc(e);
       ++e;
    }
@@ -132,9 +138,11 @@ void man_entity_for_all( void (*ptrfunc)(Entity_t*) ) {
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-void man_entity_for_entities( void (*ptrfunc)(Entity_t*) ) {
-   Entity_t* e = m_entities;
-   while(e -> type != e_type_invalid){
+void man_entity_for_entities(void (*ptrfunc)(Entity_t *))
+{
+   Entity_t *e = m_entities;
+   while (e->type != e_type_invalid)
+   {
       ptrfunc(e);
       ++e;
    }
@@ -146,8 +154,9 @@ void man_entity_for_entities( void (*ptrfunc)(Entity_t*) ) {
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
                      The function man_entity_create_player should be called before calling this function
 */
-void man_entity_for_player( void (*ptrfunc)(Entity_t*) ) {
-   Entity_t* e = &m_player;
+void man_entity_for_player(void (*ptrfunc)(Entity_t *))
+{
+   Entity_t *e = &m_player;
    ptrfunc(e);
 }
 
@@ -157,8 +166,9 @@ void man_entity_for_player( void (*ptrfunc)(Entity_t*) ) {
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-void man_entity_set4destruction(Entity_t* dead_e){
-   dead_e -> type |=  e_type_dead;
+void man_entity_set4destruction(Entity_t *dead_e)
+{
+   dead_e->type |= e_type_dead;
 }
 
 /*
@@ -168,13 +178,17 @@ void man_entity_set4destruction(Entity_t* dead_e){
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-void man_entity_update() {
-   Entity_t* e = m_entities;
-   while(e -> type != e_type_invalid){
-      if(e -> type & e_type_dead ){
+void man_entity_update()
+{
+   Entity_t *e = m_entities;
+   while (e->type != e_type_invalid)
+   {
+      if (e->type & e_type_dead)
+      {
          man_entity_destroy(e);
       }
-      else{
+      else
+      {
          ++e;
       }
    }
@@ -186,6 +200,7 @@ void man_entity_update() {
    
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
 */
-u8 man_entity_freeSpace(){
+u8 man_entity_freeSpace()
+{
    return MAX_ENTITIES_NON_PLAYER - m_num_entities_non_player;
 }

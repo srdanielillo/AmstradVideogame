@@ -15,15 +15,16 @@
    
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
-void sys_render_entitie_first_time(Entity_t* e) {
-    u8 sprite_H = e -> sprite_H;
-    u8 sprite_W = e -> sprite_W;
-    u8 x = e -> x, y = e -> y;
-    u8* ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
-    u8* sprite = e -> sprite;
-    
+void sys_render_entitie_first_time(Entity_t *e)
+{
+    u8 sprite_H = e->sprite_H;
+    u8 sprite_W = e->sprite_W;
+    u8 x = e->x, y = e->y;
+    u8 *ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
+    u8 *sprite = e->sprite;
+
     cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
-    e -> prevptr = ptr;
+    e->prevptr = ptr;
 }
 
 /*
@@ -33,38 +34,43 @@ void sys_render_entitie_first_time(Entity_t* e) {
    
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
-void sys_render_update_entitie(Entity_t* e) {
-    u8 message, sprite_H, sprite_W, x, y; 
+void sys_render_update_entitie(Entity_t *e)
+{
+    u8 message, sprite_H, sprite_W, x, y;
     u8 *ptr, *sprite;
-    
-    message = e -> messages_re_ph;
-    sprite_H = e -> sprite_H;
-    sprite_W = e -> sprite_W;
-    x = e -> x; y = e -> y;
-    
-    if(((message & sys_render_should_render) && (message & sys_render_moved)) || (e->type == e_type_player && message & sys_render_moved)){
-        if(!(e->type & e_type_dead)){
+
+    message = e->messages_re_ph;
+    sprite_H = e->sprite_H;
+    sprite_W = e->sprite_W;
+    x = e->x;
+    y = e->y;
+
+    if (((message & sys_render_should_render) && (message & sys_render_moved)) || (e->type == e_type_player && message & sys_render_moved))
+    {
+        if (!(e->type & e_type_dead))
+        {
             ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
-            sprite = e -> sprite;
+            sprite = e->sprite;
 
             cpct_drawSpriteBlended(e->prevptr, sprite_H, sprite_W, sprite);
             cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
-            
-            e -> prevptr = ptr;
-            
-            // Desactivate the flag so the next cicle the entity wont be rendered 
+
+            e->prevptr = ptr;
+
+            // Desactivate the flag so the next cicle the entity wont be rendered
             //e -> messages_re_ph &= sys_render_not_render;
         }
     }
     // Changes the state of the render (If rendered last cycle the next cycle must not be rendered)
-    if(e -> messages_re_ph & sys_render_should_render){
-        e -> messages_re_ph &= sys_render_not_render;
+    if (e->messages_re_ph & sys_render_should_render)
+    {
+        e->messages_re_ph &= sys_render_not_render;
     }
-    else{
-        e -> messages_re_ph |= sys_render_should_render;
+    else
+    {
+        e->messages_re_ph |= sys_render_should_render;
     }
 }
-
 
 /*
 *******************************************************
@@ -72,13 +78,13 @@ void sys_render_update_entitie(Entity_t* e) {
 *******************************************************
 */
 
-
 /*
    [INFO]            Calls sys_render_player and sys_render_one_entity
                       
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
-void sys_render_update() {
+void sys_render_update()
+{
     man_entity_for_all(sys_render_update_entitie);
 }
 
@@ -87,7 +93,7 @@ void sys_render_update() {
                       
    [PREREQUISITES]   The entity manager must be initialized before calling this function
 */
-void sys_render_first_time() {
+void sys_render_first_time()
+{
     man_entity_for_all(sys_render_entitie_first_time);
 }
-
