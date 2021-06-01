@@ -1,5 +1,5 @@
+//TODO Cambiarlo y hacer que se parezca a patrol system
 #include "jump.h"
-#include "man/entity.h"
 
 /*
 *******************************************************

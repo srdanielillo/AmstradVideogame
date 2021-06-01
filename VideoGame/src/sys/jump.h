@@ -1,5 +1,6 @@
 #pragma once
 #include <cpctelera.h>
+#include "man/entity.h"
 
 #define STEPS_PER_JUMP_TABLE 4
 #define JUMP_TABLES_NUMBER 3

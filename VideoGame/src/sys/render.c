@@ -1,6 +1,5 @@
 //TO-DO Incluir repintado en entidades que no sean el jugador
 #include "render.h"
-#include "man/entity.h"
 
 /*
 *******************************************************
@@ -28,6 +27,49 @@ void sys_render_entitie_first_time(Entity_t *e)
 }
 
 /*
+   [INFO]            Renders player 
+                     -  Gets the screen pointer that corresponds to the entity
+                     -  Puts the sprite of the entitie in the place pointed by the screen pointer
+   
+   [PREREQUISITES]   The entity manager must be initialized before calling this function
+*/
+void sys_render_update_player(Entity_t *e)
+{
+    u8 message, sprite_H, sprite_W, x, y;
+    u8 *ptr, *sprite;
+
+    message = e->messages_re_ph;
+    sprite_H = e->sprite_H;
+    sprite_W = e->sprite_W;
+    x = e->x;
+    y = e->y;
+
+    if (message & RENDER_HAS_MOVED)
+    {
+        if (!(e->type & e_type_dead))
+        {
+            ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
+            sprite = e->sprite;
+
+            cpct_drawSpriteBlended(e->prevptr, sprite_H, sprite_W, sprite);
+            cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
+
+            e->prevptr = ptr;
+        }
+    }
+
+    // Changes the state of the render (If rendered last cycle the next cycle must not be rendered)
+    if (e->messages_re_ph & RENDER_SHOULD_RENDER)
+    {
+        e->messages_re_ph &= RENDER_NOT_RENDER;
+    }
+    else
+    {
+        e->messages_re_ph |= RENDER_SHOULD_RENDER;
+    }
+}
+
+/*
    [INFO]            Renders entity 
                      -  Gets the screen pointer that corresponds to the entity
                      -  Puts the sprite of the entitie in the place pointed by the screen pointer
@@ -45,7 +87,7 @@ void sys_render_update_entitie(Entity_t *e)
     x = e->x;
     y = e->y;
 
-    if (((message & sys_render_should_render) && (message & sys_render_moved)) || (e->type == e_type_player && message & sys_render_moved))
+    if ((message & RENDER_SHOULD_RENDER) && (message & RENDER_HAS_MOVED))
     {
         if (!(e->type & e_type_dead))
         {
@@ -56,19 +98,17 @@ void sys_render_update_entitie(Entity_t *e)
             cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
 
             e->prevptr = ptr;
-
-            // Desactivate the flag so the next cicle the entity wont be rendered
-            //e -> messages_re_ph &= sys_render_not_render;
         }
     }
+
     // Changes the state of the render (If rendered last cycle the next cycle must not be rendered)
-    if (e->messages_re_ph & sys_render_should_render)
+    if (e->messages_re_ph & RENDER_SHOULD_RENDER)
     {
-        e->messages_re_ph &= sys_render_not_render;
+        e->messages_re_ph &= RENDER_NOT_RENDER;
     }
     else
     {
-        e->messages_re_ph |= sys_render_should_render;
+        e->messages_re_ph |= RENDER_SHOULD_RENDER;
     }
 }
 
@@ -85,7 +125,8 @@ void sys_render_update_entitie(Entity_t *e)
 */
 void sys_render_update()
 {
-    man_entity_for_all(sys_render_update_entitie);
+    man_entity_for_player(sys_render_update_player);
+    man_entity_for_entities(sys_render_update_entitie);
 }
 
 /*

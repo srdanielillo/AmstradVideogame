@@ -23,7 +23,6 @@ void sys_input_update_player(Entity_t *e)
     if (!jump_table)
     {
         cpct_scanKeyboard_f();
-        //if(cpct_isAnyKeyPressed_f()){
         if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorRight))
         {
             e->jump_table = jump_table_right;
@@ -44,7 +43,6 @@ void sys_input_update_player(Entity_t *e)
         {
             e->vx = -1;
         }
-        //}
     }
 }
 
