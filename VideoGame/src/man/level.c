@@ -20,8 +20,7 @@ const Entity_t man_level_init_player = {
     PLAYER_SPRITE_H_LEVEL1,     // sprite_H
     PLAYER_START_SPRITE_LEVEL1, // sprite
     0,                          // prevptr
-    0,                          // jump_table
-    0,                          // jump_index
+    0xFF,                       // jump_info
     0x00,                       // messages_re_ph
     0x00                        // patrol_info
 };
@@ -38,8 +37,7 @@ const Entity_t man_level_init_enemy = {
     PLAYER_SPRITE_H_LEVEL1,    // sprite_H
     PLAYER_NEXT_SPRITE_LEVEL1, // sprite
     0,                         // prevptr
-    0,                         // jump_table
-    0,                         // jump_index
+    0,                         // jump_info
     0x00,                      // messages_re_ph
     0x00                       // patrol_info
 };
@@ -53,8 +51,7 @@ const Entity_t man_level_init_enemy_2 = {
     PLAYER_SPRITE_H_LEVEL1,    // sprite_H
     PLAYER_NEXT_SPRITE_LEVEL1, // sprite
     0,                         // prevptr
-    0,                         // jump_table
-    0,                         // jump_index
+    0,                         // jump_info
     0x01,                      // messages_re_ph
     0x10                       // patrol_info
 };
@@ -68,8 +65,7 @@ const Entity_t man_level_init_enemy_3 = {
     PLAYER_SPRITE_H_LEVEL1,     // sprite_H
     PLAYER_START_SPRITE_LEVEL1, // sprite
     0,                          // prevptr
-    0,                          // jump_table
-    0,                          // jump_index
+    0,                          // jump_info
     0x00,                       // messages_re_ph
     0x20                        // patrol_info
 };
@@ -83,8 +79,7 @@ const Entity_t man_level_init_enemy_4 = {
     PLAYER_SPRITE_H_LEVEL1,     // sprite_H
     PLAYER_START_SPRITE_LEVEL1, // sprite
     0,                          // prevptr
-    0,                          // jump_table
-    0,                          // jump_index
+    0,                          // jump_info
     0x01,                       // messages_re_ph
     0x00};
 
@@ -97,8 +92,7 @@ const Entity_t man_level_init_enemy_5 = {
     PLAYER_SPRITE_H_LEVEL1,     // sprite_H
     PLAYER_START_SPRITE_LEVEL1, // sprite
     0,                          // prevptr
-    0,                          // jump_table
-    0,                          // jump_index
+    0,                          // jump_info
     0x00,                       // messages_re_ph
     0x00                        // patrol_info
 };
@@ -112,8 +106,7 @@ const Entity_t man_level_init_enemy_6 = {
     PLAYER_SPRITE_H_LEVEL1,     // sprite_H
     PLAYER_START_SPRITE_LEVEL1, // sprite
     0,                          // prevptr
-    0,                          // jump_table
-    0,                          // jump_index
+    0,                          // jump_info
     0x01,                       // messages_re_ph
     0x00};
 
@@ -123,9 +116,9 @@ const Entity_t man_level_init_enemy_6 = {
           The sys_jump_init_player should only be called once.
           This is beacuse the values that these system points are here and are managed by this system   
 */
-const u8 man_level_jtable_site_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_IN_SITE_PLAYER_LEVEL1;
-const u8 man_level_jtable_right_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_RIGHT_PLAYER_LEVEL1;
-const u8 man_level_jtable_left_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_LEFT_PLAYER_LEVEL1;
+const Jump_step_t man_level_jtable_site_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_IN_SITE_PLAYER_LEVEL1;
+const Jump_step_t man_level_jtable_right_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_RIGHT_PLAYER_LEVEL1;
+const Jump_step_t man_level_jtable_left_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TABLE_LEFT_PLAYER_LEVEL1;
 
 /*
    [INFO] Containers to store the patrol tables
@@ -179,7 +172,7 @@ void man_level_init()
 {
    cpct_disableFirmware();
    cpct_setVideoMode(0);
-   sys_jump_init_player(man_level_jtable_site_p_level1);
+   sys_jump_init_jump_tables(man_level_jtable_site_p_level1);
    sys_ai_init_patrol_tables(man_level_patrol_table_1);
 }
 

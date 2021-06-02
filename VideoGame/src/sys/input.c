@@ -19,29 +19,29 @@
 */
 void sys_input_update_player(Entity_t *e)
 {
-    u8 jump_table = e->jump_table;
-    if (!jump_table)
+    u8 jump_info = e->jump_info;
+    if (jump_info == 0xFF)
     {
         cpct_scanKeyboard_f();
         if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorRight))
         {
-            e->jump_table = jump_table_right;
+            e->jump_info = jump_table_right;
         }
         else if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorLeft))
         {
-            e->jump_table = jump_table_left;
+            e->jump_info = jump_table_left;
         }
         else if (cpct_isKeyPressed(Key_CursorUp))
         {
-            e->jump_table = jump_table_in_site;
+            e->jump_info = jump_table_in_site;
         }
         else if (cpct_isKeyPressed(Key_CursorRight))
         {
-            e->vx = 1;
+            e->vx++;
         }
         else if (cpct_isKeyPressed(Key_CursorLeft))
         {
-            e->vx = -1;
+            e->vx--;
         }
     }
 }

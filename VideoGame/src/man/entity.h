@@ -17,9 +17,7 @@ typedef struct te
    u8 sprite_W, sprite_H;
    u8 *sprite;
    u8 *prevptr;
-   //TO-DO Almacenar ambos en un solo u8
-   u8 jump_table;
-   u8 jump_index;
+   u8 jump_info;
    /*
          7  6  5  4  3    [1]        [0]
                           Has_moved  Should_render

@@ -2,8 +2,8 @@
 #include <cpctelera.h>
 #include "man/entity.h"
 
-#define jump_table_in_site 0x01
-#define jump_table_right 0x02
-#define jump_table_left 0x03
+#define jump_table_in_site 0x00
+#define jump_table_right 0x10
+#define jump_table_left 0x20
 
 void sys_input_update();
