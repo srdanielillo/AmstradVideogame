@@ -113,9 +113,12 @@ Entity_t *man_entitiy_create()
 */
 void man_entity_populate_entity_data(Entity_t *e)
 {
-   Entity_t *to = man_entitiy_create();
-   Entity_t *from = e;
-   cpct_memcpy(to, from, sizeof(Entity_t));
+   if (man_entity_freeSpace() > 0x00)
+   {
+      Entity_t *to = man_entitiy_create();
+      Entity_t *from = e;
+      cpct_memcpy(to, from, sizeof(Entity_t));
+   }
 }
 
 /*

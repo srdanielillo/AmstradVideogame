@@ -6,6 +6,9 @@
 *******************************************************
 */
 
+Shot_data_t shot_data_template;
+Shot_data_t *shot_data_template_ptr;
+
 /*
    [INFO]            Updates the velocity attributes of the player depending on the pressed keys
                      - CursorRight x++ || CursorLeft x--
@@ -23,7 +26,13 @@ void sys_input_update_player(Entity_t *e)
     if (jump_info == 0xFF)
     {
         cpct_scanKeyboard_f();
-        if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorRight))
+        if (cpct_isKeyPressed(Key_Space))
+        {
+            shot_data_template_ptr = &shot_data_template;
+            cpct_memcpy(shot_data_template_ptr, e, (sizeof(Shot_data_t) - 1));
+            man_shot_create_shot(shot_data_template_ptr);
+        }
+        else if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorRight))
         {
             e->jump_info = jump_table_right;
         }

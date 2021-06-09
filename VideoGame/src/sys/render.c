@@ -24,6 +24,7 @@ void sys_render_entitie_first_time(Entity_t *e)
 
     cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
     e->prevptr = ptr;
+    e->messages_re_ph &= 0x7F;
 }
 
 /*
@@ -87,7 +88,11 @@ void sys_render_update_entitie(Entity_t *e)
     x = e->x;
     y = e->y;
 
-    if ((message & RENDER_SHOULD_RENDER) && (message & RENDER_HAS_MOVED))
+    if (message & 0x80)
+    {
+        sys_render_entitie_first_time(e);
+    }
+    else if ((message & RENDER_SHOULD_RENDER) && (message & RENDER_HAS_MOVED))
     {
         if (!(e->type & e_type_dead))
         {

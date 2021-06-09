@@ -9,6 +9,23 @@
 */
 
 /*
+   [INFO] Const data to initialize the shot manager
+*/
+const Entity_t man_level_init_shot_template = {
+    e_type_shot, // type
+    0xFA,        // x
+    0xFA,        // y
+    0xFA, 0xFA,  // vx, vy
+    2,           // sprite_W
+    4,           // sprite_H
+    bullet_sp_0, // sprite
+    0,           // prevptr
+    0xFF,        // jump_info
+    0x80,        // messages_re_ph
+    0xFF         // patrol_info
+};
+
+/*
    [INFO] Container to copy the player data on each level
 */
 const Entity_t man_level_init_player = {
@@ -174,6 +191,7 @@ void man_level_init()
    cpct_setVideoMode(0);
    sys_jump_init_jump_tables(man_level_jtable_site_p_level1);
    sys_ai_init_patrol_tables(man_level_patrol_table_1);
+   man_shot_init(&man_level_init_shot_template);
 }
 
 /*

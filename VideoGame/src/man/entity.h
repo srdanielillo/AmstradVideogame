@@ -4,6 +4,7 @@
 #define e_type_invalid 0x00
 #define e_type_player 0x02
 #define e_type_enemy 0x03
+#define e_type_shot 0x04
 #define e_type_default 0x7F
 #define e_type_dead 0x80
 
