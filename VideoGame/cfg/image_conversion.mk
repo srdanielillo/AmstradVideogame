@@ -45,6 +45,7 @@ PALETTE= 26 0 18 18 6 6 15 15 24 24 9 9 2 2 4 4
 $(eval $(call IMG2SP, SET_PALETTE_FW  , $(PALETTE)         ))
 $(eval $(call IMG2SP, SET_FOLDER      , src/sprites               ))
 $(eval $(call IMG2SP, CONVERT         , img/agent.png , 16, 16, agent_sp, agent_pal))
+$(eval $(call IMG2SP, CONVERT         , img/bullet.png , 4, 4, bullet_sp, bullet_pal))
 
 
 ##
