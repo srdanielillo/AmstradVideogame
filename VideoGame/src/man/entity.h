@@ -8,8 +8,12 @@
 #define e_type_default 0x7F
 #define e_type_dead 0x80
 
-#define MAX_ENTITIES_NON_PLAYER 6
+#define MAX_ENTITIES_NON_PLAYER 10
 
+#define RIGHT_DIRECTION 1
+#define LEFT_DIRECTION 2
+
+// 15
 typedef struct te
 {
    u8 type;
@@ -25,6 +29,7 @@ typedef struct te
    */
    u8 messages_re_ph;
    u8 patrol_info;
+   u8 direction;
 } Entity_t;
 
 void man_entitiy_init();

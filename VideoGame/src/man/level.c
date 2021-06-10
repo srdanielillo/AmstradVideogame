@@ -12,17 +12,18 @@
    [INFO] Const data to initialize the shot manager
 */
 const Entity_t man_level_init_shot_template = {
-    e_type_shot, // type
-    0xFA,        // x
-    0xFA,        // y
-    0xFA, 0xFA,  // vx, vy
-    2,           // sprite_W
-    4,           // sprite_H
-    bullet_sp_0, // sprite
-    0,           // prevptr
-    0xFF,        // jump_info
-    0x80,        // messages_re_ph
-    0xFF         // patrol_info
+    e_type_shot,    // type
+    0xFA,           // x
+    0xFA,           // y
+    0x00, 0x00,     // vx, vy
+    2,              // sprite_W
+    4,              // sprite_H
+    bullet_sp_0,    // sprite
+    0,              // prevptr
+    0xFF,           // jump_info
+    0x80,           // messages_re_ph
+    0xFF,           // patrol_info
+    RIGHT_DIRECTION // direction
 };
 
 /*
@@ -39,7 +40,8 @@ const Entity_t man_level_init_player = {
     0,                          // prevptr
     0xFF,                       // jump_info
     0x00,                       // messages_re_ph
-    0x00                        // patrol_info
+    0x00,                       // patrol_info
+    RIGHT_DIRECTION             // direction
 };
 
 /*
@@ -56,7 +58,8 @@ const Entity_t man_level_init_enemy = {
     0,                         // prevptr
     0,                         // jump_info
     0x00,                      // messages_re_ph
-    0x00                       // patrol_info
+    0x00,                      // patrol_info
+    RIGHT_DIRECTION            // direction
 };
 
 const Entity_t man_level_init_enemy_2 = {
@@ -70,7 +73,8 @@ const Entity_t man_level_init_enemy_2 = {
     0,                         // prevptr
     0,                         // jump_info
     0x01,                      // messages_re_ph
-    0x10                       // patrol_info
+    0x10,                      // patrol_info
+    RIGHT_DIRECTION            // direction
 };
 
 const Entity_t man_level_init_enemy_3 = {
@@ -84,7 +88,8 @@ const Entity_t man_level_init_enemy_3 = {
     0,                          // prevptr
     0,                          // jump_info
     0x00,                       // messages_re_ph
-    0x20                        // patrol_info
+    0x20,                       // patrol_info
+    RIGHT_DIRECTION             // direction
 };
 
 const Entity_t man_level_init_enemy_4 = {
@@ -98,7 +103,9 @@ const Entity_t man_level_init_enemy_4 = {
     0,                          // prevptr
     0,                          // jump_info
     0x01,                       // messages_re_ph
-    0x00};
+    0x00,                       // patrol_info
+    RIGHT_DIRECTION             // direction
+};
 
 const Entity_t man_level_init_enemy_5 = {
     e_type_enemy,               // type
@@ -111,7 +118,8 @@ const Entity_t man_level_init_enemy_5 = {
     0,                          // prevptr
     0,                          // jump_info
     0x00,                       // messages_re_ph
-    0x00                        // patrol_info
+    0x00,                       // patrol_info
+    RIGHT_DIRECTION             // direction
 };
 
 const Entity_t man_level_init_enemy_6 = {
@@ -125,7 +133,9 @@ const Entity_t man_level_init_enemy_6 = {
     0,                          // prevptr
     0,                          // jump_info
     0x01,                       // messages_re_ph
-    0x00};
+    0x00,                       // patrol_info
+    RIGHT_DIRECTION             // direction
+};
 
 /*
    [INFO] Container to store the jump tables of the player
@@ -161,6 +171,7 @@ void man_level_gameLoop()
    //TO-DO Comprobar condición de cambio de nivel (Puntuación enemigos...)
    while (1)
    {
+
       sys_input_update();
       sys_jump_update();
       sys_ai_update();
@@ -192,6 +203,7 @@ void man_level_init()
    sys_jump_init_jump_tables(man_level_jtable_site_p_level1);
    sys_ai_init_patrol_tables(man_level_patrol_table_1);
    man_shot_init(&man_level_init_shot_template);
+   sys_input_init();
 }
 
 /*
@@ -211,7 +223,7 @@ void man_level_level1()
    man_entity_create_player(&man_level_init_player);
    man_entity_populate_entity_data(&man_level_init_enemy);
    man_entity_populate_entity_data(&man_level_init_enemy_2);
-   man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
    man_entity_populate_entity_data(&man_level_init_enemy_4);
    //man_entity_populate_entity_data(&man_level_init_enemy_5);
    //man_entity_populate_entity_data(&man_level_init_enemy_6);

@@ -31,6 +31,19 @@ void sys_phyisics_update_entitie(Entity_t *e)
       newx += newvx;
       newy += newvy;
 
+      if (newvx)
+      {
+         if (newvx > 0)
+         {
+            e->direction = RIGHT_DIRECTION;
+         }
+
+         if (newvx & PHYSICS_IS_NEGATIVE)
+         {
+            e->direction = LEFT_DIRECTION;
+         }
+      }
+
       e->x = newx;
       e->y = newy;
 
@@ -61,6 +74,19 @@ void sys_physics_update_player(Entity_t *e)
 
       newx += newvx;
       newy += newvy;
+
+      if (newvx)
+      {
+         if (newvx > 0)
+         {
+            e->direction = RIGHT_DIRECTION;
+         }
+
+         if (newvx & PHYSICS_IS_NEGATIVE)
+         {
+            e->direction = LEFT_DIRECTION;
+         }
+      }
 
       // Checks if newx is less than 0
       if ((newx & PHYSICS_IS_NEGATIVE) == PHYSICS_IS_NEGATIVE)

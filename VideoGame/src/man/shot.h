@@ -2,11 +2,12 @@
 #include <cpctelera.h>
 #include "man/entity.h"
 
+#define RIGHT_SHOT_VELOCITY 0x02
+#define LEFT_SHOT_VELOCITY -2
+
 typedef struct sd
 {
-    u8 type;
     u8 x, y;
-    u8 vx, vy;
     u8 direction;
 } Shot_data_t;
 

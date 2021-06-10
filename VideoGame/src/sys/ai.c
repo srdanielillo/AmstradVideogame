@@ -11,6 +11,18 @@
 */
 Patrol_step_t *sys_ai_ptable_ptrs[PATROL_TABLES_NUMBER];
 
+void sys_ai_update_shot(Entity_t *e)
+{
+    if (e->direction == RIGHT_DIRECTION)
+    {
+        e->vx = RIGHT_SHOT_VELOCITY;
+    }
+    else if (e->direction == LEFT_DIRECTION)
+    {
+        e->vx = LEFT_SHOT_VELOCITY;
+    }
+}
+
 /*
    [INFO]            Applies the corresponding patrol step
                            
@@ -81,6 +93,10 @@ void sys_ai_update_entitie(Entity_t *e)
     if (type == e_type_enemy)
     {
         sys_ai_update_patrol(e);
+    }
+    else if (type == e_type_shot)
+    {
+        sys_ai_update_shot(e);
     }
 }
 

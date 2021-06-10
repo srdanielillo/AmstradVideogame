@@ -9,6 +9,8 @@
 Shot_data_t shot_data_template;
 Shot_data_t *shot_data_template_ptr;
 
+u8 cycle_reset_shot_counter;
+
 /*
    [INFO]            Updates the velocity attributes of the player depending on the pressed keys
                      - CursorRight x++ || CursorLeft x--
@@ -22,15 +24,24 @@ Shot_data_t *shot_data_template_ptr;
 */
 void sys_input_update_player(Entity_t *e)
 {
-    u8 jump_info = e->jump_info;
+    u8 jump_info;
+
+    if (cycle_reset_shot_counter > 0)
+    {
+        --cycle_reset_shot_counter;
+    }
+
+    jump_info = e->jump_info;
     if (jump_info == 0xFF)
     {
         cpct_scanKeyboard_f();
-        if (cpct_isKeyPressed(Key_Space))
+        if (cpct_isKeyPressed(Key_Space) && cycle_reset_shot_counter == 0)
         {
-            shot_data_template_ptr = &shot_data_template;
-            cpct_memcpy(shot_data_template_ptr, e, (sizeof(Shot_data_t) - 1));
+            shot_data_template_ptr->x = e->x + e->sprite_W;
+            shot_data_template_ptr->y = e->y + 4;
+            shot_data_template_ptr->direction = e->direction;
             man_shot_create_shot(shot_data_template_ptr);
+            cycle_reset_shot_counter = CYCLES_TO_RESET_SHOT;
         }
         else if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorRight))
         {
@@ -60,6 +71,13 @@ void sys_input_update_player(Entity_t *e)
 * PUBLIC SECTION
 *******************************************************
 */
+
+void sys_input_init()
+{
+    shot_data_template_ptr = &shot_data_template;
+    cpct_memset(shot_data_template_ptr, 0, sizeof(Shot_data_t));
+    cycle_reset_shot_counter = 0;
+}
 
 /*
    [INFO]            Calls sys_input_update_one_entity
