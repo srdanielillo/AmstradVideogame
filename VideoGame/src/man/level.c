@@ -221,10 +221,10 @@ void man_level_level1()
    cpct_setPalette(PALETTE_LEVEL1, 16);
    man_entitiy_init();
    man_entity_create_player(&man_level_init_player);
-   man_entity_populate_entity_data(&man_level_init_enemy);
-   man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
    //man_entity_populate_entity_data(&man_level_init_enemy_3);
-   man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
    //man_entity_populate_entity_data(&man_level_init_enemy_5);
    //man_entity_populate_entity_data(&man_level_init_enemy_6);
 

@@ -94,16 +94,14 @@ void sys_render_update_entitie(Entity_t *e)
     }
     else if ((message & RENDER_SHOULD_RENDER) && (message & RENDER_HAS_MOVED))
     {
-        if (!(e->type & e_type_dead))
-        {
-            ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
-            sprite = e->sprite;
 
-            cpct_drawSpriteBlended(e->prevptr, sprite_H, sprite_W, sprite);
-            cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
+        ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
+        sprite = e->sprite;
 
-            e->prevptr = ptr;
-        }
+        cpct_drawSpriteBlended(e->prevptr, sprite_H, sprite_W, sprite);
+        cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
+
+        e->prevptr = ptr;
     }
 
     // Changes the state of the render (If rendered last cycle the next cycle must not be rendered)
@@ -142,4 +140,18 @@ void sys_render_update()
 void sys_render_first_time()
 {
     man_entity_for_all(sys_render_entitie_first_time);
+}
+
+void sys_render_last_time(Entity_t *e)
+{
+    u8 *ptr, *sprite;
+    u8 sprite_H, sprite_W;
+
+    sprite_H = e->sprite_H;
+    sprite_W = e->sprite_W;
+
+    ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
+    sprite = e->sprite;
+
+    cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
 }

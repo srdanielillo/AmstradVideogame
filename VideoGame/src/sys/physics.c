@@ -15,7 +15,7 @@
 
 void sys_phyisics_update_entitie(Entity_t *e)
 {
-   u8 newx, newy, newvx, newvy, message, type;
+   u8 newx, newy, newvx, newvy, message, type, scr_w;
 
    newvx = e->vx;
    newvy = e->vy;
@@ -24,6 +24,7 @@ void sys_phyisics_update_entitie(Entity_t *e)
 
    if (newvx | newvy)
    {
+      scr_w = e->sprite_W;
 
       newx = e->x;
       newy = e->y;
@@ -38,20 +39,27 @@ void sys_phyisics_update_entitie(Entity_t *e)
             e->direction = RIGHT_DIRECTION;
          }
 
-         if (newvx & PHYSICS_IS_NEGATIVE)
+         if ((newvx & PHYSICS_IS_NEGATIVE) == PHYSICS_IS_NEGATIVE)
          {
             e->direction = LEFT_DIRECTION;
          }
       }
 
-      e->x = newx;
-      e->y = newy;
+      if ((newx + scr_w) > SCR_W) // || (newx & PHYSICS_IS_NEGATIVE == PHYSICS_IS_NEGATIVE))
+      {
+         man_entity_set4destruction(e);
+      }
+      else
+      {
+         e->x = newx;
+         e->y = newy;
 
-      e->messages_re_ph |= PHYSICS_HAS_MOVED;
+         e->messages_re_ph |= PHYSICS_HAS_MOVED;
 
-      //Resets speed
-      e->vx = 0;
-      e->vy = 0;
+         //Resets speed
+         e->vx = 0;
+         e->vy = 0;
+      }
    }
    else
    {
@@ -82,7 +90,7 @@ void sys_physics_update_player(Entity_t *e)
             e->direction = RIGHT_DIRECTION;
          }
 
-         if (newvx & PHYSICS_IS_NEGATIVE)
+         if ((newvx & PHYSICS_IS_NEGATIVE) == PHYSICS_IS_NEGATIVE)
          {
             e->direction = LEFT_DIRECTION;
          }
