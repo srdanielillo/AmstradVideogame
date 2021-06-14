@@ -24,8 +24,7 @@ u8 cycle_reset_shot_counter;
 */
 void sys_input_update_player(Entity_t *e)
 {
-    u8 jump_info;
-    u8 direction;
+    u8 jump_info, direction, x, y, sprite_W;
 
     if (cycle_reset_shot_counter > 0)
     {
@@ -35,8 +34,11 @@ void sys_input_update_player(Entity_t *e)
     jump_info = e->jump_info;
     if (jump_info == 0xFF)
     {
+        x = e->x;
+        y = e->y;
+        sprite_W = e->sprite_W;
         cpct_scanKeyboard_f();
-        if (cpct_isKeyPressed(Key_Space) && cycle_reset_shot_counter == 0)
+        if (cpct_isKeyPressed(Key_Space) && cycle_reset_shot_counter == 0 && (x + sprite_W < 78) && x)
         {
             direction = e->direction;
             if (direction == RIGHT_DIRECTION)
