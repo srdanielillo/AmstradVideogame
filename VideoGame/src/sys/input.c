@@ -25,6 +25,7 @@ u8 cycle_reset_shot_counter;
 void sys_input_update_player(Entity_t *e)
 {
     u8 jump_info;
+    u8 direction;
 
     if (cycle_reset_shot_counter > 0)
     {
@@ -37,9 +38,18 @@ void sys_input_update_player(Entity_t *e)
         cpct_scanKeyboard_f();
         if (cpct_isKeyPressed(Key_Space) && cycle_reset_shot_counter == 0)
         {
-            shot_data_template_ptr->x = e->x + e->sprite_W;
+            direction = e->direction;
+            if (direction == RIGHT_DIRECTION)
+            {
+                shot_data_template_ptr->x = e->x + e->sprite_W;
+            }
+            else if (direction == LEFT_DIRECTION)
+            {
+                shot_data_template_ptr->x = e->x;
+            }
+
             shot_data_template_ptr->y = e->y + 4;
-            shot_data_template_ptr->direction = e->direction;
+            shot_data_template_ptr->direction = direction;
             man_shot_create_shot(shot_data_template_ptr);
             cycle_reset_shot_counter = CYCLES_TO_RESET_SHOT;
         }
