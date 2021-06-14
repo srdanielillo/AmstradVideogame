@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "sys/render.h"
 
 /*
 *******************************************************
@@ -44,6 +45,8 @@ void man_entity_destroy(Entity_t *dead_e)
 {
    Entity_t *de = dead_e;
    Entity_t *last = m_next_free_entity;
+   //cpct_drawSpriteBlended(dead_e->prevptr, dead_e->sprite_H, dead_e->sprite_W, dead_e->sprite);
+   sys_render_last_time(dead_e);
    --last;
    if (de != last)
    {

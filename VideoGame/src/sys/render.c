@@ -144,14 +144,14 @@ void sys_render_first_time()
 
 void sys_render_last_time(Entity_t *e)
 {
-    u8 *ptr, *sprite;
     u8 sprite_H, sprite_W;
+    u8 *sprite, *prevptr;
+
+    sprite = e->sprite;
+    prevptr = e->prevptr;
 
     sprite_H = e->sprite_H;
     sprite_W = e->sprite_W;
 
-    ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
-    sprite = e->sprite;
-
-    cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
+    cpct_drawSpriteBlended(prevptr, sprite_H, sprite_W, sprite);
 }

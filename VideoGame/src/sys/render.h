@@ -5,3 +5,4 @@
 
 void sys_render_first_time();
 void sys_render_update();
+void sys_render_last_time(Entity_t *e);

@@ -45,7 +45,7 @@ void sys_phyisics_update_entitie(Entity_t *e)
          }
       }
 
-      if ((newx + scr_w) > SCR_W) // || (newx & PHYSICS_IS_NEGATIVE == PHYSICS_IS_NEGATIVE))
+      if (newx > SCR_W) // || (newx & PHYSICS_IS_NEGATIVE == PHYSICS_IS_NEGATIVE))
       {
          man_entity_set4destruction(e);
       }
