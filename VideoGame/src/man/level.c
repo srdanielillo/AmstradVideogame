@@ -12,18 +12,18 @@
    [INFO] Const data to initialize the shot manager
 */
 const Entity_t man_level_init_shot_template = {
-    e_type_shot,    // type
-    0xFA,           // x
-    0xFA,           // y
-    0x00, 0x00,     // vx, vy
-    2,              // sprite_W
-    4,              // sprite_H
-    bullet_sp_0,    // sprite
-    0,              // prevptr
-    0xFF,           // jump_info
-    0x80,           // messages_re_ph
-    0xFF,           // patrol_info
-    RIGHT_DIRECTION // direction
+    e_type_shot,          // type
+    0xFA,                 // x
+    0xFA,                 // y
+    0x00, 0x00,           // vx, vy
+    2,                    // sprite_W
+    4,                    // sprite_H
+    BULLET_SPRITE_LEVEL1, // sprite
+    0,                    // prevptr
+    0xFF,                 // jump_info
+    0x80,                 // messages_re_ph
+    0xFF,                 // patrol_info
+    RIGHT_DIRECTION       // direction
 };
 
 /*
@@ -151,7 +151,6 @@ const Jump_step_t man_level_jtable_left_p_level1[STEPS_PER_JUMP_TABLE] = JUMP_TA
    [INFO] Containers to store the patrol tables
 
 */
-//TODO Poner nombre consistente
 const Patrol_step_t man_level_patrol_table_1[STEPS_PER_PATROL_TABLE] = {{0, 0}, {70, 0}, {70, 184}, {0, 184}};
 const Patrol_step_t man_level_patrol_table_2[STEPS_PER_PATROL_TABLE] = {{0, 180}, {60, 180}, {30, 180}, {0, 180}};
 const Patrol_step_t man_level_patrol_table_3[STEPS_PER_PATROL_TABLE] = {{30, 80}, {60, 80}, {30, 80}, {0, 80}};
@@ -161,7 +160,7 @@ const Patrol_step_t man_level_patrol_table_3[STEPS_PER_PATROL_TABLE] = {{30, 80}
             //TO-DO
             - Loop while condition victory of the level is accomplished
             - On each iteration call the update method of each system
-            - Waits VSYNC to to start next iterations
+            
    
    [PREREQUISITES]   Any function with the signature man_level_levelX should be called before this one.
    
@@ -192,7 +191,10 @@ void man_level_gameLoop()
 
 /*
    [INFO] Method to initialize the common data between levels
-            - -Initialize the jumptable pointers of the jump system 
+            -Initialize the jumptable pointers of the jump system
+            -Initialize the patroltable pointers of the ai system
+            -Initialize the shot_template used to create new shots in the shot manager
+            -Initialize the shot_info template in input_init 
    
    [PREREQUISITES]   
 */

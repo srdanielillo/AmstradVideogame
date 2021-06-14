@@ -24,8 +24,8 @@ typedef struct te
    u8 *prevptr;
    u8 jump_info;
    /*
-         7  6  5  4  3    [1]        [0]
-                          Has_moved  Should_render
+         [7]                 6  5  4  3    [1]        [0]
+         Render_first_time                 Has_moved  Should_render
    */
    u8 messages_re_ph;
    u8 patrol_info;
