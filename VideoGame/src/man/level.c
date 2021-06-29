@@ -174,12 +174,13 @@ void man_level_gameLoop()
       sys_input_update();
       sys_jump_update();
       sys_ai_update();
+      //cpct_setBorder(HW_ORANGE);
       sys_phyisics_update();
+      //cpct_setBorder(HW_PINK);
+      sys_collision_update();
       man_entity_update();
       cpct_waitVSYNC();
-      //cpct_setBorder(HW_ORANGE);
       sys_render_update();
-      //cpct_setBorder(HW_PINK);
    }
 }
 
@@ -225,7 +226,7 @@ void man_level_level1()
    man_entity_create_player(&man_level_init_player);
    man_entity_populate_entity_data(&man_level_init_enemy);
    man_entity_populate_entity_data(&man_level_init_enemy_2);
-   man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
    //man_entity_populate_entity_data(&man_level_init_enemy_4);
    //man_entity_populate_entity_data(&man_level_init_enemy_5);
    //man_entity_populate_entity_data(&man_level_init_enemy_6);

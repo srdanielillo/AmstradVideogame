@@ -166,6 +166,48 @@ void man_entity_for_player(void (*ptrfunc)(Entity_t *))
 }
 
 /*
+   [INFO]            Applies the function passed as paremeter to compare one entity against the others
+   
+   [PREREQUISITES]   The function man_entity_init should be called before calling this function
+                     The function man_entity_create_player should be called before calling this function
+*/
+void man_entity_one_against_others(void (*ptrfunc)(Entity_t *, Entity_t *))
+{
+   Entity_t *subject, *compared;
+   subject = m_entities;
+   compared = subject + 1;
+
+   while (subject->type != e_type_invalid)
+   {
+      while (compared->type != e_type_invalid)
+      {
+         ptrfunc(subject, compared);
+         ++compared;
+      }
+      ++subject;
+      compared = subject + 1;
+   }
+}
+
+/*
+   [INFO]            Applies the function passed as paremeter to compare one entity against the others
+   
+   [PREREQUISITES]   The function man_entity_init should be called before calling this function
+                     The function man_entity_create_player should be called before calling this function
+*/
+void man_entity_player_against_others(void (*ptrfunc)(Entity_t *, Entity_t *))
+{
+   Entity_t *player = &m_player;
+   Entity_t *compared = m_entities;
+
+   while (compared->type != e_type_invalid)
+   {
+      ptrfunc(player, compared);
+      ++compared;
+   }
+}
+
+/*
    [INFO]            Marks an entity to be deleted 
                      - Uses an OR logic door to activate the biggest bit of the type attribute  
    
