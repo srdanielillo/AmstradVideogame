@@ -6,7 +6,7 @@ void sys_collision_check_collision_entities(Entity_t *first_e, Entity_t *second_
 
 void sys_collision_check_collision_player(Entity_t *player, Entity_t *entitie)
 {
-    if (entitie->type != e_type_shot)
+    if (entitie->type != e_type_shot && (player->messages_re_ph & PHYSICS_HAS_MOVED || entitie->messages_re_ph & PHYSICS_HAS_MOVED))
     {
         u8 player_x, player_y, player_scr_W, player_scr_H;
         u8 entitie_x, entitie_y, entitie_scr_W, entitie_scr_H;
