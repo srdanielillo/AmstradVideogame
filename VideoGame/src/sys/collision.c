@@ -1,7 +1,28 @@
 #include "collision.h"
 
-void sys_collision_check_collision_entities(Entity_t *first_e, Entity_t *second_e)
+void sys_collision_check_collision_shots(Entity_t *shot, Entity_t *enemy)
 {
+    u8 shot_x, shot_y, shot_scr_W, shot_scr_H;
+    u8 enemy_x, enemy_y, enemy_scr_W, enemy_scr_H;
+
+    shot_x = shot->x;
+    shot_y = shot->y;
+    shot_scr_W = shot->sprite_W;
+    shot_scr_H = shot->sprite_H;
+
+    enemy_x = enemy->x;
+    enemy_y = enemy->y;
+    enemy_scr_W = enemy->sprite_W;
+    enemy_scr_H = enemy->sprite_H;
+
+    if (shot_x < enemy_x + enemy_scr_W &&
+        shot_x + shot_scr_W > enemy_x &&
+        shot_y < enemy_y + enemy_scr_H &&
+        shot_y + shot_scr_H > enemy_y)
+    {
+        man_entity_set4destruction(shot);
+        cpct_setBorder(HW_BRIGHT_GREEN);
+    }
 }
 
 void sys_collision_check_collision_player(Entity_t *player, Entity_t *entitie)
@@ -35,5 +56,5 @@ void sys_collision_check_collision_player(Entity_t *player, Entity_t *entitie)
 void sys_collision_update()
 {
     man_entity_player_against_others(sys_collision_check_collision_player);
-    man_entity_one_against_others(sys_collision_check_collision_entities);
+    man_entity_one_against_others(sys_collision_check_collision_shots);
 }

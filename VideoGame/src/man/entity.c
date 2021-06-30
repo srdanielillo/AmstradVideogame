@@ -195,6 +195,38 @@ void man_entity_one_against_others(void (*ptrfunc)(Entity_t *, Entity_t *))
    [PREREQUISITES]   The function man_entity_init should be called before calling this function
                      The function man_entity_create_player should be called before calling this function
 */
+void man_entity_shots_against_others(void (*ptrfunc)(Entity_t *, Entity_t *))
+{
+   Entity_t *shot, *enemy;
+
+   shot = m_entities;
+   enemy = m_entities + 1;
+
+   while (shot->type != e_type_invalid)
+   {
+      if (shot->type == e_type_shot)
+      {
+         while (enemy->type != e_type_invalid)
+         {
+            if (enemy->type != e_type_shot)
+            {
+               ptrfunc(shot, enemy);
+            }
+         }
+      }
+
+      // Restart the loop
+      enemy = m_entities;
+      ++shot;
+   }
+}
+
+/*
+   [INFO]            Applies the function passed as paremeter to compare one entity against the others
+   
+   [PREREQUISITES]   The function man_entity_init should be called before calling this function
+                     The function man_entity_create_player should be called before calling this function
+*/
 void man_entity_player_against_others(void (*ptrfunc)(Entity_t *, Entity_t *))
 {
    Entity_t *player = &m_player;
