@@ -222,6 +222,7 @@ void man_level_init()
 void man_level_level1()
 {
    cpct_setPalette(PALETTE_LEVEL1, 16);
+   cpct_memcpy(CPCT_VMEM_START, bg_level1_sp, 80 * 200);
    man_entitiy_init();
    man_entity_create_player(&man_level_init_player);
    man_entity_populate_entity_data(&man_level_init_enemy);

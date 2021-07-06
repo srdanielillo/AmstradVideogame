@@ -2,11 +2,12 @@
 #include <cpctelera.h>
 #include <sprites/agent.h>
 #include <sprites/bullet.h>
+#include <sprites/bg_level1.h>
 
 #define PALETTE_LEVEL1 agent_pal
 
 #define PLAYER_START_X_LEVEL1 70
-#define PLAYER_START_Y_LEVEL1 184
+#define PLAYER_START_Y_LEVEL1 175
 #define PLAYER_START_SPRITE_LEVEL1 agent_sp_0
 #define PLAYER_NEXT_SPRITE_LEVEL1 agent_sp_1
 #define PLAYER_SPRITE_W_LEVEL1 8

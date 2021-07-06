@@ -47,6 +47,9 @@ $(eval $(call IMG2SP, SET_FOLDER      , src/sprites               ))
 $(eval $(call IMG2SP, CONVERT         , img/agent.png , 16, 16, agent_sp, agent_pal))
 $(eval $(call IMG2SP, CONVERT         , img/bullet.png , 4, 4, bullet_sp, bullet_pal))
 
+$(eval $(call IMG2SP, SET_IMG_FORMAT  , screen ))
+$(eval $(call IMG2SP, CONVERT         , img/bg_level1.png , 160, 200, bg_level1_sp, bg_level1_pal))
+
 
 ##
 ## OLD MACROS (For compatibility)
