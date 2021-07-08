@@ -219,10 +219,15 @@ void man_level_init()
    
    [PREREQUISITES] The method man_level_init should be called before this function is called  
 */
+#define TILEMAP_VMEM cpctm_screenPtr(CPCT_VMEM_START, 0, 0)
 void man_level_level1()
 {
    cpct_setPalette(PALETTE_LEVEL1, 16);
-   cpct_memcpy(CPCT_VMEM_START, bg_level1_sp, 80 * 200);
+
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(g_bg_level1_W, g_bg_level1_H, g_bg_level1_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level1);
+
    man_entitiy_init();
    man_entity_create_player(&man_level_init_player);
    man_entity_populate_entity_data(&man_level_init_enemy);

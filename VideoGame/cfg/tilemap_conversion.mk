@@ -38,6 +38,7 @@
 # Conversion 
 #$(eval $(call TMX2DATA, CONVERT, tmxfile, array )) 
 
+$(eval $(call TMX2C,img/tiles/bg_level1.tmx,g_bg_level1,src/map/,))
 
 ##
 ## OLD MACROS (For compatibility)
