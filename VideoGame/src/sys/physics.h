@@ -1,6 +1,7 @@
 #pragma once
 #include <cpctelera.h>
 #include "man/entity.h"
+#include "map/bg_level1.h"
 #include "utils/bit.operators.constants.h"
 
 void sys_phyisics_init();

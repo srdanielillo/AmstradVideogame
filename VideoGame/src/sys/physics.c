@@ -67,9 +67,29 @@ void sys_phyisics_update_entitie(Entity_t *e)
    }
 }
 
+u8 sys_physics_check_tile_colision(u8 x, u8 y)
+{
+   u8 x_tile_index, y_tile_index;
+
+   x_tile_index = x >> 2;
+   // Multiply 20 times (The width of the map)
+   y_tile_index = ((y >> 3) << 4) + ((y >> 3) << 2);
+
+   // Almacenar nivel en el que estamos
+   if (g_bg_level1[x_tile_index + y_tile_index] == 1)
+   {
+      return 0x01;
+   }
+
+   return 0x00;
+}
+
 void sys_physics_update_player(Entity_t *e)
 {
    u8 newx, newy, newvx, newvy;
+
+   // Sprite size stuff
+   u8 sprite_W, sprite_H, half_sprite_H;
 
    newvx = e->vx;
    newvy = e->vy;
@@ -83,6 +103,7 @@ void sys_physics_update_player(Entity_t *e)
       newx += newvx;
       newy += newvy;
 
+      // CHANGE DIRECTION
       if (newvx)
       {
          if (newvx > 0)
@@ -96,31 +117,23 @@ void sys_physics_update_player(Entity_t *e)
          }
       }
 
-      // Checks if newx is less than 0
-      if ((newx & PHYSICS_IS_NEGATIVE) == PHYSICS_IS_NEGATIVE)
-      {
-         newx = 0;
-      }
-      else if (newx > SCR_W - e->sprite_W)
-      {
-         newx = SCR_W - e->sprite_W;
-      }
+      sprite_W = e->sprite_W;
+      sprite_H = e->sprite_H;
+      half_sprite_H = sprite_H >> 1;
 
-      // Checks if newy is less than 0
-      if ((newy & PHYSICS_IS_NEGATIVE) == PHYSICS_IS_NEGATIVE)
-      {
-         newy = 0;
-      }
-      else if (newy > SCR_H - e->sprite_H)
-      {
-         man_entity_set4destruction(e);
-      }
+      // Checks if under the player are no tiles collisionables and keep falling
+      // If there are no collisionables tiles and y > 200 the player has fall outside the map
 
-      e->x = newx;
-      e->y = newy;
+      // Checks if one of the collision points is going to collide with a tile
 
-      //Activates the active_movement flag
-      e->messages_re_ph |= PHYSICS_HAS_MOVED;
+      if (!sys_physics_check_tile_colision(newx, newy) && !sys_physics_check_tile_colision(newx + sprite_W, newy) && !sys_physics_check_tile_colision(newx, newy + half_sprite_H) && !sys_physics_check_tile_colision(newx + sprite_W, newy + half_sprite_H))
+      {
+         e->x = newx;
+         e->y = newy;
+
+         //Activates the active_movement flag
+         e->messages_re_ph |= PHYSICS_HAS_MOVED;
+      }
 
       //Resets speed
       e->vx = 0;
