@@ -90,8 +90,6 @@ u8 check_tile_collision(u8 x, u8 y)
    return 0x00;
 }
 
-u8 debug_collision;
-
 void sys_physics_update_player(Entity_t *e)
 {
    u8 oldx, oldy, newx, newy, vx, vy;
@@ -191,7 +189,6 @@ void sys_physics_update_player(Entity_t *e)
             if (check_tile_collision(newx - 1 + sprite_W, newy) || check_tile_collision(newx - 1 + sprite_W, newy + half_sprite_H))
             {
                x_collision = 1;
-               debug_collision = 1;
             }
          }
       }

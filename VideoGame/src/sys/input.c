@@ -24,7 +24,7 @@ u8 cycle_reset_shot_counter;
 */
 void sys_input_update_player(Entity_t *e)
 {
-    u8 jump_info, direction, x, y, sprite_W;
+    u8 jump_info, direction, x, y, sprite_W, vy;
 
     if (cycle_reset_shot_counter > 0)
     {
@@ -36,6 +36,8 @@ void sys_input_update_player(Entity_t *e)
     {
         x = e->x;
         y = e->y;
+        // If vy is activated at this point the gravity is on
+        vy = e->vy;
         sprite_W = e->sprite_W;
         cpct_scanKeyboard_f();
         if (cpct_isKeyPressed(Key_Space) && cycle_reset_shot_counter == 0 && (x + sprite_W < 78) && x)
@@ -55,15 +57,15 @@ void sys_input_update_player(Entity_t *e)
             man_shot_create_shot(shot_data_template_ptr);
             cycle_reset_shot_counter = CYCLES_TO_RESET_SHOT;
         }
-        else if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorRight))
+        else if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorRight) && !vy)
         {
             e->jump_info = jump_table_right;
         }
-        else if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorLeft))
+        else if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorLeft) && !vy)
         {
             e->jump_info = jump_table_left;
         }
-        else if (cpct_isKeyPressed(Key_CursorUp))
+        else if (cpct_isKeyPressed(Key_CursorUp) && !vy)
         {
             e->jump_info = jump_table_in_site;
         }
