@@ -67,16 +67,20 @@ void sys_phyisics_update_entitie(Entity_t *e)
    }
 }
 
-u8 sys_physics_check_tile_colision(u8 x, u8 y)
+u8 check_tile_collision(u8 x, u8 y)
 {
-   u8 x_tile_index, y_tile_index;
+   u16 x_tile_index, y_tile_index, tile_number, linear_tile_index;
 
    x_tile_index = x >> 2;
    // Multiply 20 times (The width of the map)
    y_tile_index = ((y >> 3) << 4) + ((y >> 3) << 2);
 
+   linear_tile_index = x_tile_index + y_tile_index;
+
+   tile_number = g_bg_level1[linear_tile_index];
+
    // Almacenar nivel en el que estamos
-   if (g_bg_level1[x_tile_index + y_tile_index] == 1)
+   if (tile_number == 1 || tile_number == 2)
    {
       return 0x01;
    }
@@ -84,34 +88,43 @@ u8 sys_physics_check_tile_colision(u8 x, u8 y)
    return 0x00;
 }
 
+u8 debug_collision;
+
 void sys_physics_update_player(Entity_t *e)
 {
-   u8 newx, newy, newvx, newvy;
+   u8 oldx, oldy, newx, newy, vx, vy;
 
    // Sprite size stuff
    u8 sprite_W, sprite_H, half_sprite_H;
 
-   newvx = e->vx;
-   newvy = e->vy;
+   // Collision stuff
+   u8 gravity_on, x_collision, y_collision;
 
-   if (newvx | newvy)
+   gravity_on = 0;
+   x_collision = 0;
+   y_collision = 0;
+
+   vx = e->vx;
+   vy = e->vy;
+
+   if (vx | vy)
    {
 
-      newx = e->x;
-      newy = e->y;
+      oldx = e->x;
+      oldy = e->y;
 
-      newx += newvx;
-      newy += newvy;
+      newx = oldx + vx;
+      newy = oldy + vy;
 
       // CHANGE DIRECTION
-      if (newvx)
+      if (vx)
       {
-         if (newvx > 0)
+         if (vx > 0)
          {
             e->direction = RIGHT_DIRECTION;
          }
 
-         if ((newvx & PHYSICS_IS_NEGATIVE) == PHYSICS_IS_NEGATIVE)
+         if ((vx & PHYSICS_IS_NEGATIVE) == PHYSICS_IS_NEGATIVE)
          {
             e->direction = LEFT_DIRECTION;
          }
@@ -121,23 +134,81 @@ void sys_physics_update_player(Entity_t *e)
       sprite_H = e->sprite_H;
       half_sprite_H = sprite_H >> 1;
 
-      // Checks if under the player are no tiles collisionables and keep falling
-      // If there are no collisionables tiles and y > 200 the player has fall outside the map
+      // Check for gravity
+      //if (e->jump_info == 0xFF)
+      //{
+      //   if (!check_tile_collision(newx, newy + sprite_H) && !check_tile_collision(newx + sprite_W, newy + sprite_H))
+      //   {
+      //      gravity_on = 1;
+      //   }
+      //   else
+      //   {
+      //      newy = ((newy >> 3) << 3);
+      //   }
+      //}
 
-      // Checks if one of the collision points is going to collide with a tile
+      // Check collisions in y axis
+      if (vy) //&& !gravity_on)
+      {
+         // Check collisions under the player
+         if ((vy & PHYSICS_IS_NEGATIVE) == PHYSICS_IS_NEGATIVE)
+         {
+            if (check_tile_collision(newx, newy) || check_tile_collision(newx + sprite_W, newy))
+            {
+               y_collision = 1;
+               e->jump_info = 0xFF;
+            }
+         }
+         // Check collisions above the player
+         else
+         {
+            if (check_tile_collision(newx, newy + sprite_H) || check_tile_collision(newx + sprite_W, newy + sprite_H))
+            {
+               y_collision = 1;
+               e->jump_info = 0xFF;
+            }
+         }
+      }
 
-      if (!sys_physics_check_tile_colision(newx, newy) && !sys_physics_check_tile_colision(newx + sprite_W, newy) && !sys_physics_check_tile_colision(newx, newy + half_sprite_H) && !sys_physics_check_tile_colision(newx + sprite_W, newy + half_sprite_H))
+      // Check collisions in x axis only if there are not in the y axis
+      if (vx)
+      {
+
+         // Check collisions to the left
+         if ((vx & PHYSICS_IS_NEGATIVE) == PHYSICS_IS_NEGATIVE)
+         {
+            if (check_tile_collision(newx, newy) || check_tile_collision(newx, newy + half_sprite_H))
+            {
+               x_collision = 1;
+            }
+         }
+         // Check collisions to the right
+         else
+         {
+            if (check_tile_collision(newx - 1 + sprite_W, newy) || check_tile_collision(newx - 1 + sprite_W, newy + half_sprite_H))
+            {
+               x_collision = 1;
+               debug_collision = 1;
+            }
+         }
+      }
+
+      if (!x_collision)
       {
          e->x = newx;
-         e->y = newy;
-
-         //Activates the active_movement flag
-         e->messages_re_ph |= PHYSICS_HAS_MOVED;
       }
+
+      if (!y_collision)
+      {
+         e->y = newy;
+      }
+
+      //Activates the active_movement flag
+      e->messages_re_ph |= PHYSICS_HAS_MOVED;
 
       //Resets speed
       e->vx = 0;
-      e->vy = 0;
+      e->vy = gravity_on;
    }
    else
    {

@@ -2,7 +2,7 @@
 #include <cpctelera.h>
 #include "man/entity.h"
 
-#define STEPS_PER_JUMP_TABLE 8
+#define STEPS_PER_JUMP_TABLE 14
 #define JUMP_TABLES_NUMBER 3
 
 typedef struct js
