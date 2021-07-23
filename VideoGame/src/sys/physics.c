@@ -6,6 +6,8 @@
 *******************************************************
 */
 
+u8 gravity_on;
+
 /*
    [INFO]            Applies physics to the player entity and mark it to destroy when it meet one of this conditions
                      -  The player gets out the screen after applying vy      
@@ -135,22 +137,23 @@ void sys_physics_update_player(Entity_t *e)
       half_sprite_H = sprite_H >> 1;
 
       // Check for gravity
-      //if (e->jump_info == 0xFF)
-      //{
-      //   if (!check_tile_collision(newx, newy + sprite_H) && !check_tile_collision(newx + sprite_W, newy + sprite_H))
-      //   {
-      //      gravity_on = 1;
-      //   }
-      //   else
-      //   {
-      //      newy = ((newy >> 3) << 3);
-      //   }
-      //}
+      if (e->jump_info == 0xFF)
+      {
+         if (!check_tile_collision(newx, newy - 1 + sprite_H) && !check_tile_collision(newx + sprite_W, newy - 1 + sprite_H))
+         {
+            gravity_on = 1;
+         }
+         else
+         {
+            y_collision = 1;
+            gravity_on = 0;
+         }
+      }
 
       // Check collisions in y axis
-      if (vy) //&& !gravity_on)
+      if (vy && !gravity_on)
       {
-         // Check collisions under the player
+         // Check collisions up
          if ((vy & PHYSICS_IS_NEGATIVE) == PHYSICS_IS_NEGATIVE)
          {
             if (check_tile_collision(newx, newy) || check_tile_collision(newx + sprite_W, newy))
@@ -159,10 +162,10 @@ void sys_physics_update_player(Entity_t *e)
                e->jump_info = 0xFF;
             }
          }
-         // Check collisions above the player
+         // Check collisions down
          else
          {
-            if (check_tile_collision(newx, newy + sprite_H) || check_tile_collision(newx + sprite_W, newy + sprite_H))
+            if (check_tile_collision(newx, newy - 1 + sprite_H) || check_tile_collision(newx + sprite_W, newy - 1 + sprite_H))
             {
                y_collision = 1;
                e->jump_info = 0xFF;
@@ -229,6 +232,7 @@ void sys_physics_update_player(Entity_t *e)
 */
 void sys_phyisics_init()
 {
+   gravity_on = 0;
 }
 
 /*
