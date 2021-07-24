@@ -155,6 +155,15 @@ const Patrol_step_t man_level_patrol_table_1[STEPS_PER_PATROL_TABLE] = {{0, 0}, 
 const Patrol_step_t man_level_patrol_table_2[STEPS_PER_PATROL_TABLE] = {{0, 180}, {60, 180}, {30, 180}, {0, 180}};
 const Patrol_step_t man_level_patrol_table_3[STEPS_PER_PATROL_TABLE] = {{30, 80}, {60, 80}, {30, 80}, {0, 80}};
 
+u8 get_level_state()
+{
+   if (man_entity_player_dead())
+   {
+      return LEVEL_STATE_PLAYER_DEAD;
+   }
+   return LEVEL_STATE_CONTINUE;
+}
+
 /*
    [INFO] Method to group the call to the update methods of each system
             //TO-DO
@@ -165,10 +174,11 @@ const Patrol_step_t man_level_patrol_table_3[STEPS_PER_PATROL_TABLE] = {{30, 80}
    [PREREQUISITES]   Any function with the signature man_level_levelX should be called before this one.
    
 */
-void man_level_gameLoop()
+u8 man_level_gameLoop()
 {
+
    //TO-DO Comprobar condición de cambio de nivel (Puntuación enemigos...)
-   while (1)
+   while (get_level_state() == LEVEL_STATE_CONTINUE)
    {
 
       sys_input_update();
@@ -182,6 +192,8 @@ void man_level_gameLoop()
       cpct_waitVSYNC();
       sys_render_update();
    }
+
+   return get_level_state();
 }
 
 /*
@@ -220,7 +232,7 @@ void man_level_init()
    [PREREQUISITES] The method man_level_init should be called before this function is called  
 */
 #define TILEMAP_VMEM cpctm_screenPtr(CPCT_VMEM_START, 0, 0)
-void man_level_level1()
+u8 man_level_level1()
 {
    cpct_setPalette(PALETTE_LEVEL1, 16);
 
@@ -230,7 +242,7 @@ void man_level_level1()
 
    man_entitiy_init();
    man_entity_create_player(&man_level_init_player);
-   //man_entity_populate_entity_data(&man_level_init_enemy);
+   man_entity_populate_entity_data(&man_level_init_enemy);
    //man_entity_populate_entity_data(&man_level_init_enemy_2);
    //man_entity_populate_entity_data(&man_level_init_enemy_3);
    //man_entity_populate_entity_data(&man_level_init_enemy_4);
@@ -240,5 +252,5 @@ void man_level_level1()
    // Draws the whole level before doing any system update
    cpct_waitVSYNC();
    sys_render_first_time();
-   man_level_gameLoop();
+   return man_level_gameLoop();
 }

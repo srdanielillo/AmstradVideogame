@@ -84,7 +84,7 @@ u8 check_tile_collision(u8 x, u8 y)
    // Almacenar nivel en el que estamos
    if (tile_number == 1 || tile_number == 2)
    {
-      return 0x01;
+      return tile_number;
    }
 
    return 0x00;
@@ -133,6 +133,11 @@ void sys_physics_update_player(Entity_t *e)
       sprite_W = e->sprite_W;
       sprite_H = e->sprite_H;
       half_sprite_H = sprite_H >> 1;
+
+      if (newy + sprite_H > 216)
+      {
+         man_entity_set4destruction(e);
+      }
 
       // Check for gravity
       if (e->jump_info == 0xFF)

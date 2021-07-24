@@ -21,6 +21,11 @@
 
 void main(void)
 {
+   u8 level_state = LEVEL_STATE_CONTINUE;
    man_level_init();
-   man_level_level1();
+
+   while (level_state != LEVEL_STATE_FINISHED)
+   {
+      level_state = man_level_level1();
+   }
 }

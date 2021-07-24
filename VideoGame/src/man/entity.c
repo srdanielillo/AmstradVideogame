@@ -250,6 +250,14 @@ void man_entity_set4destruction(Entity_t *dead_e)
    dead_e->type |= e_type_dead;
 }
 
+/**
+ * Check if player is dead
+ **/
+u8 man_entity_player_dead()
+{
+   return m_player.type & e_type_dead;
+}
+
 /*
    [INFO]            Deletes the entities that are marked as e_type_dead entities
                      - Uses and AND logic door to get > 0 if the entitie must be destroyed and 0 in other case

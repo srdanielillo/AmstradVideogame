@@ -10,5 +10,9 @@
 #include "sys/ai.h"
 #include "sys/collision.h"
 
+#define LEVEL_STATE_CONTINUE 0
+#define LEVEL_STATE_PLAYER_DEAD 1
+#define LEVEL_STATE_FINISHED 10
+
 void man_level_init();
-void man_level_level1();
+u8 man_level_level1();
