@@ -7,6 +7,11 @@
 */
 
 u8 gravity_on;
+/* Activated when the player collisions with a door to enter the next level*/
+u8 door_collision;
+
+/* Actual tilemap to check colisions with */
+u8 *level_tilemap;
 
 /*
    [INFO]            Applies physics to the player entity and mark it to destroy when it meet one of this conditions
@@ -17,12 +22,10 @@ u8 gravity_on;
 
 void sys_phyisics_update_entitie(Entity_t *e)
 {
-   u8 newx, newy, newvx, newvy, message, type, scr_w;
+   u8 newx, newy, newvx, newvy, scr_w;
 
    newvx = e->vx;
    newvy = e->vy;
-   message = e->messages_re_ph;
-   type = e->type;
 
    if (newvx | newvy)
    {
@@ -79,12 +82,20 @@ u8 check_tile_collision(u8 x, u8 y)
 
    linear_tile_index = x_tile_index + y_tile_index;
 
-   tile_number = g_bg_level1[linear_tile_index];
+   if (linear_tile_index > 499)
+   {
+      return 0x00;
+   }
 
-   // Almacenar nivel en el que estamos
+   tile_number = level_tilemap[linear_tile_index];
+
    if (tile_number == 1 || tile_number == 2)
    {
-      return tile_number;
+      return 0x01;
+   }
+   else if (tile_number == 9)
+   {
+      door_collision = 1;
    }
 
    return 0x00;
@@ -100,7 +111,9 @@ void sys_physics_update_player(Entity_t *e)
    // Collision stuff
    u8 gravity_on, x_collision, y_collision;
 
+   cpct_setBorder(HW_BLACK);
    gravity_on = 0;
+   door_collision = 0;
    x_collision = 0;
    y_collision = 0;
 
@@ -235,6 +248,7 @@ void sys_physics_update_player(Entity_t *e)
 void sys_phyisics_init()
 {
    gravity_on = 0;
+   door_collision = 0;
 }
 
 /*
@@ -246,4 +260,14 @@ void sys_phyisics_update()
 {
    man_entity_for_player(sys_physics_update_player);
    man_entity_for_entities(sys_phyisics_update_entitie);
+}
+
+void sys_phyisics_set_tilemap(u8 *tilemap)
+{
+   level_tilemap = tilemap;
+}
+
+u8 sys_physics_door_collision()
+{
+   return door_collision;
 }

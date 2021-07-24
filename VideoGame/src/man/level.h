@@ -16,3 +16,4 @@
 
 void man_level_init();
 u8 man_level_level1();
+u8 man_level_level2();

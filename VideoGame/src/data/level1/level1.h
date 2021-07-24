@@ -4,6 +4,7 @@
 #include <sprites/bullet.h>
 #include <map/tiles_level1.h>
 #include <map/bg_level1.h>
+#include <map/bg_level2.h>
 
 #define PALETTE_LEVEL1 agent_pal
 

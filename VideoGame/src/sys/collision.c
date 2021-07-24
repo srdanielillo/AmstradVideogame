@@ -21,7 +21,6 @@ void sys_collision_check_collision_shots(Entity_t *shot, Entity_t *enemy)
         shot_y + shot_scr_H > enemy_y)
     {
         man_entity_set4destruction(shot);
-        cpct_setBorder(HW_BRIGHT_GREEN);
     }
 }
 
@@ -48,7 +47,6 @@ void sys_collision_check_collision_player(Entity_t *player, Entity_t *entitie)
             player_y + player_scr_H > entitie_y)
         {
             man_entity_set4destruction(player);
-            cpct_setBorder(HW_BRIGHT_GREEN);
         }
     }
 }

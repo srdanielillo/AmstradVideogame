@@ -161,6 +161,12 @@ u8 get_level_state()
    {
       return LEVEL_STATE_PLAYER_DEAD;
    }
+
+   if (sys_physics_door_collision() && man_entity_enemies_left() == 0)
+   {
+      return LEVEL_STATE_FINISHED;
+   }
+
    return LEVEL_STATE_CONTINUE;
 }
 
@@ -216,9 +222,9 @@ void man_level_init()
    cpct_disableFirmware();
    cpct_setVideoMode(0);
    sys_jump_init_jump_tables(man_level_jtable_site_p_level1);
-   sys_ai_init_patrol_tables(man_level_patrol_table_1);
    man_shot_init(&man_level_init_shot_template);
    sys_input_init();
+   sys_phyisics_init();
 }
 
 /*
@@ -239,6 +245,41 @@ u8 man_level_level1()
    // Draw map
    cpct_etm_setDrawTilemap4x8_ag(g_bg_level1_W, g_bg_level1_H, g_bg_level1_W, g_tiles_level1_00);
    cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level1);
+
+   // Set the tilemap of the level so the physics system can check collisions
+   sys_phyisics_set_tilemap(g_bg_level1);
+
+   // Init patrol system
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
+
+   man_entitiy_init();
+   man_entity_create_player(&man_level_init_player);
+   man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_6);
+
+   // Draws the whole level before doing any system update
+   cpct_waitVSYNC();
+   sys_render_first_time();
+   return man_level_gameLoop();
+}
+
+u8 man_level_level2()
+{
+   cpct_setPalette(PALETTE_LEVEL1, 16);
+
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(g_bg_level2_W, g_bg_level2_H, g_bg_level2_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level2);
+
+   // Set the tilemap of the level so the physics system can check collisions
+   sys_phyisics_set_tilemap(g_bg_level2);
+
+   // Init patrol system
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
 
    man_entitiy_init();
    man_entity_create_player(&man_level_init_player);

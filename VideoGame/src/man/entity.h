@@ -48,5 +48,6 @@ void man_entity_player_against_others(void (*ptrfunc)(Entity_t *, Entity_t *));
 
 u8 man_entity_freeSpace();
 u8 man_entity_player_dead();
+u8 man_entity_enemies_left();
 
 void man_entity_update();

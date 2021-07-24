@@ -291,3 +291,8 @@ u8 man_entity_freeSpace()
 {
    return MAX_ENTITIES_NON_PLAYER - m_num_entities_non_player;
 }
+
+u8 man_entity_enemies_left()
+{
+   return m_num_entities_non_player;
+}
