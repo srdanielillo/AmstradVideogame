@@ -58,15 +58,31 @@ void sys_animation_update_player(Entity_t *e)
         }
         else
         {
-            if (animation_counter)
+            if (direction == RIGHT_DIRECTION)
             {
-                e->sprite = e->sprites_array[SPRITE_I0];
-                e->animation_counter = 0;
+                if (animation_counter)
+                {
+                    e->sprite = e->sprites_array[SPRITE_IR0];
+                    e->animation_counter = 0;
+                }
+                else
+                {
+                    e->sprite = e->sprites_array[SPRITE_IR1];
+                    e->animation_counter = 1;
+                }
             }
             else
             {
-                e->sprite = e->sprites_array[SPRITE_I1];
-                e->animation_counter = 1;
+                if (animation_counter)
+                {
+                    e->sprite = e->sprites_array[SPRITE_IL0];
+                    e->animation_counter = 0;
+                }
+                else
+                {
+                    e->sprite = e->sprites_array[SPRITE_IL1];
+                    e->animation_counter = 1;
+                }
             }
         }
     }
@@ -74,58 +90,74 @@ void sys_animation_update_player(Entity_t *e)
 
 void sys_animantion_update_entitie(Entity_t *e)
 {
-    u8 direction, last_direction, animation_counter;
+    u8 direction, last_direction, animation_counter, type;
 
     if (!(e->type & e_type_dead) && (e->messages_re_ph & RENDER_SHOULD_RENDER))
     {
+        type = e->type;
         direction = e->direction;
         last_direction = e->last_direction;
         animation_counter = e->animation_counter;
         e->prevsprite = e->sprite;
 
-        if (e->messages_re_ph & RENDER_HAS_MOVED)
+        if (type == e_type_enemy)
         {
-            if (direction != last_direction)
+
+            if (e->messages_re_ph & RENDER_HAS_MOVED)
             {
-                if (direction == RIGHT_DIRECTION)
+                if (direction != last_direction)
                 {
-                    e->sprite = e->sprites_array[SPRITE_R0];
-                    e->animation_counter = 0;
-                }
-                else
-                {
-                    e->sprite = e->sprites_array[SPRITE_L0];
-                    e->animation_counter = 0;
-                }
-            }
-            else
-            {
-                if (direction == RIGHT_DIRECTION)
-                {
-                    if (animation_counter)
+                    if (direction == RIGHT_DIRECTION)
                     {
                         e->sprite = e->sprites_array[SPRITE_R0];
                         e->animation_counter = 0;
                     }
                     else
                     {
-                        e->sprite = e->sprites_array[SPRITE_R1];
-                        e->animation_counter = 1;
+                        e->sprite = e->sprites_array[SPRITE_L0];
+                        e->animation_counter = 0;
                     }
                 }
                 else
                 {
-                    if (animation_counter)
+                    if (direction == RIGHT_DIRECTION)
                     {
-                        e->sprite = e->sprites_array[SPRITE_L0];
-                        e->animation_counter = 0;
+                        if (animation_counter)
+                        {
+                            e->sprite = e->sprites_array[SPRITE_R0];
+                            e->animation_counter = 0;
+                        }
+                        else
+                        {
+                            e->sprite = e->sprites_array[SPRITE_R1];
+                            e->animation_counter = 1;
+                        }
                     }
                     else
                     {
-                        e->sprite = e->sprites_array[SPRITE_L1];
-                        e->animation_counter = 1;
+                        if (animation_counter)
+                        {
+                            e->sprite = e->sprites_array[SPRITE_L0];
+                            e->animation_counter = 0;
+                        }
+                        else
+                        {
+                            e->sprite = e->sprites_array[SPRITE_L1];
+                            e->animation_counter = 1;
+                        }
                     }
                 }
+            }
+        }
+        else if (e->type == e_type_shot)
+        {
+            if (direction == RIGHT_DIRECTION)
+            {
+                e->sprite = e->sprites_array[SPRITE_R0];
+            }
+            else
+            {
+                e->sprite = e->sprites_array[SPRITE_L0];
             }
         }
     }

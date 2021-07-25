@@ -15,7 +15,7 @@
 #define LEVEL_STATE_PLAYER_DEAD 1
 #define LEVEL_STATE_FINISHED 10
 
-#define SPRITES_NUMBER 6
+#define SPRITES_NUMBER 8
 
 void man_level_init();
 u8 man_level_level1();

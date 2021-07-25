@@ -1,18 +1,18 @@
 #pragma once
 #include <cpctelera.h>
-#include <sprites/agent.h>
 #include <sprites/bullet.h>
 #include <sprites/player.h>
+#include <sprites/enemy1.h>
 #include <map/tiles_level1.h>
 #include <map/bg_level1.h>
 #include <map/bg_level2.h>
 
-#define PALETTE_LEVEL1 agent_pal
+#define PALETTE_LEVEL1 player_pal
 
 #define PLAYER_START_X_LEVEL1 4
 #define PLAYER_START_Y_LEVEL1 15
 #define PLAYER_START_SPRITE_LEVEL1 player_sp_0
-#define PLAYER_NEXT_SPRITE_LEVEL1 player_sp_1
+#define ENEMY1_START_SPRITE_LEVEL1 enemy1_sp_1
 #define PLAYER_SPRITE_W_LEVEL1 4
 #define PLAYER_SPRITE_H_LEVEL1 16
 
