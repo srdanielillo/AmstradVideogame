@@ -39,6 +39,7 @@ void sys_phyisics_update_entitie(Entity_t *e)
 
       if (newvx)
       {
+         e->last_direction = e->direction;
          if (newvx > 0)
          {
             e->direction = RIGHT_DIRECTION;
@@ -132,6 +133,7 @@ void sys_physics_update_player(Entity_t *e)
       // CHANGE DIRECTION
       if (vx)
       {
+         e->last_direction = e->direction;
          if (vx > 0)
          {
             e->direction = RIGHT_DIRECTION;

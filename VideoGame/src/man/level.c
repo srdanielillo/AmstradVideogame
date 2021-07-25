@@ -9,6 +9,12 @@
 */
 
 /*
+   [INFO] Containers to store the different sprites of the entities
+
+*/
+u8 *player_sprites[6] = {player_sp_0, player_sp_1, player_sp_2, player_sp_3, player_sp_4, player_sp_5};
+
+/*
    [INFO] Const data to initialize the shot manager
 */
 const Entity_t man_level_init_shot_template = {
@@ -23,7 +29,10 @@ const Entity_t man_level_init_shot_template = {
     0xFF,                 // jump_info
     0x80,                 // messages_re_ph
     0xFF,                 // patrol_info
-    RIGHT_DIRECTION       // direction
+    RIGHT_DIRECTION,      // direction
+    player_sprites,       // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,       // last direction
+    1                     // animation counter
 };
 
 /*
@@ -41,7 +50,10 @@ const Entity_t man_level_init_player = {
     0xFF,                       // jump_info
     0x00,                       // messages_re_ph
     0x00,                       // patrol_info
-    RIGHT_DIRECTION             // direction
+    LEFT_DIRECTION,             // direction
+    player_sprites,             // pointer to the array of pointers to the entity sprite
+    RIGHT_DIRECTION,            // last direction
+    1                           // animation counter
 };
 
 /*
@@ -59,7 +71,10 @@ const Entity_t man_level_init_enemy = {
     0,                         // jump_info
     0x00,                      // messages_re_ph
     0x00,                      // patrol_info
-    RIGHT_DIRECTION            // direction
+    RIGHT_DIRECTION,           // direction
+    player_sprites,            // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,            // last direction
+    1                          // animation counter
 };
 
 const Entity_t man_level_init_enemy_2 = {
@@ -74,7 +89,10 @@ const Entity_t man_level_init_enemy_2 = {
     0,                         // jump_info
     0x01,                      // messages_re_ph
     0x10,                      // patrol_info
-    RIGHT_DIRECTION            // direction
+    RIGHT_DIRECTION,           // direction
+    player_sprites,            // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,            // last direction
+    1                          // animation counter
 };
 
 const Entity_t man_level_init_enemy_3 = {
@@ -89,7 +107,10 @@ const Entity_t man_level_init_enemy_3 = {
     0,                          // jump_info
     0x00,                       // messages_re_ph
     0x20,                       // patrol_info
-    RIGHT_DIRECTION             // direction
+    RIGHT_DIRECTION,            // direction
+    player_sprites,             // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,             // last direction
+    1                           // animation counter
 };
 
 const Entity_t man_level_init_enemy_4 = {
@@ -104,7 +125,10 @@ const Entity_t man_level_init_enemy_4 = {
     0,                          // jump_info
     0x01,                       // messages_re_ph
     0x00,                       // patrol_info
-    RIGHT_DIRECTION             // direction
+    RIGHT_DIRECTION,            // direction
+    player_sprites,             // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,             // last direction
+    1                           // animation counter
 };
 
 const Entity_t man_level_init_enemy_5 = {
@@ -119,7 +143,10 @@ const Entity_t man_level_init_enemy_5 = {
     0,                          // jump_info
     0x00,                       // messages_re_ph
     0x00,                       // patrol_info
-    RIGHT_DIRECTION             // direction
+    RIGHT_DIRECTION,            // direction
+    player_sprites,             // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,             // last direction
+    1                           // animation counter
 };
 
 const Entity_t man_level_init_enemy_6 = {
@@ -134,7 +161,10 @@ const Entity_t man_level_init_enemy_6 = {
     0,                          // jump_info
     0x01,                       // messages_re_ph
     0x00,                       // patrol_info
-    RIGHT_DIRECTION             // direction
+    RIGHT_DIRECTION,            // direction
+    player_sprites,             // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,             // last direction
+    1                           // animation counter
 };
 
 /*
@@ -224,7 +254,12 @@ void man_level_init()
    sys_jump_init_jump_tables(man_level_jtable_site_p_level1);
    man_shot_init(&man_level_init_shot_template);
    sys_input_init();
-   sys_phyisics_init();
+   player_sprites[0] = player_sp_0;
+   player_sprites[1] = player_sp_1;
+   player_sprites[2] = player_sp_2;
+   player_sprites[3] = player_sp_3;
+   player_sprites[4] = player_sp_4;
+   player_sprites[5] = player_sp_5;
 }
 
 /*
@@ -253,8 +288,9 @@ u8 man_level_level1()
    sys_ai_init_patrol_tables(man_level_patrol_table_1);
 
    man_entitiy_init();
+   sys_phyisics_init();
    man_entity_create_player(&man_level_init_player);
-   man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy);
    //man_entity_populate_entity_data(&man_level_init_enemy_2);
    //man_entity_populate_entity_data(&man_level_init_enemy_3);
    //man_entity_populate_entity_data(&man_level_init_enemy_4);
@@ -282,6 +318,37 @@ u8 man_level_level2()
    sys_ai_init_patrol_tables(man_level_patrol_table_1);
 
    man_entitiy_init();
+   sys_phyisics_init();
+   man_entity_create_player(&man_level_init_player);
+   man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_6);
+
+   // Draws the whole level before doing any system update
+   cpct_waitVSYNC();
+   sys_render_first_time();
+   return man_level_gameLoop();
+}
+
+u8 man_level_level3()
+{
+   cpct_setPalette(PALETTE_LEVEL1, 16);
+
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(g_bg_level2_W, g_bg_level2_H, g_bg_level2_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level2);
+
+   // Set the tilemap of the level so the physics system can check collisions
+   sys_phyisics_set_tilemap(g_bg_level2);
+
+   // Init patrol system
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
+
+   man_entitiy_init();
+   sys_phyisics_init();
    man_entity_create_player(&man_level_init_player);
    man_entity_populate_entity_data(&man_level_init_enemy);
    //man_entity_populate_entity_data(&man_level_init_enemy_2);

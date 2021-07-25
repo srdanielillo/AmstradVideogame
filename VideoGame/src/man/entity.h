@@ -30,6 +30,9 @@ typedef struct te
       u8 messages_re_ph;
       u8 patrol_info;
       u8 direction;
+      u8 **sprites_array;
+      u8 last_direction;
+      u8 animation_counter;
 } Entity_t;
 
 void man_entitiy_init();

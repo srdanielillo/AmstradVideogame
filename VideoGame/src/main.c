@@ -26,12 +26,18 @@ void main(void)
 
    while (level_state != LEVEL_STATE_FINISHED)
    {
+      level_state = man_level_level1();
+   }
+
+   level_state = LEVEL_STATE_CONTINUE;
+   while (level_state != LEVEL_STATE_FINISHED)
+   {
       level_state = man_level_level2();
    }
 
    level_state = LEVEL_STATE_CONTINUE;
    while (level_state != LEVEL_STATE_FINISHED)
    {
-      level_state = man_level_level1();
+      level_state = man_level_level3();
    }
 }
