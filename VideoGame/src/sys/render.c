@@ -16,13 +16,10 @@
 */
 void sys_render_entitie_first_time(Entity_t *e)
 {
-    u8 sprite_H = e->sprite_H;
-    u8 sprite_W = e->sprite_W;
-    u8 x = e->x, y = e->y;
+    // Change to use the macro
     u8 *ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
-    u8 *sprite = e->sprite;
 
-    cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
+    cpct_drawSpriteBlended(ptr, e->sprite_H, e->sprite_W, e->sprite);
     e->prevptr = ptr;
     e->messages_re_ph &= 0x7F;
 }
@@ -37,7 +34,7 @@ void sys_render_entitie_first_time(Entity_t *e)
 void sys_render_update_player(Entity_t *e)
 {
     u8 message, sprite_H, sprite_W, x, y;
-    u8 *ptr, *sprite;
+    u8 *ptr;
 
     // Animation stuff
     u8 last_direction, direction, animation_counter;
@@ -52,88 +49,13 @@ void sys_render_update_player(Entity_t *e)
     last_direction = e->last_direction;
     animation_counter = e->animation_counter;
 
-    if (message & RENDER_HAS_MOVED)
-    {
-
-        if (!(e->type & e_type_dead))
-        {
-            ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
-            sprite = e->sprite;
-
-            cpct_drawSpriteBlended(e->prevptr, sprite_H, sprite_W, sprite);
-
-            // Animation
-            // Player has changed the direction
-            if (direction != last_direction)
-            {
-                if (direction == RIGHT_DIRECTION)
-                {
-                    sprite = e->sprites_array[SPRITE_R0];
-                    e->sprite = sprite;
-                }
-                else
-                {
-                    sprite = e->sprites_array[SPRITE_L0];
-                    e->sprite = sprite;
-                }
-            }
-            else
-            {
-                if (direction == RIGHT_DIRECTION)
-                {
-                    if (animation_counter)
-                    {
-                        sprite = e->sprites_array[SPRITE_R0];
-                        e->sprite = sprite;
-                        e->animation_counter = 0;
-                    }
-                    else
-                    {
-                        sprite = e->sprites_array[SPRITE_R1];
-                        e->sprite = sprite;
-                        e->animation_counter = 1;
-                    }
-                }
-                else
-                {
-                    if (animation_counter)
-                    {
-                        sprite = e->sprites_array[SPRITE_L0];
-                        e->sprite = sprite;
-                        e->animation_counter = 0;
-                    }
-                    else
-                    {
-                        sprite = e->sprites_array[SPRITE_L1];
-                        e->sprite = sprite;
-                        e->animation_counter = 1;
-                    }
-                }
-            }
-            cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
-
-            e->prevptr = ptr;
-        }
-    }
-    else
+    if (!(e->type & e_type_dead))
     {
         ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
-        sprite = e->sprite;
 
-        cpct_drawSpriteBlended(e->prevptr, sprite_H, sprite_W, sprite);
-        if (animation_counter)
-        {
-            sprite = e->sprites_array[SPRITE_I0];
-            e->sprite = sprite;
-            e->animation_counter = 0;
-        }
-        else
-        {
-            sprite = e->sprites_array[SPRITE_I1];
-            e->sprite = sprite;
-            e->animation_counter = 1;
-        }
-        cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
+        cpct_drawSpriteBlended(e->prevptr, sprite_H, sprite_W, e->prevsprite);
+        cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, e->sprite);
+
         e->prevptr = ptr;
     }
 }
@@ -148,7 +70,7 @@ void sys_render_update_player(Entity_t *e)
 void sys_render_update_entitie(Entity_t *e)
 {
     u8 message, sprite_H, sprite_W, x, y;
-    u8 *ptr, *sprite;
+    u8 *ptr;
 
     message = e->messages_re_ph;
     sprite_H = e->sprite_H;
@@ -164,10 +86,9 @@ void sys_render_update_entitie(Entity_t *e)
     {
 
         ptr = cpct_getScreenPtr(CPCT_VMEM_START, e->x, e->y);
-        sprite = e->sprite;
 
-        cpct_drawSpriteBlended(e->prevptr, sprite_H, sprite_W, sprite);
-        cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, sprite);
+        cpct_drawSpriteBlended(e->prevptr, sprite_H, sprite_W, e->prevsprite);
+        cpct_drawSpriteBlended(ptr, sprite_H, sprite_W, e->sprite);
 
         e->prevptr = ptr;
     }

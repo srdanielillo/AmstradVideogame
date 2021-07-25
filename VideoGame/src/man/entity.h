@@ -33,6 +33,7 @@ typedef struct te
       u8 **sprites_array;
       u8 last_direction;
       u8 animation_counter;
+      u8 *prevsprite;
 } Entity_t;
 
 void man_entitiy_init();

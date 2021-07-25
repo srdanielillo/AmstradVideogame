@@ -9,6 +9,7 @@
 #include "sys/jump.h"
 #include "sys/ai.h"
 #include "sys/collision.h"
+#include "sys/animation.h"
 
 #define LEVEL_STATE_CONTINUE 0
 #define LEVEL_STATE_PLAYER_DEAD 1

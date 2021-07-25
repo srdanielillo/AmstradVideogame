@@ -32,7 +32,8 @@ const Entity_t man_level_init_shot_template = {
     RIGHT_DIRECTION,      // direction
     player_sprites,       // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,       // last direction
-    1                     // animation counter
+    1,                    // animation counter
+    BULLET_SPRITE_LEVEL1  // Prev sprite
 };
 
 /*
@@ -53,7 +54,8 @@ const Entity_t man_level_init_player = {
     LEFT_DIRECTION,             // direction
     player_sprites,             // pointer to the array of pointers to the entity sprite
     RIGHT_DIRECTION,            // last direction
-    1                           // animation counter
+    1,                          // animation counter
+    PLAYER_START_SPRITE_LEVEL1  // prevsprite
 };
 
 /*
@@ -74,7 +76,8 @@ const Entity_t man_level_init_enemy = {
     RIGHT_DIRECTION,           // direction
     player_sprites,            // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,            // last direction
-    1                          // animation counter
+    1,                         // animation counter
+    PLAYER_NEXT_SPRITE_LEVEL1, // prevsprite
 };
 
 const Entity_t man_level_init_enemy_2 = {
@@ -92,7 +95,8 @@ const Entity_t man_level_init_enemy_2 = {
     RIGHT_DIRECTION,           // direction
     player_sprites,            // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,            // last direction
-    1                          // animation counter
+    1,                         // animation counter
+    PLAYER_NEXT_SPRITE_LEVEL1, // prevsprite
 };
 
 const Entity_t man_level_init_enemy_3 = {
@@ -110,7 +114,8 @@ const Entity_t man_level_init_enemy_3 = {
     RIGHT_DIRECTION,            // direction
     player_sprites,             // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,             // last direction
-    1                           // animation counter
+    1,                          // animation counter
+    PLAYER_NEXT_SPRITE_LEVEL1,  // prevsprite
 };
 
 const Entity_t man_level_init_enemy_4 = {
@@ -128,7 +133,8 @@ const Entity_t man_level_init_enemy_4 = {
     RIGHT_DIRECTION,            // direction
     player_sprites,             // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,             // last direction
-    1                           // animation counter
+    1,                          // animation counter
+    PLAYER_NEXT_SPRITE_LEVEL1,  // prevsprite
 };
 
 const Entity_t man_level_init_enemy_5 = {
@@ -146,7 +152,8 @@ const Entity_t man_level_init_enemy_5 = {
     RIGHT_DIRECTION,            // direction
     player_sprites,             // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,             // last direction
-    1                           // animation counter
+    1,                          // animation counter
+    PLAYER_NEXT_SPRITE_LEVEL1,  // prevsprite
 };
 
 const Entity_t man_level_init_enemy_6 = {
@@ -164,7 +171,8 @@ const Entity_t man_level_init_enemy_6 = {
     RIGHT_DIRECTION,            // direction
     player_sprites,             // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,             // last direction
-    1                           // animation counter
+    1,                          // animation counter
+    PLAYER_NEXT_SPRITE_LEVEL1,  // prevsprite
 };
 
 /*
@@ -220,10 +228,9 @@ u8 man_level_gameLoop()
       sys_input_update();
       sys_jump_update();
       sys_ai_update();
-      //cpct_setBorder(HW_ORANGE);
       sys_phyisics_update();
-      //cpct_setBorder(HW_PINK);
       sys_collision_update();
+      sys_animation_update();
       man_entity_update();
       cpct_waitVSYNC();
       sys_render_update();
