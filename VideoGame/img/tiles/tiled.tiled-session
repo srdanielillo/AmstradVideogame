@@ -29,8 +29,16 @@
             "scale": 4.237,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 79.7734245928723,
-                "y": 130.2808590984187
+                "x": 79.30139249468962,
+                "y": 100.77885296200141
+            }
+        },
+        "load_screen.tmx": {
+            "scale": 4.237,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 80.00944064196364,
+                "y": 100.0708048147274
             }
         },
         "patrons_level1.tsx": {
@@ -48,6 +56,7 @@
     ],
     "project": "tiled.tiled-project",
     "recentFiles": [
+        "load_screen.tmx",
         "bg_level2.tmx",
         "tiles_level1.tsx",
         "patrons_level1.tsx",
