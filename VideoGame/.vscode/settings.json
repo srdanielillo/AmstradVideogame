@@ -4,6 +4,7 @@
     "files.associations": {
         "*.y": "cpp",
         "level.h": "c",
-        "level1.h": "c"
+        "level1.h": "c",
+        "cpctelera.h": "c"
     }
 }

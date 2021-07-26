@@ -24,15 +24,16 @@ u8 cycle_reset_shot_counter;
 */
 void sys_input_update_player(Entity_t *e)
 {
-    u8 jump_info, direction, x, y, sprite_W, vy;
+    Jump_step_t *jump_table;
+    u8 direction, x, y, sprite_W, vy;
 
     if (cycle_reset_shot_counter > 0)
     {
         --cycle_reset_shot_counter;
     }
 
-    jump_info = e->jump_info;
-    if (jump_info == 0xFF)
+    jump_table = e->jump_table;
+    if ((u16)jump_table == 0xFFFF)
     {
         x = e->x;
         y = e->y;
@@ -59,15 +60,15 @@ void sys_input_update_player(Entity_t *e)
         }
         else if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorRight) && !vy)
         {
-            e->jump_info = jump_table_right;
+            e->jump_table = sys_jump_get_jt_pointer(1);
         }
         else if (cpct_isKeyPressed(Key_CursorUp) && cpct_isKeyPressed(Key_CursorLeft) && !vy)
         {
-            e->jump_info = jump_table_left;
+            e->jump_table = sys_jump_get_jt_pointer(2);
         }
         else if (cpct_isKeyPressed(Key_CursorUp) && !vy)
         {
-            e->jump_info = jump_table_in_site;
+            e->jump_table = sys_jump_get_jt_pointer(0);
         }
         else if (cpct_isKeyPressed(Key_CursorRight))
         {

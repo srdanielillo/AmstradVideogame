@@ -13,6 +13,13 @@
 #define RIGHT_DIRECTION 1
 #define LEFT_DIRECTION 2
 
+typedef struct js
+{
+      i8 x;
+      i8 y;
+
+} Jump_step_t;
+
 // 15
 typedef struct te
 {
@@ -22,7 +29,8 @@ typedef struct te
       u8 sprite_W, sprite_H;
       u8 *sprite;
       u8 *prevptr;
-      u8 jump_info;
+      Jump_step_t *jump_table;
+      u8 jump_step;
       /*
          [7]                 6  5  4  3    [1]        [0]
          Render_first_time                 Has_moved  Should_render

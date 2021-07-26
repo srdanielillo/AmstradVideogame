@@ -155,7 +155,7 @@ void sys_physics_update_player(Entity_t *e)
       }
 
       // Check for gravity
-      if (e->jump_info == 0xFF)
+      if ((u16)e->jump_table == 0xFFFF)
       {
          if (!check_tile_collision(newx, newy - 1 + sprite_H) && !check_tile_collision(newx + sprite_W, newy - 1 + sprite_H))
          {
@@ -177,7 +177,7 @@ void sys_physics_update_player(Entity_t *e)
             if (check_tile_collision(newx, newy) || check_tile_collision(newx + sprite_W, newy))
             {
                y_collision = 1;
-               e->jump_info = 0xFF;
+               e->jump_table = (Jump_step_t *)0xFFFF;
             }
          }
          // Check collisions down
@@ -186,7 +186,7 @@ void sys_physics_update_player(Entity_t *e)
             if (check_tile_collision(newx, newy - 1 + sprite_H) || check_tile_collision(newx + sprite_W, newy - 1 + sprite_H))
             {
                y_collision = 1;
-               e->jump_info = 0xFF;
+               e->jump_table = (Jump_step_t *)0xFFFF;
             }
          }
       }

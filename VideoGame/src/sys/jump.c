@@ -28,30 +28,27 @@ Jump_step_t *sys_jump_player_jtable_ptrs[JUMP_TABLES_NUMBER];
 */
 void sys_jump_update_entitie(Entity_t *e)
 {
-    u8 jump_info = e->jump_info;
+    Jump_step_t *jump_table;
+    u8 jump_step;
 
-    if (jump_info != 0xFF)
+    jump_table = e->jump_table;
+    jump_step = e->jump_step;
+
+    if ((u16)jump_table != 0xFFFF)
     {
-        u8 jump_table_number = jump_info >> 4;
-        u8 jump_step_index = jump_info & 0x0F;
-        u8 step_x, step_y;
-
-        if (jump_step_index == STEPS_PER_JUMP_TABLE)
+        if (jump_step == STEPS_PER_JUMP_TABLE)
         {
-            e->jump_info = 0xFF;
+            e->jump_table = (Jump_step_t *)0xFFFF;
+            e->jump_step = 0x00;
         }
         else
         {
-            Jump_step_t *jump_table = sys_jump_player_jtable_ptrs[jump_table_number];
-            jump_table += jump_step_index;
+            jump_table += jump_step;
 
-            step_x = jump_table->x;
-            step_y = jump_table->y;
+            e->vx += jump_table->x;
+            e->vy += jump_table->y;
 
-            e->vx += step_x;
-            e->vy += step_y;
-
-            e->jump_info++;
+            e->jump_step++;
         }
     }
 }
@@ -75,6 +72,11 @@ void sys_jump_init_jump_tables(Jump_step_t *ptr)
         sys_jump_player_jtable_ptrs[i] = ptr;
         ptr += STEPS_PER_JUMP_TABLE;
     }
+}
+
+Jump_step_t *sys_jump_get_jt_pointer(u8 index)
+{
+    return sys_jump_player_jtable_ptrs[index];
 }
 
 /*
