@@ -19,6 +19,23 @@
 #include <cpctelera.h>
 #include "man/level.h"
 
+#define TILEMAP_VMEM cpctm_screenPtr(CPCT_VMEM_START, 0, 0)
+
+void load_intermediate_screen()
+{
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(intermediate_screen_W, intermediate_screen_H, intermediate_screen_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, intermediate_screen);
+   while (1)
+   {
+      cpct_scanKeyboard_f();
+      if (cpct_isAnyKeyPressed_f())
+      {
+         break;
+      }
+   }
+}
+
 void main(void)
 {
    u8 level_state = LEVEL_STATE_CONTINUE;
@@ -26,18 +43,23 @@ void main(void)
 
    while (level_state != LEVEL_STATE_FINISHED)
    {
+      load_intermediate_screen();
       level_state = man_level_level1();
    }
 
    level_state = LEVEL_STATE_CONTINUE;
+   load_intermediate_screen();
    while (level_state != LEVEL_STATE_FINISHED)
    {
+      load_intermediate_screen();
       level_state = man_level_level2();
    }
 
    level_state = LEVEL_STATE_CONTINUE;
+   load_intermediate_screen();
    while (level_state != LEVEL_STATE_FINISHED)
    {
+      load_intermediate_screen();
       level_state = man_level_level3();
    }
 }

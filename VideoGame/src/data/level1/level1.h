@@ -4,6 +4,7 @@
 #include <sprites/player.h>
 #include <sprites/enemy1.h>
 #include <map/tiles_level1.h>
+#include <map/intermediate_screen.h>
 #include <map/bg_level1.h>
 #include <map/bg_level2.h>
 
