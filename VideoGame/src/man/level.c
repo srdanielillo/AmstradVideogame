@@ -13,6 +13,8 @@
 
 */
 u8 *player_sprites[SPRITES_NUMBER];
+u8 *enemy1_sprites[SPRITES_NUMBER];
+u8 *bullet_sprites[SPRITES_NUMBER];
 
 /*
    [INFO] Const data to initialize the shot manager
@@ -22,15 +24,15 @@ const Entity_t man_level_init_shot_template = {
     0xFA,                 // x
     0xFA,                 // y
     0x00, 0x00,           // vx, vy
-    2,                    // sprite_W
-    4,                    // sprite_H
+    1,                    // sprite_W
+    1,                    // sprite_H
     BULLET_SPRITE_LEVEL1, // sprite
     0,                    // prevptr
     0xFF,                 // jump_info
     0x80,                 // messages_re_ph
     0xFF,                 // patrol_info
     RIGHT_DIRECTION,      // direction
-    player_sprites,       // pointer to the array of pointers to the entity sprite
+    bullet_sprites,       // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,       // last direction
     1,                    // animation counter
     BULLET_SPRITE_LEVEL1  // Prev sprite
@@ -74,7 +76,7 @@ const Entity_t man_level_init_enemy = {
     0x00,                       // messages_re_ph
     0x00,                       // patrol_info
     RIGHT_DIRECTION,            // direction
-    player_sprites,             // pointer to the array of pointers to the entity sprite
+    enemy1_sprites,             // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,             // last direction
     1,                          // animation counter
     ENEMY1_START_SPRITE_LEVEL1, // prevsprite
@@ -93,7 +95,7 @@ const Entity_t man_level_init_enemy_2 = {
     0x01,                       // messages_re_ph
     0x10,                       // patrol_info
     RIGHT_DIRECTION,            // direction
-    player_sprites,             // pointer to the array of pointers to the entity sprite
+    enemy1_sprites,             // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,             // last direction
     1,                          // animation counter
     ENEMY1_START_SPRITE_LEVEL1, // prevsprite
@@ -112,7 +114,7 @@ const Entity_t man_level_init_enemy_3 = {
     0x00,                       // messages_re_ph
     0x20,                       // patrol_info
     RIGHT_DIRECTION,            // direction
-    player_sprites,             // pointer to the array of pointers to the entity sprite
+    enemy1_sprites,             // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,             // last direction
     1,                          // animation counter
     ENEMY1_START_SPRITE_LEVEL1, // prevsprite
@@ -131,7 +133,7 @@ const Entity_t man_level_init_enemy_4 = {
     0x01,                       // messages_re_ph
     0x00,                       // patrol_info
     RIGHT_DIRECTION,            // direction
-    player_sprites,             // pointer to the array of pointers to the entity sprite
+    enemy1_sprites,             // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,             // last direction
     1,                          // animation counter
     ENEMY1_START_SPRITE_LEVEL1, // prevsprite
@@ -150,7 +152,7 @@ const Entity_t man_level_init_enemy_5 = {
     0x00,                       // messages_re_ph
     0x00,                       // patrol_info
     RIGHT_DIRECTION,            // direction
-    player_sprites,             // pointer to the array of pointers to the entity sprite
+    enemy1_sprites,             // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,             // last direction
     1,                          // animation counter
     ENEMY1_START_SPRITE_LEVEL1, // prevsprite
@@ -169,7 +171,7 @@ const Entity_t man_level_init_enemy_6 = {
     0x01,                       // messages_re_ph
     0x00,                       // patrol_info
     RIGHT_DIRECTION,            // direction
-    player_sprites,             // pointer to the array of pointers to the entity sprite
+    enemy1_sprites,             // pointer to the array of pointers to the entity sprite
     LEFT_DIRECTION,             // last direction
     1,                          // animation counter
     ENEMY1_START_SPRITE_LEVEL1, // prevsprite
@@ -239,6 +241,42 @@ u8 man_level_gameLoop()
    return get_level_state();
 }
 
+void init_player_sprites()
+{
+   player_sprites[0] = player_sp_0;
+   player_sprites[1] = player_sp_1;
+   player_sprites[2] = player_sp_2;
+   player_sprites[3] = player_sp_3;
+   player_sprites[4] = player_sp_4;
+   player_sprites[5] = player_sp_5;
+   player_sprites[6] = player_sp_6;
+   player_sprites[7] = player_sp_7;
+}
+
+void init_enemy1_sprites()
+{
+   enemy1_sprites[0] = enemy1_sp_0;
+   enemy1_sprites[1] = enemy1_sp_1;
+   enemy1_sprites[2] = enemy1_sp_2;
+   enemy1_sprites[3] = enemy1_sp_3;
+   enemy1_sprites[4] = enemy1_sp_4;
+   enemy1_sprites[5] = enemy1_sp_5;
+   enemy1_sprites[6] = enemy1_sp_6;
+   enemy1_sprites[7] = enemy1_sp_7;
+}
+
+void init_bullet_sprites()
+{
+   bullet_sprites[0] = bullet_sp_0;
+   bullet_sprites[1] = bullet_sp_1;
+   bullet_sprites[2] = bullet_sp_2;
+   bullet_sprites[3] = bullet_sp_3;
+   bullet_sprites[4] = bullet_sp_4;
+   bullet_sprites[5] = bullet_sp_5;
+   bullet_sprites[6] = bullet_sp_6;
+   bullet_sprites[7] = bullet_sp_7;
+}
+
 /*
 *******************************************************
 * PUBLIC SECTION
@@ -261,14 +299,9 @@ void man_level_init()
    sys_jump_init_jump_tables(man_level_jtable_site_p_level1);
    man_shot_init(&man_level_init_shot_template);
    sys_input_init();
-   player_sprites[0] = player_sp_0;
-   player_sprites[1] = player_sp_1;
-   player_sprites[2] = player_sp_2;
-   player_sprites[3] = player_sp_3;
-   player_sprites[4] = player_sp_4;
-   player_sprites[5] = player_sp_5;
-   player_sprites[6] = player_sp_6;
-   player_sprites[7] = player_sp_7;
+   init_player_sprites();
+   init_enemy1_sprites();
+   init_bullet_sprites();
 }
 
 /*
