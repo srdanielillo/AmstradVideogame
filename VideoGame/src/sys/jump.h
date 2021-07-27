@@ -2,7 +2,7 @@
 #include <cpctelera.h>
 #include "man/entity.h"
 
-#define STEPS_PER_JUMP_TABLE 14
+#define STEPS_PER_JUMP_TABLE 28
 #define JUMP_TABLES_NUMBER 3
 
 void sys_jump_init_jump_tables(Jump_step_t *ptr);
