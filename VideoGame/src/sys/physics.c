@@ -90,11 +90,11 @@ u8 check_tile_collision(u8 x, u8 y)
 
    tile_number = level_tilemap[linear_tile_index];
 
-   if (tile_number == 1 || tile_number == 2)
+   if (tile_number > 0 && tile_number < 8)
    {
       return 0x01;
    }
-   else if (tile_number == 9)
+   else if (tile_number == 15)
    {
       door_collision = 1;
    }

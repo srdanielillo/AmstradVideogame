@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "tiles_level1.tsx",
     "expandedProjectPaths": [
         "/home/dani/AmstradVideogame/VideoGame/img"
     ],
@@ -18,11 +18,11 @@
             }
         },
         "bg_level1.tmx": {
-            "scale": 2.74075,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 135.36440755267722,
-                "y": 118.94554410289155
+                "x": 105.99999999999997,
+                "y": 86.33333333333334
             }
         },
         "bg_level2.tmx": {
@@ -34,11 +34,11 @@
             }
         },
         "intermediate_screen.tmx": {
-            "scale": 4.237,
+            "scale": 4.23,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.00944064196364,
-                "y": 100.0708048147274
+                "x": 80.1418439716312,
+                "y": 100.23640661938533
             }
         },
         "load_screen.tmx": {
@@ -54,22 +54,25 @@
             "scaleInEditor": 1
         },
         "tiles_level1.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInDock": 4,
+            "scaleInEditor": 8
         }
     },
     "last.externalTilesetPath": "/home/dani/AmstradVideogame/VideoGame/img/tiles",
     "last.imagePath": "/home/dani/AmstradVideogame/VideoGame/img/tiles",
     "openFiles": [
+        "bg_level1.tmx",
+        "tiles_level1.tsx"
     ],
     "project": "tiled.tiled-project",
     "recentFiles": [
-        "load_screen.tmx",
-        "bg_level2.tmx",
         "tiles_level1.tsx",
+        "bg_level1.tmx",
+        "bg_level2.tmx",
+        "intermediate_screen.tmx",
+        "load_screen.tmx",
         "patrons_level1.tsx",
-        "bg_level1",
-        "bg_level1.tmx"
+        "bg_level1"
     ],
     "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx"
