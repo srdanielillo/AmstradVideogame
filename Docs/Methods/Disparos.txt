@@ -1,0 +1,16 @@
+- Comprobar en:
+    input
+    ai
+    
+- Crear una entidad desde otro sistema
+    A la siguiente iteración
+    Pasar puntero a entidad que estará definida en shot.h (o level.h)
+    Tipo para indicar que se genere la entidad en la siguiente iteración
+    Tipo para indicar que es una bala
+    Combinación para que se renderice correctamente
+    
+    
+- Definir dirección del tiro en función de donde mire entidad (Flags en las entidades)
+
+- Agregar tiros en las patrullas
+

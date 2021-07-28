@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "sys/render.h"
 
 /*
 *******************************************************
@@ -44,6 +45,7 @@ void man_entity_destroy(Entity_t *dead_e)
 {
    Entity_t *de = dead_e;
    Entity_t *last = m_next_free_entity;
+   sys_render_last_time(dead_e);
    --last;
    if (de != last)
    {
@@ -113,9 +115,12 @@ Entity_t *man_entitiy_create()
 */
 void man_entity_populate_entity_data(Entity_t *e)
 {
-   Entity_t *to = man_entitiy_create();
-   Entity_t *from = e;
-   cpct_memcpy(to, from, sizeof(Entity_t));
+   if (man_entity_freeSpace() > 0x00)
+   {
+      Entity_t *to = man_entitiy_create();
+      Entity_t *from = e;
+      cpct_memcpy(to, from, sizeof(Entity_t));
+   }
 }
 
 /*
@@ -161,6 +166,80 @@ void man_entity_for_player(void (*ptrfunc)(Entity_t *))
 }
 
 /*
+   [INFO]            Applies the function passed as paremeter to compare one entity against the others
+   
+   [PREREQUISITES]   The function man_entity_init should be called before calling this function
+                     The function man_entity_create_player should be called before calling this function
+*/
+void man_entity_one_against_others(void (*ptrfunc)(Entity_t *, Entity_t *))
+{
+   Entity_t *subject, *compared;
+   subject = m_entities;
+   compared = subject + 1;
+
+   while (subject->type != e_type_invalid)
+   {
+      while (compared->type != e_type_invalid)
+      {
+         ptrfunc(subject, compared);
+         ++compared;
+      }
+      ++subject;
+      compared = subject + 1;
+   }
+}
+
+/*
+   [INFO]            Applies the function passed as paremeter to compare one entity against the others
+   
+   [PREREQUISITES]   The function man_entity_init should be called before calling this function
+                     The function man_entity_create_player should be called before calling this function
+*/
+void man_entity_shots_against_others(void (*ptrfunc)(Entity_t *, Entity_t *))
+{
+   Entity_t *shot, *enemy;
+
+   shot = m_entities;
+   enemy = m_entities + 1;
+
+   while (shot->type != e_type_invalid)
+   {
+      if (shot->type == e_type_shot)
+      {
+         while (enemy->type != e_type_invalid)
+         {
+            if (enemy->type != e_type_shot)
+            {
+               ptrfunc(shot, enemy);
+            }
+         }
+      }
+
+      // Restart the loop
+      enemy = m_entities;
+      ++shot;
+   }
+}
+
+/*
+   [INFO]            Applies the function passed as paremeter to compare one entity against the others
+   
+   [PREREQUISITES]   The function man_entity_init should be called before calling this function
+                     The function man_entity_create_player should be called before calling this function
+*/
+void man_entity_player_against_others(void (*ptrfunc)(Entity_t *, Entity_t *))
+{
+   Entity_t *player = &m_player;
+   Entity_t *compared = m_entities;
+
+   while (compared->type != e_type_invalid)
+   {
+      ptrfunc(player, compared);
+      ++compared;
+   }
+}
+
+/*
    [INFO]            Marks an entity to be deleted 
                      - Uses an OR logic door to activate the biggest bit of the type attribute  
    
@@ -169,6 +248,14 @@ void man_entity_for_player(void (*ptrfunc)(Entity_t *))
 void man_entity_set4destruction(Entity_t *dead_e)
 {
    dead_e->type |= e_type_dead;
+}
+
+/**
+ * Check if player is dead
+ **/
+u8 man_entity_player_dead()
+{
+   return m_player.type & e_type_dead;
 }
 
 /*
@@ -203,4 +290,9 @@ void man_entity_update()
 u8 man_entity_freeSpace()
 {
    return MAX_ENTITIES_NON_PLAYER - m_num_entities_non_player;
+}
+
+u8 man_entity_enemies_left()
+{
+   return m_num_entities_non_player;
 }

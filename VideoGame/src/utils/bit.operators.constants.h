@@ -32,3 +32,11 @@
 #define RENDER_HAS_MOVED 0x02
 #define RENDER_SHOULD_RENDER 0x01
 #define RENDER_NOT_RENDER 0xFE
+
+/**
+ * 
+ *  COLLISION SYSTEM OPERATORS 
+ *
+ **/
+#define TILE_W 4
+#define TILE_H 8
