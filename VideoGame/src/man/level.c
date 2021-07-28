@@ -13,7 +13,9 @@
 
 */
 u8 *player_sprites[SPRITES_NUMBER];
-u8 *enemy1_sprites[SPRITES_NUMBER];
+u8 *enemy1_sprites[SPRITES_NUMBER]; // Brujo limoncin
+u8 *enemy2_sprites[SPRITES_NUMBER]; // Robot asesino
+u8 *enemy3_sprites[SPRITES_NUMBER]; // SamuraiPulpo
 u8 *bullet_sprites[SPRITES_NUMBER];
 
 /*
@@ -86,43 +88,43 @@ const Entity_t man_level_init_enemy = {
 };
 
 const Entity_t man_level_init_enemy_2 = {
-    e_type_enemy,               // type
-    0,                          // x
-    180,                        // y
-    0, 0,                       // vx, vy
-    PLAYER_SPRITE_W_LEVEL1,     // sprite_W
-    PLAYER_SPRITE_H_LEVEL1,     // sprite_H
-    ENEMY1_START_SPRITE_LEVEL1, // sprite
-    0,                          // prevptr
-    0xFFFF,                     // jump_table
-    0xFF,                       // jump_step
-    0x01,                       // messages_re_ph
-    0x10,                       // patrol_info
-    RIGHT_DIRECTION,            // direction
-    enemy1_sprites,             // pointer to the array of pointers to the entity sprite
-    LEFT_DIRECTION,             // last direction
-    1,                          // animation counter
-    ENEMY1_START_SPRITE_LEVEL1, // prevsprite
+    e_type_enemy,           // type
+    0,                      // x
+    180,                    // y
+    0, 0,                   // vx, vy
+    PLAYER_SPRITE_W_LEVEL1, // sprite_W
+    PLAYER_SPRITE_H_LEVEL1, // sprite_H
+    enemy2_sp_0,            // sprite
+    0,                      // prevptr
+    0xFFFF,                 // jump_table
+    0xFF,                   // jump_step
+    0x01,                   // messages_re_ph
+    0x10,                   // patrol_info
+    RIGHT_DIRECTION,        // direction
+    enemy2_sprites,         // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,         // last direction
+    1,                      // animation counter
+    enemy2_sp_0,            // prevsprite
 };
 
 const Entity_t man_level_init_enemy_3 = {
-    e_type_enemy,               // type
-    0,                          // x
-    80,                         // y
-    0, 0,                       // vx, vy
-    PLAYER_SPRITE_W_LEVEL1,     // sprite_W
-    PLAYER_SPRITE_H_LEVEL1,     // sprite_H
-    PLAYER_START_SPRITE_LEVEL1, // sprite
-    0,                          // prevptr
-    0xFFFF,                     // jump_table
-    0xFF,                       // jump_step
-    0x00,                       // messages_re_ph
-    0x20,                       // patrol_info
-    RIGHT_DIRECTION,            // direction
-    enemy1_sprites,             // pointer to the array of pointers to the entity sprite
-    LEFT_DIRECTION,             // last direction
-    1,                          // animation counter
-    ENEMY1_START_SPRITE_LEVEL1, // prevsprite
+    e_type_enemy,           // type
+    0,                      // x
+    80,                     // y
+    0, 0,                   // vx, vy
+    PLAYER_SPRITE_W_LEVEL1, // sprite_W
+    PLAYER_SPRITE_H_LEVEL1, // sprite_H
+    enemy3_sp_4,            // sprite
+    0,                      // prevptr
+    0xFFFF,                 // jump_table
+    0xFF,                   // jump_step
+    0x00,                   // messages_re_ph
+    0x20,                   // patrol_info
+    RIGHT_DIRECTION,        // direction
+    enemy3_sprites,         // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,         // last direction
+    1,                      // animation counter
+    enemy3_sp_4,            // prevsprite
 };
 
 const Entity_t man_level_init_enemy_4 = {
@@ -273,6 +275,30 @@ void init_enemy1_sprites()
    enemy1_sprites[7] = enemy1_sp_7;
 }
 
+void init_enemy2_sprites()
+{
+   enemy2_sprites[0] = enemy2_sp_0;
+   enemy2_sprites[1] = enemy2_sp_1;
+   enemy2_sprites[2] = enemy2_sp_2;
+   enemy2_sprites[3] = enemy2_sp_3;
+   enemy2_sprites[4] = enemy2_sp_4;
+   enemy2_sprites[5] = enemy2_sp_5;
+   enemy2_sprites[6] = enemy2_sp_6;
+   enemy2_sprites[7] = enemy2_sp_7;
+}
+
+void init_enemy3_sprites()
+{
+   enemy3_sprites[0] = enemy3_sp_0;
+   enemy3_sprites[1] = enemy3_sp_1;
+   enemy3_sprites[2] = enemy3_sp_2;
+   enemy3_sprites[3] = enemy3_sp_3;
+   enemy3_sprites[4] = enemy3_sp_4;
+   enemy3_sprites[5] = enemy3_sp_5;
+   enemy3_sprites[6] = enemy3_sp_6;
+   enemy3_sprites[7] = enemy3_sp_7;
+}
+
 void init_bullet_sprites()
 {
    bullet_sprites[0] = bullet_sp_0;
@@ -309,6 +335,8 @@ void man_level_init()
    sys_input_init();
    init_player_sprites();
    init_enemy1_sprites();
+   init_enemy2_sprites();
+   init_enemy3_sprites();
    init_bullet_sprites();
 }
 
@@ -340,9 +368,9 @@ u8 man_level_level1()
    man_entitiy_init();
    sys_phyisics_init();
    man_entity_create_player(&man_level_init_player);
-   //man_entity_populate_entity_data(&man_level_init_enemy);
-   //man_entity_populate_entity_data(&man_level_init_enemy_2);
-   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   man_entity_populate_entity_data(&man_level_init_enemy);
+   man_entity_populate_entity_data(&man_level_init_enemy_2);
+   man_entity_populate_entity_data(&man_level_init_enemy_3);
    //man_entity_populate_entity_data(&man_level_init_enemy_4);
    //man_entity_populate_entity_data(&man_level_init_enemy_5);
    //man_entity_populate_entity_data(&man_level_init_enemy_6);

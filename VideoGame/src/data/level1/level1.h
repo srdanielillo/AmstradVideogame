@@ -3,6 +3,8 @@
 #include <sprites/bullet.h>
 #include <sprites/player.h>
 #include <sprites/enemy1.h>
+#include <sprites/enemy2.h>
+#include <sprites/enemy3.h>
 #include <map/tiles_level1.h>
 #include <map/intermediate_screen.h>
 #include <map/bg_level1.h>

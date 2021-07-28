@@ -46,6 +46,8 @@ PALETTE= 2 19 9 12 6 6 6 6 16 16 16 16 24 24 24 24
 $(eval $(call IMG2SP, SET_PALETTE_FW  , $(PALETTE) ))
 $(eval $(call IMG2SP, SET_FOLDER      , src/sprites ))
 $(eval $(call IMG2SP, CONVERT         , img/enemy1.png , 8, 16, enemy1_sp, enemy1_pal))
+$(eval $(call IMG2SP, CONVERT         , img/enemy2.png , 8, 16, enemy2_sp, enemy2_pal))
+$(eval $(call IMG2SP, CONVERT         , img/enemy3.png , 8, 16, enemy3_sp, enemy3_pal))
 $(eval $(call IMG2SP, CONVERT         , img/bullet.png , 2, 1, bullet_sp, bullet_pal))
 $(eval $(call IMG2SP, CONVERT         , img/player.png , 8, 16, player_sp, player_pal))
 
