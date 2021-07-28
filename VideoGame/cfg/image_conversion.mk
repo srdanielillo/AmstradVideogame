@@ -41,7 +41,8 @@
 #$(eval $(call IMG2SP, CONVERT_PALETTE , $(PALETTE), g_palette ))
 #$(eval $(call IMG2SP, CONVERT         , img.png , w, h, array, palette, tileset))
 
-PALETTE= 26 0 18 18 6 6 15 15 24 24 9 9 2 2 4 4
+$(eval $(call IMG2SP, SET_MODE        , 0                  ))
+PALETTE= 2 19 9 12 6 6 6 6 16 16 16 16 24 24 24 24 
 $(eval $(call IMG2SP, SET_PALETTE_FW  , $(PALETTE) ))
 $(eval $(call IMG2SP, SET_FOLDER      , src/sprites ))
 $(eval $(call IMG2SP, CONVERT         , img/enemy1.png , 8, 16, enemy1_sp, enemy1_pal))
