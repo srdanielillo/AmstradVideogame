@@ -383,18 +383,9 @@ u8 man_level_level2()
    // Set the tilemap of the level so the physics system can check collisions
    sys_phyisics_set_tilemap(g_bg_level2);
 
-   // Init patrol system
-   sys_ai_init_patrol_tables(man_level_patrol_table_1);
-
-   man_entitiy_init();
+      man_entitiy_init();
    sys_phyisics_init();
    man_entity_create_player(&man_level_init_player);
-   man_entity_populate_entity_data(&man_level_init_enemy);
-   //man_entity_populate_entity_data(&man_level_init_enemy_2);
-   //man_entity_populate_entity_data(&man_level_init_enemy_3);
-   //man_entity_populate_entity_data(&man_level_init_enemy_4);
-   //man_entity_populate_entity_data(&man_level_init_enemy_5);
-   //man_entity_populate_entity_data(&man_level_init_enemy_6);
 
    // Draws the whole level before doing any system update
    cpct_waitVSYNC();
