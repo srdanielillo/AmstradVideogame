@@ -25,12 +25,76 @@
                 "y": 86
             }
         },
+        "bg_level10.tmx": {
+            "scale": 4.237,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 80.00944064196364,
+                "y": 100.0708048147274
+            }
+        },
         "bg_level2.tmx": {
             "scale": 4.237,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 79.06537644559829,
+                "x": 78.59334434741564,
                 "y": 100.54283691291008
+            }
+        },
+        "bg_level3.tmx": {
+            "scale": 4.237,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 80.00944064196364,
+                "y": 100.0708048147274
+            }
+        },
+        "bg_level4.tmx": {
+            "scale": 4.237,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 80.00944064196364,
+                "y": 100.0708048147274
+            }
+        },
+        "bg_level5.tmx": {
+            "scale": 4.237,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 80.00944064196364,
+                "y": 100.0708048147274
+            }
+        },
+        "bg_level6.tmx": {
+            "scale": 4.237,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 80.00944064196364,
+                "y": 100.0708048147274
+            }
+        },
+        "bg_level7.tmx": {
+            "scale": 4.237,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 80.00944064196364,
+                "y": 100.0708048147274
+            }
+        },
+        "bg_level8.tmx": {
+            "scale": 4.237,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 80.00944064196364,
+                "y": 100.0708048147274
+            }
+        },
+        "bg_level9.tmx": {
+            "scale": 4.237,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 80.00944064196364,
+                "y": 100.0708048147274
             }
         },
         "intermediate_screen.tmx": {
@@ -66,10 +130,10 @@
     ],
     "project": "tiled.tiled-project",
     "recentFiles": [
-        "tiles_level1.tsx",
-        "bg_level1.tmx",
-        "bg_level2.tmx",
         "intermediate_screen.tmx",
+        "bg_level2.tmx",
+        "bg_level1.tmx",
+        "tiles_level1.tsx",
         "load_screen.tmx",
         "patrons_level1.tsx",
         "bg_level1"

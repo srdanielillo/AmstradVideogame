@@ -383,7 +383,7 @@ u8 man_level_level2()
    // Set the tilemap of the level so the physics system can check collisions
    sys_phyisics_set_tilemap(g_bg_level2);
 
-      man_entitiy_init();
+   man_entitiy_init();
    sys_phyisics_init();
    man_entity_create_player(&man_level_init_player);
 
@@ -411,8 +411,8 @@ u8 man_level_level3()
    sys_phyisics_init();
    man_entity_create_player(&man_level_init_player);
    man_entity_populate_entity_data(&man_level_init_enemy);
-   //man_entity_populate_entity_data(&man_level_init_enemy_2);
-   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   man_entity_populate_entity_data(&man_level_init_enemy_2);
+   man_entity_populate_entity_data(&man_level_init_enemy_3);
    //man_entity_populate_entity_data(&man_level_init_enemy_4);
    //man_entity_populate_entity_data(&man_level_init_enemy_5);
    //man_entity_populate_entity_data(&man_level_init_enemy_6);
