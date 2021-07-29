@@ -21,88 +21,88 @@
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 105.66666666666666,
+                "x": 105.83333333333331,
                 "y": 86
             }
         },
         "bg_level10.tmx": {
-            "scale": 4.237,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.00944064196364,
-                "y": 100.0708048147274
+                "x": 80.16666666666666,
+                "y": 100
             }
         },
         "bg_level2.tmx": {
-            "scale": 4.237,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 78.59334434741564,
-                "y": 100.54283691291008
+                "x": 78.83333333333331,
+                "y": 100.66666666666667
             }
         },
         "bg_level3.tmx": {
-            "scale": 4.237,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.00944064196364,
-                "y": 100.0708048147274
+                "x": 80.16666666666666,
+                "y": 100
             }
         },
         "bg_level4.tmx": {
-            "scale": 4.237,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.00944064196364,
-                "y": 100.0708048147274
+                "x": 80.16666666666666,
+                "y": 100
             }
         },
         "bg_level5.tmx": {
-            "scale": 4.237,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.00944064196364,
-                "y": 100.0708048147274
+                "x": 80.16666666666666,
+                "y": 100
             }
         },
         "bg_level6.tmx": {
-            "scale": 4.237,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.00944064196364,
-                "y": 100.0708048147274
+                "x": 80.16666666666666,
+                "y": 100
             }
         },
         "bg_level7.tmx": {
-            "scale": 4.237,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.00944064196364,
-                "y": 100.0708048147274
+                "x": 80.16666666666666,
+                "y": 100
             }
         },
         "bg_level8.tmx": {
-            "scale": 4.237,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.00944064196364,
-                "y": 100.0708048147274
+                "x": 80.16666666666666,
+                "y": 100
             }
         },
         "bg_level9.tmx": {
-            "scale": 4.237,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.00944064196364,
-                "y": 100.0708048147274
+                "x": 80.16666666666666,
+                "y": 100
             }
         },
         "intermediate_screen.tmx": {
             "scale": 4.23,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.1418439716312,
-                "y": 100.23640661938533
+                "x": 80.26004728132386,
+                "y": 97.39952718676122
             }
         },
         "load_screen.tmx": {

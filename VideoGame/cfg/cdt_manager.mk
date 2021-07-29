@@ -24,7 +24,9 @@
 ############################################################################
 
 ## Set the name of your main game file in the CDT here
+SCR_PAL = 2 24 6 16
 $(eval $(call CDTMAN, SET_FILENAME   , 4Shots))
+$(eval $(call CDTMAN, SET_MINILOAD_PALETTE_FW , 3, $(SCR_PAL)   ))
 $(eval $(call CDTMAN, SET_MINILOAD_MODE       , 1               ))                      
 $(eval $(call CDTMAN, GEN_MINILOADER , img/ld_screen.png))
 
