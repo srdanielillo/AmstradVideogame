@@ -65,12 +65,15 @@ const Entity_t man_level_init_player = {
 };
 
 /*
-   [INFO] Container to copy the enemies data on each level
+
+      LEVEL 2
+
 */
-const Entity_t man_level_init_enemy = {
+
+const Entity_t enemy1_level2 = {
     e_type_enemy,               // type
-    0,                          // x
-    150,                        // y
+    16,                         // x
+    100,                        // y
     0, 0,                       // vx, vy
     PLAYER_SPRITE_W_LEVEL1,     // sprite_W
     PLAYER_SPRITE_H_LEVEL1,     // sprite_H
@@ -86,6 +89,16 @@ const Entity_t man_level_init_enemy = {
     1,                          // animation counter
     ENEMY1_START_SPRITE_LEVEL1, // prevsprite
 };
+
+const Patrol_step_t level1_patrol_table1[STEPS_PER_PATROL_TABLE] = {{25, 100}, {40, 100}, {70, 100}, {16, 100}};
+const Patrol_step_t level1_patrol_table2[STEPS_PER_PATROL_TABLE] = {{0, 180}, {60, 180}, {30, 180}, {0, 180}};
+const Patrol_step_t level1_patrol_table3[STEPS_PER_PATROL_TABLE] = {{30, 80}, {60, 80}, {30, 80}, {0, 80}};
+
+/*
+
+      LEVEL 3
+
+*/
 
 const Entity_t man_level_init_enemy_2 = {
     e_type_enemy,           // type
@@ -383,9 +396,13 @@ u8 man_level_level2()
    // Set the tilemap of the level so the physics system can check collisions
    sys_phyisics_set_tilemap(g_bg_level2);
 
+   // Init patrol system
+   sys_ai_init_patrol_tables(level1_patrol_table1);
+
    man_entitiy_init();
    sys_phyisics_init();
    man_entity_create_player(&man_level_init_player);
+   man_entity_populate_entity_data(&enemy1_level2);
 
    // Draws the whole level before doing any system update
    cpct_waitVSYNC();
@@ -403,9 +420,6 @@ u8 man_level_level3()
 
    // Set the tilemap of the level so the physics system can check collisions
    sys_phyisics_set_tilemap(g_bg_level3);
-
-   // Init patrol system
-   sys_ai_init_patrol_tables(man_level_patrol_table_1);
 
    man_entitiy_init();
    sys_phyisics_init();
