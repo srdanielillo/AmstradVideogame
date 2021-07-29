@@ -90,13 +90,83 @@ const Entity_t enemy1_level2 = {
     ENEMY1_START_SPRITE_LEVEL1, // prevsprite
 };
 
-const Patrol_step_t level1_patrol_table1[STEPS_PER_PATROL_TABLE] = {{25, 100}, {40, 100}, {70, 100}, {16, 100}};
-const Patrol_step_t level1_patrol_table2[STEPS_PER_PATROL_TABLE] = {{0, 180}, {60, 180}, {30, 180}, {0, 180}};
-const Patrol_step_t level1_patrol_table3[STEPS_PER_PATROL_TABLE] = {{30, 80}, {60, 80}, {30, 80}, {0, 80}};
+const Patrol_step_t level2_patrol_table1[STEPS_PER_PATROL_TABLE] = {{25, 100}, {40, 100}, {70, 100}, {16, 100}};
+const Patrol_step_t level2_patrol_table2[STEPS_PER_PATROL_TABLE] = {{0, 180}, {60, 180}, {30, 180}, {0, 180}};
+const Patrol_step_t level2_patrol_table3[STEPS_PER_PATROL_TABLE] = {{30, 80}, {60, 80}, {30, 80}, {0, 80}};
 
 /*
 
       LEVEL 3
+
+*/
+
+const Entity_t player_level3 = {
+    e_type_player,              // type
+    12,                         // x
+    16,                         // y
+    0, 0,                       // vx, vy
+    PLAYER_SPRITE_W_LEVEL1,     // sprite_W
+    PLAYER_SPRITE_H_LEVEL1,     // sprite_H
+    PLAYER_START_SPRITE_LEVEL1, // sprite
+    0,                          // prevptr
+    0xFFFF,                     // jump_table
+    0x00,                       // jump_step
+    0x00,                       // messages_re_ph
+    0x00,                       // patrol_info
+    LEFT_DIRECTION,             // direction
+    player_sprites,             // pointer to the array of pointers to the entity sprite
+    RIGHT_DIRECTION,            // last direction
+    1,                          // animation counter
+    PLAYER_START_SPRITE_LEVEL1  // prevsprite
+};
+
+const Entity_t enemy1_level3 = {
+    e_type_enemy,           // type
+    4,                      // x
+    16,                     // y
+    0, 0,                   // vx, vy
+    PLAYER_SPRITE_W_LEVEL1, // sprite_W
+    PLAYER_SPRITE_H_LEVEL1, // sprite_H
+    enemy2_sp_0,            // sprite
+    0,                      // prevptr
+    0xFFFF,                 // jump_table
+    0xFF,                   // jump_step
+    0x00,                   // messages_re_ph
+    0x00,                   // patrol_info
+    RIGHT_DIRECTION,        // direction
+    enemy2_sprites,         // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,         // last direction
+    1,                      // animation counter
+    enemy2_sp_0,            // prevsprite
+};
+
+const Entity_t enemy2_level3 = {
+    e_type_enemy,           // type
+    56,                     // x
+    176,                    // y
+    0, 0,                   // vx, vy
+    PLAYER_SPRITE_W_LEVEL1, // sprite_W
+    PLAYER_SPRITE_H_LEVEL1, // sprite_H
+    enemy3_sp_0,            // sprite
+    0,                      // prevptr
+    0xFFFF,                 // jump_table
+    0xFF,                   // jump_step
+    0x00,                   // messages_re_ph
+    0x10,                   // patrol_info
+    RIGHT_DIRECTION,        // direction
+    enemy3_sprites,         // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,         // last direction
+    1,                      // animation counter
+    enemy3_sp_0,            // prevsprite
+};
+
+const Patrol_step_t level3_patrol_table1[STEPS_PER_PATROL_TABLE] = {{4, 32}, {4, 64}, {4, 72}, {4, 16}};
+const Patrol_step_t level3_patrol_table2[STEPS_PER_PATROL_TABLE] = {{64, 168}, {68, 162}, {72, 170}, {56, 176}};
+const Patrol_step_t level3_patrol_table3[STEPS_PER_PATROL_TABLE] = {{30, 80}, {60, 80}, {30, 80}, {0, 80}};
+
+/*
+
+      LEVEL 4
 
 */
 
@@ -397,7 +467,7 @@ u8 man_level_level2()
    sys_phyisics_set_tilemap(g_bg_level2);
 
    // Init patrol system
-   sys_ai_init_patrol_tables(level1_patrol_table1);
+   sys_ai_init_patrol_tables(level2_patrol_table1);
 
    man_entitiy_init();
    sys_phyisics_init();
@@ -421,10 +491,13 @@ u8 man_level_level3()
    // Set the tilemap of the level so the physics system can check collisions
    sys_phyisics_set_tilemap(g_bg_level3);
 
+   sys_ai_init_patrol_tables(level3_patrol_table1);
+
    man_entitiy_init();
    sys_phyisics_init();
-   man_entity_create_player(&man_level_init_player);
-   //man_entity_populate_entity_data(&man_level_init_enemy);
+   man_entity_create_player(&player_level3);
+   man_entity_populate_entity_data(&enemy1_level3);
+   man_entity_populate_entity_data(&enemy2_level3);
    //man_entity_populate_entity_data(&man_level_init_enemy_2);
    //man_entity_populate_entity_data(&man_level_init_enemy_3);
    //man_entity_populate_entity_data(&man_level_init_enemy_4);
