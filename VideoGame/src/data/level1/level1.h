@@ -9,6 +9,14 @@
 #include <map/intermediate_screen.h>
 #include <map/bg_level1.h>
 #include <map/bg_level2.h>
+#include <map/bg_level3.h>
+#include <map/bg_level4.h>
+#include <map/bg_level5.h>
+#include <map/bg_level6.h>
+#include <map/bg_level7.h>
+#include <map/bg_level8.h>
+#include <map/bg_level9.h>
+#include <map/bg_level10.h>
 
 #define PALETTE_LEVEL1 player_pal
 

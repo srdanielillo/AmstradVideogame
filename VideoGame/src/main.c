@@ -62,4 +62,60 @@ void main(void)
       load_intermediate_screen();
       level_state = man_level_level3();
    }
+
+   level_state = LEVEL_STATE_CONTINUE;
+   load_intermediate_screen();
+   while (level_state != LEVEL_STATE_FINISHED)
+   {
+      load_intermediate_screen();
+      level_state = man_level_level4();
+   }
+
+   level_state = LEVEL_STATE_CONTINUE;
+   load_intermediate_screen();
+   while (level_state != LEVEL_STATE_FINISHED)
+   {
+      load_intermediate_screen();
+      level_state = man_level_level5();
+   }
+
+   level_state = LEVEL_STATE_CONTINUE;
+   load_intermediate_screen();
+   while (level_state != LEVEL_STATE_FINISHED)
+   {
+      load_intermediate_screen();
+      level_state = man_level_level6();
+   }
+
+   level_state = LEVEL_STATE_CONTINUE;
+   load_intermediate_screen();
+   while (level_state != LEVEL_STATE_FINISHED)
+   {
+      load_intermediate_screen();
+      level_state = man_level_level7();
+   }
+
+   level_state = LEVEL_STATE_CONTINUE;
+   load_intermediate_screen();
+   while (level_state != LEVEL_STATE_FINISHED)
+   {
+      load_intermediate_screen();
+      level_state = man_level_level8();
+   }
+
+   level_state = LEVEL_STATE_CONTINUE;
+   load_intermediate_screen();
+   while (level_state != LEVEL_STATE_FINISHED)
+   {
+      load_intermediate_screen();
+      level_state = man_level_level9();
+   }
+
+   level_state = LEVEL_STATE_CONTINUE;
+   load_intermediate_screen();
+   while (level_state != LEVEL_STATE_FINISHED)
+   {
+      load_intermediate_screen();
+      level_state = man_level_level10();
+   }
 }

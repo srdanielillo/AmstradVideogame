@@ -98,11 +98,11 @@
             }
         },
         "intermediate_screen.tmx": {
-            "scale": 4.23,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.26004728132386,
-                "y": 97.39952718676122
+                "x": 80.16666666666666,
+                "y": 97.33333333333334
             }
         },
         "load_screen.tmx": {

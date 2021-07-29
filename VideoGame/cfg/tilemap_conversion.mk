@@ -41,6 +41,14 @@
 $(eval $(call TMX2C,img/tiles/intermediate_screen.tmx,intermediate_screen,src/map/,))
 $(eval $(call TMX2C,img/tiles/bg_level1.tmx,g_bg_level1,src/map/,))
 $(eval $(call TMX2C,img/tiles/bg_level2.tmx,g_bg_level2,src/map/,))
+$(eval $(call TMX2C,img/tiles/bg_level3.tmx,g_bg_level3,src/map/,))
+$(eval $(call TMX2C,img/tiles/bg_level4.tmx,g_bg_level4,src/map/,))
+$(eval $(call TMX2C,img/tiles/bg_level5.tmx,g_bg_level5,src/map/,))
+$(eval $(call TMX2C,img/tiles/bg_level6.tmx,g_bg_level6,src/map/,))
+$(eval $(call TMX2C,img/tiles/bg_level7.tmx,g_bg_level7,src/map/,))
+$(eval $(call TMX2C,img/tiles/bg_level8.tmx,g_bg_level8,src/map/,))
+$(eval $(call TMX2C,img/tiles/bg_level9.tmx,g_bg_level9,src/map/,))
+$(eval $(call TMX2C,img/tiles/bg_level10.tmx,g_bg_level10,src/map/,))
 
 ##
 ## OLD MACROS (For compatibility)

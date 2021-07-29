@@ -399,10 +399,10 @@ u8 man_level_level3()
 
    // Draw map
    cpct_etm_setDrawTilemap4x8_ag(g_bg_level2_W, g_bg_level2_H, g_bg_level2_W, g_tiles_level1_00);
-   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level2);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level3);
 
    // Set the tilemap of the level so the physics system can check collisions
-   sys_phyisics_set_tilemap(g_bg_level2);
+   sys_phyisics_set_tilemap(g_bg_level3);
 
    // Init patrol system
    sys_ai_init_patrol_tables(man_level_patrol_table_1);
@@ -410,9 +410,219 @@ u8 man_level_level3()
    man_entitiy_init();
    sys_phyisics_init();
    man_entity_create_player(&man_level_init_player);
-   man_entity_populate_entity_data(&man_level_init_enemy);
-   man_entity_populate_entity_data(&man_level_init_enemy_2);
-   man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_6);
+
+   // Draws the whole level before doing any system update
+   cpct_waitVSYNC();
+   sys_render_first_time();
+   return man_level_gameLoop();
+}
+
+u8 man_level_level4()
+{
+   cpct_setPalette(PALETTE_LEVEL1, 16);
+
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(g_bg_level2_W, g_bg_level2_H, g_bg_level2_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level4);
+
+   // Set the tilemap of the level so the physics system can check collisions
+   sys_phyisics_set_tilemap(g_bg_level4);
+
+   // Init patrol system
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
+
+   man_entitiy_init();
+   sys_phyisics_init();
+   man_entity_create_player(&man_level_init_player);
+   //man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_6);
+
+   // Draws the whole level before doing any system update
+   cpct_waitVSYNC();
+   sys_render_first_time();
+   return man_level_gameLoop();
+}
+
+u8 man_level_level5()
+{
+   cpct_setPalette(PALETTE_LEVEL1, 16);
+
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(g_bg_level2_W, g_bg_level2_H, g_bg_level2_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level5);
+
+   // Set the tilemap of the level so the physics system can check collisions
+   sys_phyisics_set_tilemap(g_bg_level5);
+
+   // Init patrol system
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
+
+   man_entitiy_init();
+   sys_phyisics_init();
+   man_entity_create_player(&man_level_init_player);
+   //man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_6);
+
+   // Draws the whole level before doing any system update
+   cpct_waitVSYNC();
+   sys_render_first_time();
+   return man_level_gameLoop();
+}
+
+u8 man_level_level6()
+{
+   cpct_setPalette(PALETTE_LEVEL1, 16);
+
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(g_bg_level2_W, g_bg_level2_H, g_bg_level2_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level6);
+
+   // Set the tilemap of the level so the physics system can check collisions
+   sys_phyisics_set_tilemap(g_bg_level6);
+
+   // Init patrol system
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
+
+   man_entitiy_init();
+   sys_phyisics_init();
+   man_entity_create_player(&man_level_init_player);
+   //man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_6);
+
+   // Draws the whole level before doing any system update
+   cpct_waitVSYNC();
+   sys_render_first_time();
+   return man_level_gameLoop();
+}
+
+u8 man_level_level7()
+{
+   cpct_setPalette(PALETTE_LEVEL1, 16);
+
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(g_bg_level2_W, g_bg_level2_H, g_bg_level2_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level7);
+
+   // Set the tilemap of the level so the physics system can check collisions
+   sys_phyisics_set_tilemap(g_bg_level7);
+
+   // Init patrol system
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
+
+   man_entitiy_init();
+   sys_phyisics_init();
+   man_entity_create_player(&man_level_init_player);
+   //man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_6);
+
+   // Draws the whole level before doing any system update
+   cpct_waitVSYNC();
+   sys_render_first_time();
+   return man_level_gameLoop();
+}
+
+u8 man_level_level8()
+{
+   cpct_setPalette(PALETTE_LEVEL1, 16);
+
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(g_bg_level2_W, g_bg_level2_H, g_bg_level2_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level8);
+
+   // Set the tilemap of the level so the physics system can check collisions
+   sys_phyisics_set_tilemap(g_bg_level8);
+
+   // Init patrol system
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
+
+   man_entitiy_init();
+   sys_phyisics_init();
+   man_entity_create_player(&man_level_init_player);
+   //man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_6);
+
+   // Draws the whole level before doing any system update
+   cpct_waitVSYNC();
+   sys_render_first_time();
+   return man_level_gameLoop();
+}
+
+u8 man_level_level9()
+{
+   cpct_setPalette(PALETTE_LEVEL1, 16);
+
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(g_bg_level2_W, g_bg_level2_H, g_bg_level2_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level9);
+
+   // Set the tilemap of the level so the physics system can check collisions
+   sys_phyisics_set_tilemap(g_bg_level9);
+
+   // Init patrol system
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
+
+   man_entitiy_init();
+   sys_phyisics_init();
+   man_entity_create_player(&man_level_init_player);
+   //man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
+   //man_entity_populate_entity_data(&man_level_init_enemy_4);
+   //man_entity_populate_entity_data(&man_level_init_enemy_5);
+   //man_entity_populate_entity_data(&man_level_init_enemy_6);
+
+   // Draws the whole level before doing any system update
+   cpct_waitVSYNC();
+   sys_render_first_time();
+   return man_level_gameLoop();
+}
+
+u8 man_level_level10()
+{
+   cpct_setPalette(PALETTE_LEVEL1, 16);
+
+   // Draw map
+   cpct_etm_setDrawTilemap4x8_ag(g_bg_level2_W, g_bg_level2_H, g_bg_level2_W, g_tiles_level1_00);
+   cpct_etm_drawTilemap4x8_ag(TILEMAP_VMEM, g_bg_level10);
+
+   // Set the tilemap of the level so the physics system can check collisions
+   sys_phyisics_set_tilemap(g_bg_level10);
+
+   // Init patrol system
+   sys_ai_init_patrol_tables(man_level_patrol_table_1);
+
+   man_entitiy_init();
+   sys_phyisics_init();
+   man_entity_create_player(&man_level_init_player);
+   //man_entity_populate_entity_data(&man_level_init_enemy);
+   //man_entity_populate_entity_data(&man_level_init_enemy_2);
+   //man_entity_populate_entity_data(&man_level_init_enemy_3);
    //man_entity_populate_entity_data(&man_level_init_enemy_4);
    //man_entity_populate_entity_data(&man_level_init_enemy_5);
    //man_entity_populate_entity_data(&man_level_init_enemy_6);
