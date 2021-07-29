@@ -170,6 +170,56 @@ const Patrol_step_t level3_patrol_table3[STEPS_PER_PATROL_TABLE] = {{30, 80}, {6
 
 */
 
+const Entity_t player_level4 = {
+    e_type_player,              // type
+    4,                          // x
+    88,                         // y
+    0, 0,                       // vx, vy
+    PLAYER_SPRITE_W_LEVEL1,     // sprite_W
+    PLAYER_SPRITE_H_LEVEL1,     // sprite_H
+    PLAYER_START_SPRITE_LEVEL1, // sprite
+    0,                          // prevptr
+    0xFFFF,                     // jump_table
+    0x00,                       // jump_step
+    0x00,                       // messages_re_ph
+    0x00,                       // patrol_info
+    LEFT_DIRECTION,             // direction
+    player_sprites,             // pointer to the array of pointers to the entity sprite
+    RIGHT_DIRECTION,            // last direction
+    1,                          // animation counter
+    PLAYER_START_SPRITE_LEVEL1  // prevsprite
+};
+
+const Entity_t enemy1_level4 = {
+    e_type_enemy,           // type
+    64,                     // x
+    16,                     // y
+    0, 0,                   // vx, vy
+    PLAYER_SPRITE_W_LEVEL1, // sprite_W
+    PLAYER_SPRITE_H_LEVEL1, // sprite_H
+    enemy1_sp_0,            // sprite
+    0,                      // prevptr
+    0xFFFF,                 // jump_table
+    0xFF,                   // jump_step
+    0x00,                   // messages_re_ph
+    0x00,                   // patrol_info
+    RIGHT_DIRECTION,        // direction
+    enemy1_sprites,         // pointer to the array of pointers to the entity sprite
+    LEFT_DIRECTION,         // last direction
+    1,                      // animation counter
+    enemy1_sp_0,            // prevsprite
+};
+
+const Patrol_step_t level4_patrol_table1[STEPS_PER_PATROL_TABLE] = {{64, 64}, {64, 85}, {64, 140}, {64, 32}};
+const Patrol_step_t level4_patrol_table2[STEPS_PER_PATROL_TABLE] = {{64, 168}, {68, 162}, {72, 170}, {56, 176}};
+const Patrol_step_t level4_patrol_table3[STEPS_PER_PATROL_TABLE] = {{30, 80}, {60, 80}, {30, 80}, {0, 80}};
+
+/*
+
+   LEVEL 5
+
+*/
+
 const Entity_t man_level_init_enemy_2 = {
     e_type_enemy,           // type
     0,                      // x
@@ -498,11 +548,6 @@ u8 man_level_level3()
    man_entity_create_player(&player_level3);
    man_entity_populate_entity_data(&enemy1_level3);
    man_entity_populate_entity_data(&enemy2_level3);
-   //man_entity_populate_entity_data(&man_level_init_enemy_2);
-   //man_entity_populate_entity_data(&man_level_init_enemy_3);
-   //man_entity_populate_entity_data(&man_level_init_enemy_4);
-   //man_entity_populate_entity_data(&man_level_init_enemy_5);
-   //man_entity_populate_entity_data(&man_level_init_enemy_6);
 
    // Draws the whole level before doing any system update
    cpct_waitVSYNC();
@@ -522,17 +567,12 @@ u8 man_level_level4()
    sys_phyisics_set_tilemap(g_bg_level4);
 
    // Init patrol system
-   sys_ai_init_patrol_tables(man_level_patrol_table_1);
+   sys_ai_init_patrol_tables(level4_patrol_table1);
 
    man_entitiy_init();
    sys_phyisics_init();
-   man_entity_create_player(&man_level_init_player);
-   //man_entity_populate_entity_data(&man_level_init_enemy);
-   //man_entity_populate_entity_data(&man_level_init_enemy_2);
-   //man_entity_populate_entity_data(&man_level_init_enemy_3);
-   //man_entity_populate_entity_data(&man_level_init_enemy_4);
-   //man_entity_populate_entity_data(&man_level_init_enemy_5);
-   //man_entity_populate_entity_data(&man_level_init_enemy_6);
+   man_entity_create_player(&player_level4);
+   man_entity_populate_entity_data(&enemy1_level4);
 
    // Draws the whole level before doing any system update
    cpct_waitVSYNC();
