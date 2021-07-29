@@ -44,7 +44,7 @@ void main(void)
    while (level_state != LEVEL_STATE_FINISHED)
    {
       load_intermediate_screen();
-      level_state = man_level_level4();
+      level_state = man_level_level5();
    }
 
    level_state = LEVEL_STATE_CONTINUE;
